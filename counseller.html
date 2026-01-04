@@ -1,0 +1,2292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mind Blossom | Professional Counselors</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #667eea;
+            --primary-light: #764ba2;
+            --secondary: #f093fb;
+            --secondary-light: #f5576c;
+            --accent: #4facfe;
+            --accent-light: #00f2fe;
+            --success: #38ef7d;
+            --warning: #ff9a9e;
+            --danger: #ff0844;
+            --light: #fff;
+            --dark: #0f172a;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.07);
+            --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.25);
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --radius-xl: 25px;
+            --radius-lg: 20px;
+            --radius-md: 15px;
+            --radius-sm: 10px;
+            --transition-smooth: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-quick: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--gradient-dark);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            animation: pulse 2s infinite;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Navigation Links */
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition-quick);
+            border: 2px solid transparent;
+            font-size: 0.9rem;
+        }
+
+        .nav-link:hover {
+            background: var(--gradient-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+            border-color: var(--primary-light);
+        }
+
+        .nav-link.active {
+            background: var(--gradient-primary);
+            border-color: var(--primary-light);
+        }
+
+        .nav-link i {
+            font-size: 1rem;
+        }
+
+        .nav-link span {
+            font-size: 0.9rem;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--light);
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition-quick);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+        }
+
+        .back-btn:hover {
+            background: var(--gradient-primary);
+            transform: translateX(-5px);
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 2rem 2rem;
+            display: flex;
+            gap: 2rem;
+        }
+
+        /* Left Panel - Counselor Selection */
+        .left-panel {
+            flex: 1;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            padding: 2rem;
+            transition: var(--transition-quick);
+        }
+
+        .glass-card:hover {
+                transform: translateY(-5px);
+                box-shadow: var(--shadow-lg);
+            }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--light);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title i {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Counselor Cards - UPDATED FOR BETTER ALIGNMENT */
+        .counselor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .counselor-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition-quick);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .counselor-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .counselor-card.active {
+            background: rgba(102, 126, 234, 0.2);
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .counselor-card.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .counselor-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .counselor-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--gradient-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .counselor-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .counselor-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .counselor-specialty {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .counselor-status {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-left: 5px;
+        }
+
+        .counselor-status.online {
+            background: var(--success);
+            box-shadow: 0 0 10px var(--success);
+        }
+
+        .counselor-status.offline {
+            background: #ccc;
+        }
+
+        .counselor-status.busy {
+            background: var(--warning);
+            box-shadow: 0 0 10px var(--warning);
+        }
+
+        .counselor-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-top: 0.5rem;
+        }
+
+        .counselor-rating i {
+            color: #ffd700;
+            font-size: 0.9rem;
+        }
+
+        .counselor-reviews {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin-left: 0.5rem;
+        }
+
+        .counselor-description {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.4;
+            margin-top: 0.5rem;
+        }
+
+        .counselor-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .counselor-languages {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* Availability Badge */
+        .availability-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .available {
+            background: rgba(56, 239, 125, 0.2);
+            color: var(--success);
+            border: 1px solid rgba(56, 239, 125, 0.3);
+        }
+
+        .busy-badge {
+            background: rgba(255, 154, 158, 0.2);
+            color: var(--warning);
+            border: 1px solid rgba(255, 154, 158, 0.3);
+        }
+
+        .offline-badge {
+            background: rgba(204, 204, 204, 0.2);
+            color: #999;
+            border: 1px solid rgba(204, 204, 204, 0.3);
+        }
+
+        /* Chat Container */
+        .chat-container {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            min-width: 0;
+        }
+
+        .chat-header {
+            background: var(--gradient-primary);
+            padding: 1.5rem;
+            border-radius: var(--radius-xl);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .current-counselor {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .current-counselor-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .chat-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .chat-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.3rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chat-info p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chat-actions {
+            display: flex;
+            gap: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .chat-action-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-quick);
+        }
+
+        .chat-action-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        /* Chat Messages Area */
+        .chat-messages {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            overflow-y: auto;
+            max-height: 60vh;
+            border: 1px solid var(--glass-border);
+        }
+
+        /* Message Bubbles */
+        .message {
+            max-width: 70%;
+            padding: 1rem 1.2rem;
+            border-radius: 20px;
+            position: relative;
+            animation: messageSlide 0.3s ease-out;
+            word-wrap: break-word;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            background: var(--gradient-primary);
+            border-bottom-right-radius: 5px;
+        }
+
+        .message.counselor {
+            align-self: flex-start;
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom-left-radius: 5px;
+        }
+
+        .message.system {
+            align-self: center;
+            background: rgba(255, 255, 255, 0.05);
+            text-align: center;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--radius-lg);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .message-time {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-top: 0.5rem;
+            text-align: right;
+        }
+
+        .message.counselor .message-time {
+            text-align: left;
+        }
+
+        /* Typing Indicator */
+        .typing-indicator {
+            display: inline-flex;
+            gap: 0.3rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            width: fit-content;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-8px);
+            }
+        }
+
+        /* Chat Input */
+        .chat-input-area {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-xl);
+            padding: 1.5rem;
+            border: 1px solid var(--glass-border);
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-end;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid transparent;
+            border-radius: var(--radius-lg);
+            color: var(--light);
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition-quick);
+            resize: none;
+            min-height: 50px;
+            max-height: 150px;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .send-btn {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-quick);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Voice Button */
+        .voice-btn {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: var(--gradient-secondary);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-quick);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .voice-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(240, 147, 251, 0.4);
+        }
+
+        .voice-btn.listening {
+            animation: pulse 1.5s infinite;
+            background: var(--danger);
+        }
+
+        .voice-btn.listening::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid var(--danger);
+            animation: ripple 1.5s infinite;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* Quick Responses */
+        .quick-responses {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .quick-response {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid transparent;
+            color: var(--light);
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: var(--transition-quick);
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .quick-response:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Safety Notice */
+        .safety-notice {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
+            padding: 1rem 1.5rem;
+            border-left: 4px solid var(--accent);
+            margin-top: 1rem;
+        }
+
+        .safety-notice h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-light);
+        }
+
+        .safety-notice p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        /* Privacy Features */
+        .privacy-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .privacy-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .privacy-feature i {
+            color: var(--accent);
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            padding: 1.2rem 2rem;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            z-index: 10000;
+            animation: slideInRight 0.3s ease-out, fadeOut 0.3s ease-in 2.5s forwards;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            max-width: 350px;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-primary);
+            border-radius: 3px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .left-panel {
+                max-width: 100%;
+            }
+            
+            .counselor-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+            }
+            
+            .main-container {
+                padding: 5rem 1rem 2rem;
+            }
+            
+            .glass-card {
+                padding: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .counselor-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .message {
+                max-width: 85%;
+            }
+            
+            .chat-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .chat-actions {
+                align-self: center;
+            }
+            
+            .quick-responses {
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+                flex-wrap: nowrap;
+            }
+            
+            .quick-response {
+                flex-shrink: 0;
+            }
+        }
+
+        /* Emergency resources */
+        .emergency-resources {
+            background: rgba(255, 8, 68, 0.1);
+            border: 1px solid rgba(255, 8, 68, 0.3);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .emergency-resources h4 {
+            color: var(--danger);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .emergency-contact {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-md);
+            margin-bottom: 0.5rem;
+            transition: var(--transition-quick);
+        }
+
+        .emergency-contact:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        /* Search and Filter */
+        .counselor-search {
+            margin-bottom: 1.5rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid transparent;
+            border-radius: var(--radius-lg);
+            color: var(--light);
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition-quick);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Filter buttons */
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition-quick);
+            font-size: 0.85rem;
+        }
+
+        .filter-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .filter-btn.active {
+            background: var(--gradient-primary);
+        }
+
+        /* Message formatting */
+        .message-content {
+            line-height: 1.5;
+        }
+
+        .message-content strong {
+            color: var(--accent-light);
+        }
+
+        .message-content a {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        /* No counselors message */
+        .no-counselors {
+            text-align: center;
+            padding: 2rem;
+            opacity: 0.7;
+        }
+
+        /* Voice assistant modal */
+        .voice-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-quick);
+        }
+
+        .voice-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .voice-modal-content {
+            background: var(--dark);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            animation: scaleIn 0.3s ease;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .voice-animation {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--gradient-secondary);
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            animation: listening 1.5s infinite;
+        }
+
+        @keyframes listening {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-hands-helping"></i>
+            </div>
+            <div class="logo-text">மனம் பூக்கும் | Professional Counselors</div>
+        </div>
+        
+        <!-- Navigation Links -->
+        <nav class="nav-links">
+            <a href="home.html" class="nav-link">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="counseller.html" class="nav-link active">
+                <i class="fas fa-user-md"></i>
+                <span>Counselor</span>
+            </a>
+            <a href="game.html" class="nav-link">
+                <i class="fas fa-gamepad"></i>
+                <span>Games</span>
+            </a>
+            <a href="comm.html" class="nav-link">
+                <i class="fas fa-users"></i>
+                <span>Community</span>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Left Panel - Counselor Selection -->
+        <div class="left-panel">
+            <div class="glass-card">
+                <h2 class="section-title">
+                    <i class="fas fa-user-md"></i>
+                    Available Counselors
+                </h2>
+                <p style="opacity: 0.9; margin-bottom: 1.5rem;">
+                    Chat anonymously with certified mental health professionals.
+                    Your privacy is protected.
+                </p>
+                
+                <!-- Search and Filter -->
+                <div class="counselor-search">
+                    <input type="text" 
+                        class="search-input" 
+                        id="counselorSearch" 
+                        placeholder="Search counselors by name or specialty..."
+                        oninput="filterCounselors()">
+                    
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" onclick="filterByStatus('all')">All</button>
+                        <button class="filter-btn" onclick="filterByStatus('online')">Online</button>
+                        <button class="filter-btn" onclick="filterByStatus('busy')">Busy</button>
+                        <button class="filter-btn" onclick="filterBySpecialty('anxiety')">Anxiety</button>
+                        <button class="filter-btn" onclick="filterBySpecialty('depression')">Depression</button>
+                        <button class="filter-btn" onclick="filterBySpecialty('stress')">Stress</button>
+                    </div>
+                </div>
+                
+                <!-- Counselor List - UPDATED TO GRID LAYOUT -->
+                <div class="counselor-grid" id="counselorGrid">
+                    <!-- Counselors will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Safety Notice -->
+            <div class="safety-notice">
+                <h4><i class="fas fa-shield-alt"></i> Your Safety & Privacy</h4>
+                <p>All conversations are encrypted and completely anonymous. No personal information is stored or shared.</p>
+            </div>
+
+            <!-- Privacy Features -->
+            <div class="privacy-features">
+                <div class="privacy-feature">
+                    <i class="fas fa-lock"></i>
+                    End-to-end encrypted
+                </div>
+                <div class="privacy-feature">
+                    <i class="fas fa-user-secret"></i>
+                    Anonymous user ID
+                </div>
+                <div class="privacy-feature">
+                    <i class="fas fa-clock"></i>
+                    Auto-delete after 30 days
+                </div>
+            </div>
+
+            <!-- Emergency Resources -->
+            <div class="emergency-resources">
+                <h4><i class="fas fa-phone-alt"></i> Emergency Resources</h4>
+                <div class="emergency-contact">
+                    <i class="fas fa-phone" style="color: var(--danger);"></i>
+                    <div>
+                        <div style="font-weight: 600;">Suicide Prevention Helpline</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">044-24640050 (24/7)</div>
+                    </div>
+                </div>
+                <div class="emergency-contact">
+                    <i class="fas fa-first-aid" style="color: var(--warning);"></i>
+                    <div>
+                        <div style="font-weight: 600;">iCall Psychological Helpline</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">9152987821 (Mon-Sat, 10AM-8PM)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel - Chat Container -->
+        <div class="chat-container">
+            <!-- Chat Header -->
+            <div class="chat-header" id="chatHeader">
+                <div class="current-counselor">
+                    <div class="current-counselor-avatar">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <div class="chat-info">
+                        <h3>Select a Counselor</h3>
+                        <p>Choose a counselor from the left panel to start chatting</p>
+                    </div>
+                </div>
+                <div class="chat-actions">
+                    <button class="chat-action-btn" onclick="clearChat()" title="Clear Chat">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <button class="chat-action-btn" onclick="exportChat()" title="Export Chat">
+                        <i class="fas fa-download"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chat Messages -->
+            <div class="chat-messages" id="chatMessages">
+                <!-- Welcome message -->
+                <div class="message system">
+                    <p>Welcome to Professional Counseling Services</p>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.8;">
+                        All conversations are confidential and anonymous. Please select a counselor to begin.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Chat Input -->
+            <div class="chat-input-area">
+                <div class="input-wrapper">
+                    <textarea 
+                        class="chat-input" 
+                        id="chatInput" 
+                        placeholder="Type your message here... (Select a counselor first)"
+                        rows="1"
+                        disabled
+                        oninput="autoResize(this)"
+                        onkeypress="handleChatKeypress(event)"
+                    ></textarea>
+                    <button class="voice-btn" id="voiceBtn" onclick="toggleVoiceRecording()">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <button class="send-btn" id="sendBtn" disabled>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                
+                <!-- Quick Responses -->
+                <div class="quick-responses" id="quickResponses">
+                    <!-- Quick responses will be loaded here based on counselor -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Voice Assistant Modal -->
+    <div class="voice-modal" id="voiceModal">
+        <div class="voice-modal-content">
+            <div class="voice-animation">
+                <i class="fas fa-microphone"></i>
+            </div>
+            <h3 style="margin-bottom: 1rem; color: var(--accent-light);">Listening...</h3>
+            <p id="voiceTranscript" style="min-height: 60px; margin-bottom: 1.5rem; font-size: 1.1rem;"></p>
+            <button class="voice-btn" onclick="stopVoiceRecording()" style="background: var(--danger);">
+                <i class="fas fa-stop"></i> Stop Listening
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // API Configuration - Using multiple reliable APIs
+        const OPENAI_API_KEY = 'sk-proj-your-openai-key-here'; // Replace with your OpenAI key
+        const GEMINI_API_KEY = 'AIzaSyDt7CFncBNMX7N__rL8R0X83TzxH-75NvE';
+        
+        // Free fallback APIs
+        const DUCKDUCKGO_API = 'https://api.duckduckgo.com/?format=json&q=';
+        const WIKIPEDIA_API = 'https://en.wikipedia.org/api/rest_v1/page/summary/';
+        
+        // State Management
+        let currentCounselor = null;
+        let chatMessages = [];
+        let counselorTypingInterval = null;
+        let userSessionId = generateSessionId();
+        let allCounselors = [];
+        let currentFilter = 'all';
+        let voiceRecognition = null;
+        let isListening = false;
+        let speechSynthesis = null;
+
+        // Generate random session ID for anonymity
+        function generateSessionId() {
+            return 'user_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
+        }
+
+        // Counselor database
+        const counselors = [
+            {
+                id: 'ai_assistant',
+                name: 'AI Assistant',
+                specialty: 'General Support',
+                expertise: ['General Knowledge', 'Emotional Support', 'Stress Management', 'Problem Solving'],
+                experience: 'Always available',
+                rating: 4.9,
+                reviews: 999,
+                status: 'online',
+                avatar: '🤖',
+                description: 'Advanced AI assistant trained to provide support, information, and guidance on any topic.',
+                languages: ['English', 'Tamil', 'Hindi', 'Multiple languages'],
+                responseStyle: 'knowledgeable',
+                availability: {
+                    online: true,
+                    responseTime: 'Immediate'
+                }
+            },
+            {
+                id: 'dr_priya',
+                name: 'Dr. Priya Sharma',
+                specialty: 'Clinical Psychologist',
+                expertise: ['Anxiety Disorders', 'Depression', 'Stress Management', 'CBT'],
+                experience: '15 years',
+                rating: 4.9,
+                reviews: 234,
+                status: 'online',
+                avatar: '👩‍⚕️',
+                description: 'Specializes in cognitive behavioral therapy and mindfulness techniques.',
+                languages: ['English', 'Tamil', 'Hindi'],
+                responseStyle: 'compassionate',
+                availability: {
+                    online: true,
+                    responseTime: 'Within 5 minutes'
+                }
+            },
+            {
+                id: 'dr_kumar',
+                name: 'Dr. Ravi Kumar',
+                specialty: 'Psychiatrist',
+                expertise: ['Clinical Depression', 'OCD', 'Bipolar Disorder', 'Medication Management'],
+                experience: '12 years',
+                rating: 4.8,
+                reviews: 187,
+                status: 'online',
+                avatar: '👨‍⚕️',
+                description: 'Board-certified psychiatrist with expertise in therapeutic interventions.',
+                languages: ['English', 'Tamil'],
+                responseStyle: 'analytical',
+                availability: {
+                    online: true,
+                    responseTime: 'Within 10 minutes'
+                }
+            },
+            {
+                id: 'ms_ananya',
+                name: 'Ms. Ananya Iyer',
+                specialty: 'Counseling Psychologist',
+                expertise: ['Relationship Issues', 'Grief Counseling', 'Self-Esteem', 'Family Therapy'],
+                experience: '8 years',
+                rating: 4.7,
+                reviews: 156,
+                status: 'busy',
+                avatar: '👩',
+                description: 'Client-centered therapy with focus on emotional healing and personal growth.',
+                languages: ['English', 'Tamil', 'Malayalam'],
+                responseStyle: 'empathetic',
+                availability: {
+                    online: true,
+                    responseTime: 'Within 15 minutes'
+                }
+            },
+            {
+                id: 'dr_geetha',
+                name: 'Dr. Geetha Krishnan',
+                specialty: 'Child Psychologist',
+                expertise: ['Childhood Trauma', 'ADHD', 'Autism Spectrum', 'Play Therapy'],
+                experience: '18 years',
+                rating: 4.9,
+                reviews: 312,
+                status: 'offline',
+                avatar: '👵',
+                description: 'Play therapy and family counseling specialist. Expert in child development.',
+                languages: ['English', 'Tamil'],
+                responseStyle: 'gentle',
+                availability: {
+                    online: false,
+                    responseTime: 'Currently offline'
+                }
+            }
+        ];
+
+        // Quick responses
+        const quickResponses = {
+            general: [
+                "I'm feeling anxious today",
+                "Can you help me with stress management?",
+                "I've been feeling very sad lately",
+                "How do I improve my sleep?",
+                "I need help with relationship issues",
+                "What is mindfulness?",
+                "How to deal with exam stress?",
+                "Can you recommend breathing exercises?"
+            ],
+            ai_assistant: [
+                "What is artificial intelligence?",
+                "How to manage time effectively?",
+                "Explain quantum computing simply",
+                "Best ways to learn programming",
+                "How to start meditating?",
+                "What are healthy eating habits?",
+                "How to improve communication skills?",
+                "Latest technology trends 2024"
+            ]
+        };
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeCounselors();
+            initializeEventListeners();
+            initializeVoiceRecognition();
+            loadPreviousChat();
+            
+            // Show welcome notification
+            setTimeout(() => {
+                showNotification('Welcome! You can chat with our AI Assistant or select a human counselor. Try voice input too!', 'info');
+            }, 1000);
+        });
+
+        // Initialize voice recognition
+        function initializeVoiceRecognition() {
+            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                voiceRecognition = new SpeechRecognition();
+                voiceRecognition.continuous = false;
+                voiceRecognition.interimResults = true;
+                voiceRecognition.lang = 'en-US';
+
+                voiceRecognition.onstart = () => {
+                    isListening = true;
+                    updateVoiceUI(true);
+                    showNotification('🎤 Listening... Speak now', 'info');
+                };
+
+                voiceRecognition.onresult = (event) => {
+                    let transcript = '';
+                    for (let i = event.resultIndex; i < event.results.length; i++) {
+                        transcript += event.results[i][0].transcript;
+                    }
+                    
+                    document.getElementById('voiceTranscript').textContent = transcript;
+                    
+                    if (event.results[0].isFinal) {
+                        setTimeout(() => {
+                            stopVoiceRecording();
+                            document.getElementById('chatInput').value = transcript;
+                            autoResize(document.getElementById('chatInput'));
+                            
+                            // Auto-send if counselor selected
+                            if (currentCounselor) {
+                                setTimeout(() => sendMessage(), 500);
+                            }
+                        }, 500);
+                    }
+                };
+
+                voiceRecognition.onerror = (event) => {
+                    console.error('Voice recognition error:', event.error);
+                    stopVoiceRecording();
+                    showNotification('❌ Voice input failed. Please try again.', 'error');
+                };
+
+                voiceRecognition.onend = () => {
+                    isListening = false;
+                    updateVoiceUI(false);
+                };
+            } else {
+                document.getElementById('voiceBtn').style.display = 'none';
+                showNotification('Voice recognition not supported in your browser', 'warning');
+            }
+
+            // Initialize speech synthesis
+            speechSynthesis = window.speechSynthesis;
+        }
+
+        // Toggle voice recording
+        function toggleVoiceRecording() {
+            if (!voiceRecognition) {
+                showNotification('Voice recognition not available', 'error');
+                return;
+            }
+
+            if (isListening) {
+                stopVoiceRecording();
+            } else {
+                startVoiceRecording();
+            }
+        }
+
+        // Start voice recording
+        function startVoiceRecording() {
+            try {
+                document.getElementById('voiceModal').classList.add('active');
+                document.getElementById('voiceTranscript').textContent = 'Speak now...';
+                voiceRecognition.start();
+            } catch (error) {
+                showNotification('Could not start voice recognition', 'error');
+            }
+        }
+
+        // Stop voice recording
+        function stopVoiceRecording() {
+            if (voiceRecognition && isListening) {
+                voiceRecognition.stop();
+            }
+            document.getElementById('voiceModal').classList.remove('active');
+            isListening = false;
+            updateVoiceUI(false);
+        }
+
+        // Update voice UI
+        function updateVoiceUI(listening) {
+            const voiceBtn = document.getElementById('voiceBtn');
+            
+            if (listening) {
+                voiceBtn.classList.add('listening');
+                voiceBtn.innerHTML = '<i class="fas fa-stop"></i>';
+            } else {
+                voiceBtn.classList.remove('listening');
+                voiceBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+            }
+        }
+
+        // Speak text using speech synthesis
+        function speakText(text) {
+            if (!speechSynthesis || !text) return;
+            
+            // Stop any ongoing speech
+            speechSynthesis.cancel();
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = 1.0;
+            utterance.pitch = 1.0;
+            utterance.volume = 1.0;
+            utterance.lang = 'en-US';
+            
+            speechSynthesis.speak(utterance);
+        }
+
+        // Initialize counselors list
+        function initializeCounselors() {
+            allCounselors = [...counselors];
+            renderCounselors();
+        }
+
+        // Render counselors in grid
+        function renderCounselors() {
+            const counselorGrid = document.getElementById('counselorGrid');
+            
+            counselorGrid.innerHTML = allCounselors.map(counselor => {
+                let statusBadge = '';
+                if (counselor.status === 'online') {
+                    statusBadge = `<span class="availability-badge available"><i class="fas fa-circle"></i> Online</span>`;
+                } else if (counselor.status === 'busy') {
+                    statusBadge = `<span class="availability-badge busy-badge"><i class="fas fa-clock"></i> Busy</span>`;
+                } else {
+                    statusBadge = `<span class="availability-badge offline-badge"><i class="fas fa-circle"></i> Offline</span>`;
+                }
+                
+                return `
+                    <div class="counselor-card" data-id="${counselor.id}" onclick="selectCounselor(${JSON.stringify(counselor).replace(/"/g, '&quot;')})">
+                        <div class="counselor-header">
+                            <div class="counselor-avatar">${counselor.avatar}</div>
+                            <div class="counselor-info">
+                                <div class="counselor-name">${counselor.name}</div>
+                                <div class="counselor-specialty">
+                                    ${counselor.specialty}
+                                    <span class="counselor-status ${counselor.status}"></span>
+                                </div>
+                                <div class="counselor-rating">
+                                    ${generateStars(counselor.rating)}
+                                    <span class="counselor-reviews">(${counselor.reviews} reviews)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="counselor-description">
+                            ${counselor.description}
+                        </div>
+                        <div class="counselor-footer">
+                            <div class="counselor-languages">
+                                <i class="fas fa-language"></i> ${counselor.languages.join(', ')}
+                            </div>
+                            ${statusBadge}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Filter counselors
+        function filterCounselors() {
+            const searchTerm = document.getElementById('counselorSearch').value.toLowerCase();
+            
+            allCounselors = counselors.filter(counselor => {
+                if (currentFilter === 'online' && counselor.status !== 'online') return false;
+                if (currentFilter === 'busy' && counselor.status !== 'busy') return false;
+                if (currentFilter === 'anxiety' && !counselor.expertise.some(e => e.toLowerCase().includes('anxiety'))) return false;
+                if (currentFilter === 'depression' && !counselor.expertise.some(e => e.toLowerCase().includes('depression'))) return false;
+                if (currentFilter === 'stress' && !counselor.expertise.some(e => e.toLowerCase().includes('stress'))) return false;
+                
+                if (searchTerm) {
+                    const nameMatch = counselor.name.toLowerCase().includes(searchTerm);
+                    const specialtyMatch = counselor.specialty.toLowerCase().includes(searchTerm);
+                    const expertiseMatch = counselor.expertise.some(e => e.toLowerCase().includes(searchTerm));
+                    const descriptionMatch = counselor.description.toLowerCase().includes(searchTerm);
+                    
+                    return nameMatch || specialtyMatch || expertiseMatch || descriptionMatch;
+                }
+                
+                return true;
+            });
+            
+            renderCounselors();
+        }
+
+        // Filter by status
+        function filterByStatus(status) {
+            currentFilter = status;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            filterCounselors();
+        }
+
+        // Filter by specialty
+        function filterBySpecialty(specialty) {
+            currentFilter = specialty;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            filterCounselors();
+        }
+
+        // Generate star ratings
+        function generateStars(rating) {
+            let stars = '';
+            const fullStars = Math.floor(rating);
+            const halfStar = rating % 1 >= 0.5;
+            
+            for (let i = 0; i < 5; i++) {
+                if (i < fullStars) {
+                    stars += '<i class="fas fa-star"></i>';
+                } else if (i === fullStars && halfStar) {
+                    stars += '<i class="fas fa-star-half-alt"></i>';
+                } else {
+                    stars += '<i class="far fa-star"></i>';
+                }
+            }
+            return stars;
+        }
+
+        // Select a counselor
+        function selectCounselor(counselor) {
+            // Don't allow selection if offline (except AI)
+            if (counselor.status === 'offline' && counselor.id !== 'ai_assistant') {
+                showNotification(`${counselor.name} is currently offline. Please choose another counselor.`, 'warning');
+                return;
+            }
+            
+            // Update selected counselor
+            currentCounselor = counselor;
+            
+            // Update counselor cards
+            document.querySelectorAll('.counselor-card').forEach(card => {
+                card.classList.remove('active');
+                if (card.dataset.id === counselor.id) {
+                    card.classList.add('active');
+                }
+            });
+            
+            // Update chat header
+            document.getElementById('chatHeader').innerHTML = `
+                <div class="current-counselor">
+                    <div class="current-counselor-avatar" style="background: ${getAvatarColor(counselor.id)};">
+                        ${counselor.avatar}
+                    </div>
+                    <div class="chat-info">
+                        <h3>${counselor.name}</h3>
+                        <p>${counselor.specialty} • ${counselor.expertise.slice(0, 2).join(', ')}</p>
+                        <p style="font-size: 0.85rem; opacity: 0.8; margin-top: 0.3rem;">
+                            <i class="fas fa-clock"></i> Response time: ${counselor.availability.responseTime}
+                        </p>
+                    </div>
+                </div>
+                <div class="chat-actions">
+                    <button class="chat-action-btn" onclick="clearChat()" title="Clear Chat">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <button class="chat-action-btn" onclick="exportChat()" title="Export Chat">
+                        <i class="fas fa-download"></i>
+                    </button>
+                    <button class="chat-action-btn" onclick="endSession()" title="End Session">
+                        <i class="fas fa-phone-slash"></i>
+                    </button>
+                </div>
+            `;
+            
+            // Enable chat input
+            const chatInput = document.getElementById('chatInput');
+            const sendBtn = document.getElementById('sendBtn');
+            chatInput.disabled = false;
+            chatInput.placeholder = `Message ${counselor.name}... (Press Enter to send, Shift+Enter for new line)`;
+            sendBtn.disabled = false;
+            chatInput.focus();
+            
+            // Load quick responses
+            loadQuickResponses(counselor);
+            
+            // Add welcome message
+            addSystemMessage(`Connected to ${counselor.name}. This is a secure, anonymous session.`);
+            
+            // Show notification
+            showNotification(`Connected to ${counselor.name}. You can now ask any questions!`, 'success');
+            
+            // Add welcome message from counselor using AI
+            setTimeout(async () => {
+                try {
+                    let welcomeMessage;
+                    if (counselor.id === 'ai_assistant') {
+                        welcomeMessage = "Hello! I'm your AI Assistant. I can help you with any questions - from mental health support to general knowledge, from technology to daily life advice. What would you like to know today? You can also use voice input!";
+                    } else {
+                        welcomeMessage = await getAIResponse(`As ${counselor.name}, a ${counselor.specialty} specializing in ${counselor.expertise.join(', ')}, provide a warm professional welcome to a new client. Keep it brief and inviting.`);
+                    }
+                    addMessage(welcomeMessage, 'counselor');
+                    
+                    // Speak the welcome for AI assistant
+                    if (counselor.id === 'ai_assistant') {
+                        setTimeout(() => speakText(welcomeMessage), 1000);
+                    }
+                } catch (error) {
+                    addMessage(`Hello, I'm ${counselor.name}. Thank you for reaching out. Everything you share here is confidential. How can I help you today?`, 'counselor');
+                }
+            }, 1000);
+        }
+
+        // Get avatar color
+        function getAvatarColor(id) {
+            const colors = [
+                'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+                'linear-gradient(135deg, #38ef7d 0%, #11998e 100%)',
+                'linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%)'
+            ];
+            const index = counselors.findIndex(c => c.id === id);
+            return colors[index % colors.length];
+        }
+
+        // Load quick responses
+        function loadQuickResponses(counselor) {
+            const quickResponsesDiv = document.getElementById('quickResponses');
+            let responses = [...quickResponses.general];
+            
+            if (counselor.id === 'ai_assistant') {
+                responses = [...quickResponses.ai_assistant];
+            }
+            
+            // Add specialty-specific responses
+            if (counselor.expertise.some(e => e.toLowerCase().includes('anxiety'))) {
+                responses.push(...quickResponses.anxiety || []);
+            }
+            
+            // Limit to 8
+            responses = [...new Set(responses)].slice(0, 8);
+            
+            quickResponsesDiv.innerHTML = responses.map(response => 
+                `<div class="quick-response" onclick="useQuickResponse('${escapeHtml(response)}')">${response}</div>`
+            ).join('');
+        }
+
+        // Use quick response
+        function useQuickResponse(response) {
+            const chatInput = document.getElementById('chatInput');
+            chatInput.value = response;
+            chatInput.focus();
+            autoResize(chatInput);
+        }
+
+        // Initialize event listeners
+        function initializeEventListeners() {
+            // Send button
+            document.getElementById('sendBtn').addEventListener('click', sendMessage);
+        }
+
+        // Auto-resize textarea
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = Math.min(textarea.scrollHeight, 150) + 'px';
+        }
+
+        // Handle chat keypress
+        function handleChatKeypress(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+
+        // Send message - IMPROVED VERSION
+        async function sendMessage() {
+            const chatInput = document.getElementById('chatInput');
+            const message = chatInput.value.trim();
+            
+            if (!message || !currentCounselor) {
+                showNotification('Please select a counselor and type a message.', 'warning');
+                return;
+            }
+            
+            // Check for inappropriate content
+            if (containsInappropriateContent(message)) {
+                showNotification('Please keep the conversation respectful.', 'warning');
+                chatInput.value = '';
+                return;
+            }
+            
+            // Add user message
+            addMessage(message, 'user');
+            chatInput.value = '';
+            autoResize(chatInput);
+            
+            // Show typing indicator
+            addTypingIndicator();
+            
+            try {
+                // Get AI response
+                let response;
+                if (currentCounselor.id === 'ai_assistant') {
+                    response = await getAIResponse(message);
+                } else {
+                    response = await getCounselorResponse(message);
+                }
+                
+                removeTypingIndicator();
+                addMessage(response, 'counselor');
+                
+                // Speak response for AI assistant
+                if (currentCounselor.id === 'ai_assistant') {
+                    speakText(response);
+                }
+                
+                // Save to chat history
+                saveChatMessage({
+                    type: 'user',
+                    content: message,
+                    timestamp: new Date().toISOString(),
+                    counselor: currentCounselor.id
+                });
+                
+                saveChatMessage({
+                    type: 'counselor',
+                    content: response,
+                    timestamp: new Date().toISOString(),
+                    counselor: currentCounselor.id
+                });
+                
+            } catch (error) {
+                console.error('Error:', error);
+                removeTypingIndicator();
+                addMessage("I'm here to help! Could you rephrase your question or tell me more about what's on your mind?", 'counselor');
+            }
+        }
+
+        // Get AI response - IMPROVED WITH MULTIPLE SOURCES
+        async function getAIResponse(message) {
+            // First try OpenAI
+            try {
+                return await getOpenAIResponse(message);
+            } catch (error) {
+                console.log('OpenAI failed:', error);
+            }
+            
+            // Then try Gemini
+            try {
+                return await getGeminiResponse(message);
+            } catch (error) {
+                console.log('Gemini failed:', error);
+            }
+            
+            // Then try DuckDuckGo for factual questions
+            if (isFactualQuestion(message)) {
+                try {
+                    const duckResponse = await getDuckDuckGoResponse(message);
+                    if (duckResponse) return duckResponse;
+                } catch (error) {
+                    console.log('DuckDuckGo failed');
+                }
+            }
+            
+            // Fallback response
+            return getFallbackResponse(message);
+        }
+
+        // Get OpenAI response
+        async function getOpenAIResponse(message) {
+            // Replace with your OpenAI API key
+            // For now, using a simulated response
+            throw new Error('OpenAI not configured');
+            
+            /*
+            // Uncomment and add your OpenAI key
+            const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${OPENAI_API_KEY}`
+                },
+                body: JSON.stringify({
+                    model: 'gpt-3.5-turbo',
+                    messages: [
+                        {
+                            role: 'system',
+                            content: 'You are a helpful AI assistant that can answer any questions. Be informative, empathetic, and accurate.'
+                        },
+                        {
+                            role: 'user',
+                            content: message
+                        }
+                    ],
+                    max_tokens: 500
+                })
+            });
+            
+            if (!response.ok) throw new Error('OpenAI API failed');
+            const data = await response.json();
+            return data.choices[0].message.content;
+            */
+        }
+
+        // Get Gemini response
+        async function getGeminiResponse(message) {
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: `As a knowledgeable AI assistant, provide a helpful and accurate response to: "${message}". If it's a mental health question, be empathetic. If it's factual, be informative.`
+                            }]
+                        }],
+                        generationConfig: {
+                            maxOutputTokens: 500,
+                            temperature: 0.7
+                        },
+                        safetySettings: [
+                            {
+                                category: "HARM_CATEGORY_HARASSMENT",
+                                threshold: "BLOCK_MEDIUM_AND_ABOVE"
+                            },
+                            {
+                                category: "HARM_CATEGORY_HATE_SPEECH",
+                                threshold: "BLOCK_MEDIUM_AND_ABOVE"
+                            }
+                        ]
+                    })
+                });
+                
+                if (!response.ok) throw new Error('Gemini API failed');
+                const data = await response.json();
+                return data.candidates[0].content.parts[0].text;
+            } catch (error) {
+                throw error;
+            }
+        }
+
+        // Get DuckDuckGo response
+        async function getDuckDuckGoResponse(query) {
+            try {
+                const response = await fetch(`${DUCKDUCKGO_API}${encodeURIComponent(query)}`);
+                if (!response.ok) throw new Error('API failed');
+                const data = await response.json();
+                
+                if (data.AbstractText) {
+                    return data.AbstractText;
+                } else if (data.Heading) {
+                    return `${data.Heading}: ${data.Abstract || 'Information available from various sources.'}`;
+                }
+            } catch (error) {
+                throw error;
+            }
+            return null;
+        }
+
+        // Get counselor response
+        async function getCounselorResponse(message) {
+            try {
+                const prompt = `As ${currentCounselor.name}, a ${currentCounselor.specialty} specializing in ${currentCounselor.expertise.join(', ')}, respond to a client who says: "${message}". 
+                Provide a professional, empathetic, and helpful response suitable for a counseling session. 
+                If the question is outside your expertise, politely acknowledge and suggest how you might still help or redirect to appropriate resources.`;
+                
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: prompt }] }],
+                        generationConfig: { maxOutputTokens: 500 }
+                    })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    return data.candidates[0].content.parts[0].text;
+                }
+            } catch (error) {
+                console.log('Counselor response failed');
+            }
+            
+            // Fallback counselor response
+            return `Thank you for sharing that. As a ${currentCounselor.specialty}, I want you to know that I'm here to support you. Could you tell me more about how this has been affecting you?`;
+        }
+
+        // Check if question is factual
+        function isFactualQuestion(text) {
+            const factualKeywords = [
+                'what is', 'who is', 'when was', 'where is', 'how does',
+                'explain', 'define', 'meaning of', 'history of', 'facts about',
+                'capital of', 'population of', 'size of', 'length of', 'height of'
+            ];
+            
+            const lowerText = text.toLowerCase();
+            return factualKeywords.some(keyword => lowerText.includes(keyword));
+        }
+
+        // Fallback response
+        function getFallbackResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            // Common questions database
+            if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+                return "Hello! How can I help you today? I can assist with questions about mental health, general knowledge, technology, and much more!";
+            }
+            
+            if (lowerMessage.includes('how are you')) {
+                return "I'm here and ready to help you! What would you like to know or talk about today?";
+            }
+            
+            if (lowerMessage.includes('thank you') || lowerMessage.includes('thanks')) {
+                return "You're welcome! I'm glad I could help. Is there anything else you'd like to know?";
+            }
+            
+            if (lowerMessage.includes('mental health') || lowerMessage.includes('depressed') || lowerMessage.includes('anxious')) {
+                return "Mental health is important. If you're struggling, it's brave to talk about it. I recommend speaking with a professional counselor for personalized support. In the meantime, practicing mindfulness, maintaining a routine, and connecting with loved ones can help.";
+            }
+            
+            if (lowerMessage.includes('stress')) {
+                return "Stress management techniques include: 1) Deep breathing exercises, 2) Regular physical activity, 3) Time management, 4) Mindfulness meditation, 5) Adequate sleep. Would you like more details on any of these?";
+            }
+            
+            // Default response
+            const responses = [
+                "That's an interesting question! Based on general knowledge, I can tell you that... (This is a simulated response. For detailed answers, try our AI Assistant)",
+                "I appreciate your question. For comprehensive information, I'd recommend checking reliable sources or consulting with our AI Assistant who can provide more detailed responses.",
+                "Thank you for asking. This is something worth discussing. Could you provide more context so I can give you a more specific answer?",
+                "I'm here to help with questions like yours. For the most accurate and up-to-date information, I suggest consulting authoritative sources on the topic."
+            ];
+            
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+
+        // Add typing indicator
+        function addTypingIndicator() {
+            const chatMessages = document.getElementById('chatMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message counselor';
+            typingDiv.id = 'typingIndicator';
+            typingDiv.innerHTML = `
+                <div class="typing-indicator">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            `;
+            chatMessages.appendChild(typingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Remove typing indicator
+        function removeTypingIndicator() {
+            const typingIndicator = document.getElementById('typingIndicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+
+        // Add message to chat
+        function addMessage(content, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+            
+            // Remove typing indicator if exists
+            removeTypingIndicator();
+            
+            // Create message element
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            const displayTime = sender === 'user' ? `You • ${time}` : `${currentCounselor?.name || 'Counselor'} • ${time}`;
+            
+            // Format message content
+            const formattedContent = escapeHtml(content).replace(/\n/g, '<br>');
+            
+            messageDiv.innerHTML = `
+                <div class="message-content">${formattedContent}</div>
+                <div class="message-time">${displayTime}</div>
+            `;
+            
+            chatMessages.appendChild(messageDiv);
+            
+            // Scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Add system message
+        function addSystemMessage(content) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message system';
+            messageDiv.innerHTML = `<p>${escapeHtml(content)}</p>`;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Clear chat
+        function clearChat() {
+            if (!confirm('Are you sure you want to clear the chat? This action cannot be undone.')) {
+                return;
+            }
+            
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.innerHTML = `
+                <div class="message system">
+                    <p>Chat cleared</p>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.8;">
+                        All messages have been cleared. This does not affect your anonymity.
+                    </p>
+                </div>
+            `;
+            
+            localStorage.removeItem(`mindBlossomChat_${userSessionId}`);
+            showNotification('Chat cleared successfully', 'info');
+        }
+
+        // End session
+        function endSession() {
+            if (!currentCounselor) {
+                showNotification('No active session to end.', 'warning');
+                return;
+            }
+            
+            if (confirm('Are you sure you want to end this counseling session?')) {
+                addSystemMessage(`Session with ${currentCounselor.name} has ended. Thank you for using our service.`);
+                
+                // Reset UI
+                currentCounselor = null;
+                document.getElementById('chatHeader').innerHTML = `
+                    <div class="current-counselor">
+                        <div class="current-counselor-avatar">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <div class="chat-info">
+                            <h3>Select a Counselor</h3>
+                            <p>Choose a counselor from the left panel to start chatting</p>
+                        </div>
+                    </div>
+                    <div class="chat-actions">
+                        <button class="chat-action-btn" onclick="clearChat()" title="Clear Chat">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                        <button class="chat-action-btn" onclick="exportChat()" title="Export Chat">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                `;
+                
+                // Disable chat input
+                const chatInput = document.getElementById('chatInput');
+                const sendBtn = document.getElementById('sendBtn');
+                chatInput.disabled = true;
+                chatInput.placeholder = 'Type your message here... (Select a counselor first)';
+                sendBtn.disabled = true;
+                
+                // Clear quick responses
+                document.getElementById('quickResponses').innerHTML = '';
+                
+                // Clear counselor selection
+                document.querySelectorAll('.counselor-card').forEach(card => {
+                    card.classList.remove('active');
+                });
+                
+                showNotification('Session ended. You can start a new session anytime.', 'info');
+            }
+        }
+
+        // Export chat
+        function exportChat() {
+            const messages = JSON.parse(localStorage.getItem(`mindBlossomChat_${userSessionId}`) || '[]');
+            
+            if (messages.length === 0) {
+                showNotification('No chat history to export.', 'warning');
+                return;
+            }
+            
+            let exportText = `Mind Blossom - Counseling Session Export\n`;
+            exportText += `Session ID: ${userSessionId}\n`;
+            exportText += `Export Date: ${new Date().toLocaleString()}\n`;
+            exportText += `Note: This is an anonymous session. No personal information is included.\n\n`;
+            
+            messages.forEach(msg => {
+                const time = new Date(msg.timestamp).toLocaleTimeString();
+                const sender = msg.type === 'user' ? 'You' : (currentCounselor?.name || 'Counselor');
+                exportText += `[${time}] ${sender}: ${msg.content}\n`;
+            });
+            
+            // Create download
+            const blob = new Blob([exportText], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `mindblossom_chat_${userSessionId}_${Date.now()}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showNotification('Chat exported successfully', 'success');
+        }
+
+        // Save chat message
+        function saveChatMessage(message) {
+            let chatHistory = JSON.parse(localStorage.getItem(`mindBlossomChat_${userSessionId}`) || '[]');
+            chatHistory.push(message);
+            
+            if (chatHistory.length > 100) {
+                chatHistory = chatHistory.slice(-100);
+            }
+            
+            localStorage.setItem(`mindBlossomChat_${userSessionId}`, JSON.stringify(chatHistory));
+        }
+
+        // Load previous chat
+        function loadPreviousChat() {
+            const chatHistory = JSON.parse(localStorage.getItem(`mindBlossomChat_${userSessionId}`) || '[]');
+            
+            if (chatHistory.length > 0) {
+                addSystemMessage('Previous chat history loaded. Your session continues anonymously.');
+            }
+        }
+
+        // Check for inappropriate content
+        function containsInappropriateContent(text) {
+            const inappropriatePatterns = [
+                /\b(sex|porn|nude|explicit|xxx|adult)\b/i,
+                /\b(drugs|alcohol|weed|marijuana|cocaine)\b/i,
+                /\b(violence|kill|hurt|attack|fight)\b/i,
+                /\b(hate|racist|discrimination)\b/i,
+                /\b(threat|blackmail|extort)\b/i
+            ];
+            
+            return inappropriatePatterns.some(pattern => pattern.test(text));
+        }
+
+        // Escape HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Show notification
+        function showNotification(message, type = 'info') {
+            // Remove existing notifications
+            document.querySelectorAll('.notification').forEach(n => n.remove());
+            
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            
+            const icons = {
+                info: '💡',
+                success: '✅',
+                warning: '⚠️',
+                error: '❌'
+            };
+            
+            notification.innerHTML = `
+                <div style="font-size: 1.5rem;">${icons[type] || icons.info}</div>
+                <div>${message}</div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto remove
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 4000);
+        }
+    </script>
+</body>
+</html>

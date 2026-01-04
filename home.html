@@ -1,0 +1,3377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mind Blossom | Express Your Heart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&family=Tiro+Tamil&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #667eea;
+            --primary-light: #764ba2;
+            --secondary: #f093fb;
+            --secondary-light: #f5576c;
+            --accent: #4facfe;
+            --accent-light: #00f2fe;
+            --success: #38ef7d;
+            --warning: #ff9a9e;
+            --danger: #ff0844;
+            --light: #fff;
+            --dark: #0f172a;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.07);
+            --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.25);
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --gradient-sunset: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            --gradient-aurora: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            --radius-xl: 25px;
+            --radius-lg: 20px;
+            --radius-md: 15px;
+            --radius-sm: 10px;
+            --transition-smooth: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-quick: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--gradient-dark);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .bg-particle {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-100px) rotate(180deg);
+            }
+        }
+
+        /* Header */
+        .header {
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            animation: pulse 2s infinite;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Navigation Links */
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition-quick);
+            border: 2px solid transparent;
+        }
+
+        .nav-link:hover {
+            background: var(--gradient-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+            border-color: var(--primary-light);
+        }
+
+        .nav-link i {
+            font-size: 1.1rem;
+        }
+
+        .nav-link span {
+            font-size: 0.95rem;
+        }
+
+        /* Main Container - Horizontal Layout */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 2rem 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 2rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea, #f093fb, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        /* Express Your Heart Section */
+        .express-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Glass Cards */
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            padding: 2.5rem;
+            transition: var(--transition-quick);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Emotion Selection */
+        .emotion-selection {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--light);
+        }
+
+        /* Emotion Grid */
+        .emotion-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .emotion-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition-quick);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .emotion-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .emotion-card.active {
+            background: var(--gradient-primary);
+            border-color: var(--primary-light);
+        }
+
+        .emotion-card.active::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1));
+            border-radius: var(--radius-lg);
+            pointer-events: none;
+        }
+
+        .emotion-emoji {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .emotion-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .emotion-desc {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Feeling Input */
+        .feeling-container {
+            margin-top: 2rem;
+        }
+
+        .feeling-input-wrapper {
+            position: relative;
+            margin-top: 1rem;
+        }
+
+        .feeling-input {
+            width: 100%;
+            min-height: 150px;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid transparent;
+            border-radius: var(--radius-lg);
+            color: var(--light);
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            resize: none;
+            transition: var(--transition-quick);
+        }
+
+        .feeling-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 25px rgba(102, 126, 234, 0.2);
+        }
+
+        .feeling-placeholder {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            color: rgba(255, 255, 255, 0.5);
+            pointer-events: none;
+            transition: var(--transition-quick);
+        }
+
+        .feeling-input:focus + .feeling-placeholder,
+        .feeling-input:not(:placeholder-shown) + .feeling-placeholder {
+            top: 0.7rem;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        /* Voice Assistant */
+        .voice-assistant {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .voice-btn {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: var(--gradient-secondary);
+            border: none;
+            color: var(--light);
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-quick);
+            position: relative;
+        }
+
+        .voice-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(240, 147, 251, 0.4);
+        }
+
+        .voice-btn.listening {
+            animation: pulse 1.5s infinite;
+        }
+
+        .voice-btn.listening::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid var(--secondary-light);
+            animation: ripple 1.5s infinite;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            background: var(--gradient-primary);
+            color: var(--light);
+            border: none;
+            padding: 1.2rem 2.5rem;
+            border-radius: var(--radius-lg);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            transition: var(--transition-quick);
+            width: 100%;
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Tamil Songs Section */
+        .songs-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .songs-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .songs-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--light);
+        }
+
+        .refresh-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--light);
+            padding: 0.7rem 1.2rem;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition-quick);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .refresh-btn:hover {
+            background: var(--gradient-primary);
+            transform: rotate(15deg);
+        }
+
+        /* Language Selector */
+        .language-selector {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .language-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition-quick);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .lang-btn.active {
+            background: var(--gradient-primary);
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* AI Recommendation Button */
+        .ai-recommend-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            color: var(--light);
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: var(--transition-quick);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-recommend-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .ai-recommend-btn:hover::before {
+            left: 100%;
+        }
+
+        .ai-recommend-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .ai-recommend-btn i {
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.2) rotate(180deg); }
+        }
+
+        /* Songs Grid */
+        .songs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .song-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            transition: var(--transition-quick);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .song-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .song-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .song-cover {
+            width: 100%;
+            aspect-ratio: 1;
+            background: var(--gradient-secondary);
+            border-radius: var(--radius-md);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            overflow: hidden;
+        }
+
+        .song-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .song-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .song-artist {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .song-artist::before {
+            content: '🎵';
+            font-size: 0.8rem;
+        }
+
+        .play-btn {
+            position: absolute;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            border: none;
+            color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition-quick);
+            font-size: 1rem;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* YouTube Player Modal */
+        .youtube-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-quick);
+        }
+
+        .youtube-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .youtube-modal-content {
+            width: 90%;
+            max-width: 900px;
+            background: var(--dark);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .youtube-modal.active .youtube-modal-content {
+            transform: scale(1);
+        }
+
+        .youtube-header {
+            background: var(--gradient-primary);
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .youtube-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .youtube-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-quick);
+        }
+
+        .youtube-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .youtube-player {
+            width: 100%;
+            aspect-ratio: 16/9;
+        }
+
+        /* Chatbot Icon */
+        .chatbot-icon {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            transition: var(--transition-quick);
+            z-index: 1000;
+            animation: floatIcon 3s ease-in-out infinite;
+        }
+
+        @keyframes floatIcon {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-10px) scale(1.05);
+            }
+        }
+
+        .chatbot-icon:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+            animation: none;
+        }
+
+        .chatbot-icon i {
+            font-size: 1.8rem;
+            color: var(--light);
+        }
+
+        /* Chatbot Window */
+        .chatbot-window {
+            position: fixed;
+            bottom: 120px;
+            right: 30px;
+            width: 500px;
+            height: 650px;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 999;
+            border: 1px solid var(--glass-border);
+            animation: slideInUp 0.3s ease-out;
+        }
+
+        .chatbot-window.active {
+            display: flex;
+        }
+
+        .chatbot-header {
+            background: var(--gradient-primary);
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .close-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-quick);
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            max-width: 85%;
+            padding: 1rem 1.2rem;
+            border-radius: var(--radius-lg);
+            animation: messageSlide 0.3s ease-out;
+            word-wrap: break-word;
+            line-height: 1.4;
+        }
+
+        .message.bot {
+            align-self: flex-start;
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom-left-radius: 5px;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            background: var(--gradient-primary);
+            border-bottom-right-radius: 5px;
+        }
+
+        .chatbot-input-area {
+            padding: 1.2rem;
+            border-top: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+        }
+
+        .chatbot-input {
+            flex: 1;
+            padding: 1rem 1.2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid transparent;
+            border-radius: var(--radius-lg);
+            color: var(--light);
+            font-size: 0.95rem;
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition-quick);
+        }
+
+        .chatbot-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .send-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-quick);
+        }
+
+        .send-btn:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Typing Indicator */
+        .typing-indicator {
+            display: flex;
+            gap: 0.5rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            width: fit-content;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-8px);
+            }
+        }
+
+        /* Progress Steps */
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            position: relative;
+            padding: 0 1rem;
+        }
+
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50px;
+            right: 50px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .step {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
+            transition: var(--transition-quick);
+            font-size: 1.1rem;
+        }
+
+        .step.active {
+            background: var(--gradient-primary);
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .step.completed {
+            background: var(--gradient-secondary);
+        }
+
+        /* Community Button */
+        .community-btn {
+            display: block;
+            margin: 2rem auto 0;
+            padding: 1rem 2.5rem;
+            background: var(--gradient-secondary);
+            color: var(--light);
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-quick);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .community-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(240, 147, 251, 0.4);
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            padding: 1.2rem 2rem;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            z-index: 10000;
+            animation: slideInRight 0.3s ease-out, fadeOut 0.3s ease-in 2.5s forwards;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            max-width: 350px;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .express-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            .nav-link {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .nav-link span {
+                display: none;
+            }
+            
+            .nav-link i {
+                font-size: 1.2rem;
+            }
+            
+            .main-container {
+                padding: 5rem 1rem 2rem;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .emotion-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .songs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chatbot-window {
+                width: 90%;
+                right: 5%;
+                height: 600px;
+            }
+            
+            .chatbot-icon {
+                width: 60px;
+                height: 60px;
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .youtube-modal-content {
+                width: 95%;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-primary);
+            border-radius: 3px;
+        }
+
+        /* Message formatting */
+        .message-content {
+            word-break: break-word;
+        }
+        
+        .message-content code {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+        
+        .message-content ul, 
+        .message-content ol {
+            margin-left: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        .message-content li {
+            margin-bottom: 0.3rem;
+        }
+        
+        .message-content h3,
+        .message-content h4 {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: #f093fb;
+        }
+        
+        .message-content a {
+            color: #4facfe;
+            text-decoration: none;
+        }
+        
+        .message-content a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Source attribution */
+        .source-attribution {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-top: 0.5rem;
+            font-style: italic;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg" id="animatedBg"></div>
+    
+    <!-- YouTube Player Modal -->
+    <div class="youtube-modal" id="youtubeModal">
+        <div class="youtube-modal-content">
+            <div class="youtube-header">
+                <div class="youtube-title" id="youtubeTitle">Now Playing</div>
+                <button class="youtube-close" id="youtubeClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="youtube-player">
+                <iframe id="youtubePlayer" width="100%" height="100%" 
+                        src="" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+            <div class="logo-text">மனம் பூக்கும் | Mind Blossom</div>
+        </div>
+        
+        <!-- Navigation Links -->
+        <nav class="nav-links">
+            <a href="home.html" class="nav-link">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="counseller.html" class="nav-link">
+                <i class="fas fa-user-md"></i>
+                <span>Counselor</span>
+            </a>
+            <a href="game.html" class="nav-link">
+                <i class="fas fa-gamepad"></i>
+                <span>Games</span>
+            </a>
+            <a href="comm.html" class="nav-link">
+                <i class="fas fa-users"></i>
+                <span>Community</span>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <h1 class="hero-title">Express Your Heart</h1>
+            <p class="hero-subtitle">
+                Share your feelings anonymously. Get emotional support from our AI companion 
+                and discover healing Tamil songs that match your mood. Everything is safe and private.
+            </p>
+        </div>
+
+        <!-- Express Section -->
+        <div class="express-section">
+            <!-- Left Side - Emotion Selection -->
+            <div class="glass-card emotion-selection">
+                <h2 class="section-title">How are you feeling today?</h2>
+                <p style="opacity: 0.9; margin-bottom: 2rem;">Select your emotion to get personalized support</p>
+                
+                <!-- Emotion Grid -->
+                <div class="emotion-grid">
+                    <div class="emotion-card" data-mood="happy">
+                        <span class="emotion-emoji">😊</span>
+                        <div class="emotion-name">Happy</div>
+                        <div class="emotion-desc">Feeling joyful and content</div>
+                    </div>
+                    <div class="emotion-card" data-mood="sad">
+                        <span class="emotion-emoji">😢</span>
+                        <div class="emotion-name">Sad</div>
+                        <div class="emotion-desc">Feeling down or emotional</div>
+                    </div>
+                    <div class="emotion-card" data-mood="stressed">
+                        <span class="emotion-emoji">😫</span>
+                        <div class="emotion-name">Stressed</div>
+                        <div class="emotion-desc">Under pressure or anxious</div>
+                    </div>
+                    <div class="emotion-card" data-mood="angry">
+                        <span class="emotion-emoji">😠</span>
+                        <div class="emotion-name">Angry</div>
+                        <div class="emotion-desc">Feeling frustrated or upset</div>
+                    </div>
+                    <div class="emotion-card" data-mood="lonely">
+                        <span class="emotion-emoji">😔</span>
+                        <div class="emotion-name">Lonely</div>
+                        <div class="emotion-desc">Feeling isolated or alone</div>
+                    </div>
+                    <div class="emotion-card" data-mood="anxious">
+                        <span class="emotion-emoji">😰</span>
+                        <div class="emotion-name">Anxious</div>
+                        <div class="emotion-desc">Worried or nervous</div>
+                    </div>
+                </div>
+
+                <!-- Feeling Input -->
+                <div class="feeling-container">
+                    <h3 style="margin-bottom: 1rem; font-size: 1.2rem;">Share your thoughts...</h3>
+                    <div class="feeling-input-wrapper">
+                        <textarea class="feeling-input" id="feelingInput" placeholder=" "></textarea>
+                        <div class="feeling-placeholder">What's on your mind? You're safe here...</div>
+                    </div>
+
+                    <!-- Voice Assistant -->
+                    <div class="voice-assistant">
+                        <button class="voice-btn" id="voiceBtn">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                        <div>
+                            <div style="font-weight: 600; font-size: 0.95rem;">Voice Assistant</div>
+                            <div style="font-size: 0.85rem; opacity: 0.8;">Click to speak your feelings</div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button class="submit-btn" id="submitBtn">
+                        <i class="fas fa-paper-plane"></i>
+                        Share Anonymously
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Side - Tamil Songs -->
+            <div class="glass-card songs-section">
+                <div class="songs-header">
+                    <h2 class="songs-title">🎵 Healing Tamil Songs</h2>
+                    <button class="refresh-btn" id="refreshSongs">
+                        <i class="fas fa-redo"></i>
+                        Refresh
+                    </button>
+                </div>
+                <p style="opacity: 0.9; margin-bottom: 1.5rem;">Songs selected based on your emotional state</p>
+                
+                <!-- Songs Grid -->
+                <div class="songs-grid" id="songsGrid">
+                    <!-- Songs will be populated here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Steps -->
+        <div class="progress-steps">
+            <div class="step completed">1</div>
+            <div class="step active">2</div>
+            <div class="step">3</div>
+            <div class="step">4</div>
+            <div class="step">5</div>
+        </div>
+
+        <!-- Community Button -->
+        <button class="community-btn" id="communityBtn">
+            <i class="fas fa-users"></i>
+            Continue to Community Support
+        </button>
+    </div>
+
+    <!-- Chatbot Icon -->
+    <div class="chatbot-icon" id="chatbotIcon">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <!-- Chatbot Window -->
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <div class="chatbot-title">
+                <i class="fas fa-heart"></i>
+                Blossom AI Assistant
+            </div>
+            <button class="close-btn" id="closeChatbot">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="chatbot-messages" id="chatMessages">
+            <div class="message bot">
+                <div class="message-content">
+                    Hello! I'm Blossom 🌸 your emotional support AI. I'm here to listen, provide guidance, and help you feel better. 
+                    I can answer any questions you have - from emotional support to general knowledge!
+                </div>
+            </div>
+            <div class="message bot">
+                <div class="message-content">
+                    You can ask me anything - from stress management tips to homework help, from life advice to song recommendations. 
+                    Everything you say is confidential and safe.
+                </div>
+            </div>
+        </div>
+
+        <div class="chatbot-input-area">
+            <div class="input-wrapper">
+                <input type="text" class="chatbot-input" id="chatInput" 
+                       placeholder="Ask me anything..." 
+                       onkeypress="handleChatKeypress(event)">
+                <button class="send-btn" id="sendMessage">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // API Configuration - Using multiple sources
+        const GEMINI_API_KEY = 'AIzaSyDt7CFncBNMX7N__rL8R0X83TzxH-75NvE';
+        
+        // Alternative APIs (using Wikipedia and DuckDuckGo Instant Answer)
+        const WIKIPEDIA_API = 'https://en.wikipedia.org/api/rest_v1/page/summary/';
+        const DUCKDUCKGO_API = 'https://api.duckduckgo.com/?format=json&q=';
+        
+        // State Management
+        let currentMood = null;
+        let chatHistory = [];
+        let voiceRecognition = null;
+        let isListening = false;
+        let selectedEmotionCard = null;
+        
+        // YouTube Video IDs database - ORIGINAL STRUCTURE
+        const youtubeVideos = {
+            happy: [
+                { id: "YR12Z8f1Dh8", title: "Why This Kolaveri Di – Dhanush", artist: "Dhanush" },
+                { id: "k5dC5FQTn3I", title: "Naa Ready – Anirudh Ravichander", artist: "Anirudh Ravichander" },
+                { id: "7B6eMjp_X2E", title: "Enjoy Enjaami – Dhee", artist: "Dhee" },
+                { id: "k-BR0YzYVrA", title: "Vaathi Coming – Anirudh Ravichander", artist: "Anirudh Ravichander" }
+            ],
+            sad: [
+                { id: "ryD8BqVexJI", title: "Kanave Kanave – Anirudh Ravichander", artist: "Anirudh Ravichander" },
+                { id: "uDtN8pAe-68", title: "Munbe Vaa – A.R. Rahman", artist: "A.R. Rahman" },
+                { id: "MZ8YDP5mHwE", title: "Nenjame Nenjame – A.R. Rahman", artist: "A.R. Rahman" },
+                { id: "SqSx-NpPjIQ", title: "Mannipaaya – A.R. Rahman", artist: "A.R. Rahman" }
+            ],
+            stressed: [
+                { id: "Wp05ZCG3yMk", title: "Mella Sirithal – HipHop Tamizha", artist: "HipHop Tamizha" },
+                { id: "QNSDR4Fu1WU", title: "Malare – Vijay Yesudas", artist: "Vijay Yesudas" },
+                { id: "p6SjmRwa5jU", title: "Ennodu Nee Irundhal – A.R. Rahman", artist: "A.R. Rahman" },
+                { id: "E7_3TOqNvF4", title: "Aalaporan Tamizhan – A.R. Rahman", artist: "A.R. Rahman" }
+            ],
+            angry: [
+                { id: "xM4lQN7Sgrg", title: "Thee Illai – Anirudh Ravichander", artist: "Anirudh Ravichander" },
+                { id: "f-3mDZYsk4Y", title: "Porkalam – Anirudh Ravichander", artist: "Anirudh Ravichander" },
+                { id: "NcET8QRs5Nc", title: "Badass – Anirudh Ravichander", artist: "Anirudh Ravichander" },
+                { id: "BmR_wjR7i3Y", title: "Vikram Title Track – Anirudh Ravichander", artist: "Anirudh Ravichander" }
+            ],
+            lonely: [
+                { id: "Q8c1rDrsL4M", title: "Vaseegara – Bombay Jayashri", artist: "Bombay Jayashri" },
+                { id: "d7mWDRrrHlI", title: "En Kadhal Solla – Yuvan Shankar Raja", artist: "Yuvan Shankar Raja" },
+                { id: "7D8Fd0y4gy8", title: "Mazhai Kuruvi – Harris Jayaraj", artist: "Harris Jayaraj" },
+                { id: "gQx0efP5o70", title: "Enna Solla – Harris Jayaraj", artist: "Harris Jayaraj" }
+            ],
+            anxious: [
+                { id: "kRqK6T6_p-k", title: "Kadhal Cricket – Yuvan Shankar Raja", artist: "Yuvan Shankar Raja" },
+                { id: "cQhaSreizWg", title: "Oru Naalil – Yuvan Shankar Raja", artist: "Yuvan Shankar Raja" },
+                { id: "8gSOBw9nOmQ", title: "Kangal Irandal – A.R. Rahman", artist: "A.R. Rahman" },
+                { id: "Wk3nYH5_tms", title: "New York Nagaram – A.R. Rahman", artist: "A.R. Rahman" }
+            ],
+            default: [
+                { id: "DV7nV9W7y-0", title: "Chellamma – Doctor (Anirudh)", artist: "Anirudh Ravichander" },
+                { id: "QNSDR4Fu1WU", title: "Jigarthanda Theme – Santhosh Narayanan", artist: "Santhosh Narayanan" },
+                { id: "Wp05ZCG3yMk", title: "Mental Manadhil – A.R. Rahman", artist: "A.R. Rahman" },
+                { id: "YR12Z8f1Dh8", title: "Why This Kolaveri Di – Dhanush", artist: "Dhanush" }
+            ]
+        };
+
+        // Initialize Page
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeBackground();
+            initializeEventListeners();
+            initializeVoiceRecognition();
+            loadTamilSongs();
+            
+            // Set default welcome messages
+            setTimeout(() => {
+                addChatMessage("Hello! I'm Blossom AI, your emotional support companion. 🌸", 'bot');
+                addChatMessage("You can ask me anything - from stress management tips to general knowledge. I'll search information from reliable sources!", 'bot');
+            }, 500);
+        });
+
+        // Create Animated Background
+        function initializeBackground() {
+            const bg = document.getElementById('animatedBg');
+            const particleCount = 80;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'bg-particle';
+                
+                // Random properties
+                const size = Math.random() * 8 + 3;
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                const delay = Math.random() * 15;
+                const duration = Math.random() * 20 + 10;
+                const colors = [
+                    'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                    'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'
+                ];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${left}%`;
+                particle.style.top = `${top}%`;
+                particle.style.background = color;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.opacity = Math.random() * 0.3 + 0.1;
+                
+                bg.appendChild(particle);
+            }
+        }
+
+        // Initialize Event Listeners
+        function initializeEventListeners() {
+            // Emotion Cards
+            document.querySelectorAll('.emotion-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    // Remove active class from all cards
+                    document.querySelectorAll('.emotion-card').forEach(c => {
+                        c.classList.remove('active');
+                        // Reset to default background
+                        c.style.background = 'rgba(255, 255, 255, 0.05)';
+                        c.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                    });
+                    
+                    // Add active class to clicked card
+                    this.classList.add('active');
+                    currentMood = this.dataset.mood;
+                    selectedEmotionCard = this;
+                    
+                    // Apply mood-specific colors
+                    const moodColors = {
+                        happy: {
+                            background: 'linear-gradient(135deg, #FFD700, #FFA500)',
+                            borderColor: '#FFD700',
+                            shadow: '0 15px 30px rgba(255, 215, 0, 0.3)'
+                        },
+                        sad: {
+                            background: 'linear-gradient(135deg, #4169E1, #1E90FF)',
+                            borderColor: '#4169E1',
+                            shadow: '0 15px 30px rgba(65, 105, 225, 0.3)'
+                        },
+                        stressed: {
+                            background: 'linear-gradient(135deg, #FF6B6B, #C92A2A)',
+                            borderColor: '#FF6B6B',
+                            shadow: '0 15px 30px rgba(255, 107, 107, 0.3)'
+                        },
+                        angry: {
+                            background: 'linear-gradient(135deg, #DC143C, #8B0000)',
+                            borderColor: '#DC143C',
+                            shadow: '0 15px 30px rgba(220, 20, 60, 0.3)'
+                        },
+                        lonely: {
+                            background: 'linear-gradient(135deg, #9B59B6, #8E44AD)',
+                            borderColor: '#9B59B6',
+                            shadow: '0 15px 30px rgba(155, 89, 182, 0.3)'
+                        },
+                        anxious: {
+                            background: 'linear-gradient(135deg, #F39C12, #E67E22)',
+                            borderColor: '#F39C12',
+                            shadow: '0 15px 30px rgba(243, 156, 18, 0.3)'
+                        }
+                    };
+                    
+                    const colors = moodColors[currentMood];
+                    if (colors) {
+                        this.style.background = colors.background;
+                        this.style.borderColor = colors.borderColor;
+                        this.style.boxShadow = colors.shadow;
+                        this.style.transform = 'translateY(-8px) scale(1.05)';
+                    }
+                    
+                    // Show notification
+                    showNotification(`Selected: ${this.querySelector('.emotion-name').textContent} ${this.querySelector('.emotion-emoji').textContent}`);
+                    
+                    // Update songs based on mood
+                    loadTamilSongs(currentMood);
+                    
+                    // Update progress steps
+                    updateProgressSteps();
+                });
+            });
+
+            // Submit Button
+            document.getElementById('submitBtn').addEventListener('click', submitFeelings);
+
+            // Voice Button
+            document.getElementById('voiceBtn').addEventListener('click', toggleVoiceRecording);
+
+            // Chatbot Icon
+            document.getElementById('chatbotIcon').addEventListener('click', toggleChatbot);
+            document.getElementById('closeChatbot').addEventListener('click', toggleChatbot);
+            
+            // YouTube Modal Close
+            document.getElementById('youtubeClose').addEventListener('click', closeYouTubeModal);
+            
+            // Close YouTube modal when clicking outside
+            document.getElementById('youtubeModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeYouTubeModal();
+                }
+            });
+
+            // Send Message Button
+            document.getElementById('sendMessage').addEventListener('click', sendChatMessage);
+
+            // Refresh Songs Button
+            document.getElementById('refreshSongs').addEventListener('click', () => {
+                loadTamilSongs(currentMood);
+                showNotification('🎵 Songs refreshed!');
+            });
+
+            // Community Button
+            document.getElementById('communityBtn').addEventListener('click', () => {
+                window.location.href = 'comm.html';
+            });
+
+            // Feeling Input Animation
+            const feelingInput = document.getElementById('feelingInput');
+            feelingInput.addEventListener('focus', () => {
+                feelingInput.parentElement.style.transform = 'scale(1.02)';
+            });
+            
+            feelingInput.addEventListener('blur', () => {
+                feelingInput.parentElement.style.transform = 'scale(1)';
+            });
+        }
+
+        // Initialize Voice Recognition
+        function initializeVoiceRecognition() {
+            console.log('🎤 Initializing voice recognition...');
+            
+            // Check for browser support
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                console.log('❌ Speech recognition not supported');
+                document.getElementById('voiceBtn').style.display = 'none';
+                showNotification('Voice recognition is not supported in your browser. Please try Chrome or Edge.', 'warning');
+                return;
+            }
+
+            try {
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                voiceRecognition = new SpeechRecognition();
+                
+                // Configure recognition
+                voiceRecognition.continuous = false;
+                voiceRecognition.interimResults = true; // Enable interim results for better UX
+                voiceRecognition.maxAlternatives = 1;
+                voiceRecognition.lang = 'en-US';
+                
+                console.log('✅ Voice recognition initialized successfully');
+
+                voiceRecognition.onstart = () => {
+                    console.log('🎤 Voice recognition started');
+                    isListening = true;
+                    updateVoiceUI(true);
+                    showNotification('🎤 Listening... Speak now', 'info');
+                };
+
+                voiceRecognition.onresult = (event) => {
+                    console.log('🎤 Voice result received:', event);
+                    
+                    let finalTranscript = '';
+                    let interimTranscript = '';
+
+                    for (let i = event.resultIndex; i < event.results.length; i++) {
+                        const transcript = event.results[i][0].transcript;
+                        if (event.results[i].isFinal) {
+                            finalTranscript += transcript + ' ';
+                        } else {
+                            interimTranscript += transcript;
+                        }
+                    }
+
+                    // Update input field with interim results
+                    const feelingInput = document.getElementById('feelingInput');
+                    if (finalTranscript) {
+                        feelingInput.value = finalTranscript.trim();
+                        console.log('✅ Final transcript:', finalTranscript);
+                        
+                        // Auto-detect mood from voice input
+                        setTimeout(() => {
+                            detectMoodFromText(finalTranscript);
+                        }, 500);
+                    } else if (interimTranscript) {
+                        feelingInput.value = interimTranscript;
+                    }
+                };
+
+                voiceRecognition.onerror = (event) => {
+                    console.error('❌ Voice recognition error:', event.error);
+                    isListening = false;
+                    updateVoiceUI(false);
+                    
+                    let errorMessage = 'Voice input failed. Please try again.';
+                    switch(event.error) {
+                        case 'no-speech':
+                            errorMessage = 'No speech detected. Please try speaking clearly.';
+                            break;
+                        case 'audio-capture':
+                            errorMessage = 'Microphone not available. Please check your microphone permissions.';
+                            break;
+                        case 'not-allowed':
+                            errorMessage = 'Microphone permission denied. Please allow microphone access.';
+                            break;
+                        case 'network':
+                            errorMessage = 'Network error. Please check your internet connection.';
+                            break;
+                        case 'service-not-allowed':
+                            errorMessage = 'Voice recognition service not available.';
+                            break;
+                    }
+                    showNotification('❌ ' + errorMessage, 'error');
+                };
+
+                voiceRecognition.onend = () => {
+                    console.log('🎤 Voice recognition ended');
+                    isListening = false;
+                    updateVoiceUI(false);
+                    
+                    // Check if we got any results
+                    const feelingInput = document.getElementById('feelingInput');
+                    if (feelingInput.value.trim()) {
+                        showNotification('✅ Voice captured successfully!', 'success');
+                    }
+                };
+
+                voiceRecognition.onspeechstart = () => {
+                    console.log('🎤 Speech detected');
+                };
+
+                voiceRecognition.onspeechend = () => {
+                    console.log('🎤 Speech ended');
+                };
+
+            } catch (error) {
+                console.error('❌ Error initializing voice recognition:', error);
+                document.getElementById('voiceBtn').style.display = 'none';
+                showNotification('Failed to initialize voice recognition.', 'error');
+            }
+        }
+
+        // Update Voice UI
+        function updateVoiceUI(listening) {
+            const voiceBtn = document.getElementById('voiceBtn');
+            
+            if (listening) {
+                voiceBtn.classList.add('listening');
+                voiceBtn.innerHTML = '<i class="fas fa-stop"></i>';
+                voiceBtn.style.background = 'linear-gradient(135deg, #ff6b6b, #ff8e53)';
+            } else {
+                voiceBtn.classList.remove('listening');
+                voiceBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+                voiceBtn.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+            }
+        }
+
+        // Toggle Voice Recording
+        function toggleVoiceRecording() {
+            console.log('🎤 Toggle voice recording clicked');
+            
+            if (!voiceRecognition) {
+                showNotification('Voice recognition not available. Please refresh the page.', 'error');
+                return;
+            }
+
+            if (isListening) {
+                console.log('🎤 Stopping voice recognition');
+                voiceRecognition.stop();
+            } else {
+                console.log('🎤 Starting voice recognition');
+                try {
+                    // Request microphone permission
+                    navigator.mediaDevices.getUserMedia({ audio: true })
+                        .then(() => {
+                            voiceRecognition.start();
+                        })
+                        .catch((error) => {
+                            console.error('❌ Microphone permission denied:', error);
+                            showNotification('❌ Microphone access denied. Please allow microphone permissions.', 'error');
+                        });
+                } catch (error) {
+                    console.error('❌ Could not start voice recognition:', error);
+                    showNotification('Could not start voice recognition. Please check your microphone.', 'error');
+                }
+            }
+        }
+
+        // Detect Mood from Text
+        function detectMoodFromText(text) {
+            const lowerText = text.toLowerCase();
+            
+            // Mood detection keywords
+            const moodKeywords = {
+                happy: ['happy', 'joy', 'good', 'great', 'excited', 'wonderful', 'amazing'],
+                sad: ['sad', 'depressed', 'down', 'unhappy', 'miserable', 'cry', 'tears'],
+                stressed: ['stressed', 'pressure', 'overwhelmed', 'busy', 'tense', 'burnout'],
+                angry: ['angry', 'mad', 'frustrated', 'annoyed', 'irritated', 'upset'],
+                lonely: ['lonely', 'alone', 'isolated', 'abandoned', 'empty'],
+                anxious: ['anxious', 'worried', 'nervous', 'scared', 'fear', 'panic']
+            };
+
+            for (const [mood, keywords] of Object.entries(moodKeywords)) {
+                if (keywords.some(keyword => lowerText.includes(keyword))) {
+                    // Find and activate the corresponding emotion card
+                    const emotionCard = document.querySelector(`[data-mood="${mood}"]`);
+                    if (emotionCard) {
+                        emotionCard.click(); // Simulate click
+                    }
+                    return mood;
+                }
+            }
+            return null;
+        }
+
+        // Get Random Blossom Username
+        function getRandomBlossomUsername() {
+            const blossomNumbers = ['1', '2', '3'];
+            const randomNum = blossomNumbers[Math.floor(Math.random() * blossomNumbers.length)];
+            return `Blossom ${randomNum}`;
+        }
+
+        // Get Random Avatar
+        function getRandomAvatar(userId) {
+            return userId.replace('Blossom ', 'B');
+        }
+
+        // Submit Feelings - SAVING TO MONGODB
+        async function submitFeelings() {
+            const feelingText = document.getElementById('feelingInput').value.trim();
+            
+            if (!feelingText) {
+                showNotification('Please share your feelings first!', 'warning');
+                return;
+            }
+
+            if (!currentMood) {
+                showNotification('Please select how you are feeling!', 'warning');
+                return;
+            }
+
+            // Show loading
+            document.getElementById('submitBtn').innerHTML = '<div class="loading"></div> Sharing...';
+            document.getElementById('submitBtn').disabled = true;
+
+            try {
+                // Generate random Blossom username and avatar
+                const randomUserId = getRandomBlossomUsername();
+                const randomAvatar = getRandomAvatar(randomUserId);
+                
+                // Generate session ID
+                const sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+                
+                // Prepare data for MongoDB
+                const feelingData = {
+                    userId: randomUserId,
+                    avatar: randomAvatar,
+                    text: feelingText,
+                    mood: currentMood,
+                    sessionId: sessionId,
+                    deviceInfo: {
+                        userAgent: navigator.userAgent,
+                        platform: navigator.platform,
+                        language: navigator.language
+                    },
+                    source: 'express_page'
+                };
+                
+                // Save to MongoDB via API
+                const response = await fetch('http://localhost:3000/api/feelings', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(feelingData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Also save to localStorage for community page compatibility
+                    const post = {
+                        id: result.data._id || Date.now(),
+                        userId: randomUserId,
+                        avatar: randomAvatar,
+                        text: feelingText,
+                        mood: currentMood,
+                        timestamp: result.data.createdAt || new Date().toISOString(),
+                        reactions: {},
+                        comments: [],
+                        isOwnPost: true
+                    };
+                    
+                    let posts = JSON.parse(localStorage.getItem('mindBlossomPosts') || '[]');
+                    posts.unshift(post);
+                    localStorage.setItem('mindBlossomPosts', JSON.stringify(posts));
+                    
+                    // Create success animation
+                    createSuccessAnimation();
+                    
+                    // Show success message
+                    showNotification('✨ Your feelings have been shared anonymously and saved!', 'success');
+                    
+                    // Clear input
+                    document.getElementById('feelingInput').value = '';
+                    
+                    // Update progress steps
+                    updateProgressSteps();
+                    
+                    // Generate AI response
+                    await generateAIResponseForFeelings(feelingText, currentMood);
+                    
+                    // Suggest stress relief if stressed
+                    if (currentMood === 'stressed' || currentMood === 'anxious') {
+                        setTimeout(() => {
+                            addChatMessage("I noticed you're feeling stressed. Would you like some stress relief tips? I can help you with breathing exercises, mindfulness techniques, and practical strategies to manage stress effectively.", 'bot');
+                        }, 2000);
+                    }
+                    
+                    console.log('✅ Feeling saved to MongoDB:', result.data);
+                    
+                } else {
+                    throw new Error(result.message || 'Failed to save to database');
+                }
+                
+            } catch (error) {
+                console.error('Error saving feeling:', error);
+                
+                // Fallback to localStorage if MongoDB fails
+                const post = {
+                    id: Date.now(),
+                    userId: getRandomBlossomUsername(),
+                    avatar: getRandomAvatar(getRandomBlossomUsername()),
+                    text: feelingText,
+                    mood: currentMood,
+                    timestamp: new Date().toISOString(),
+                    reactions: {},
+                    comments: [],
+                    isOwnPost: true
+                };
+                
+                let posts = JSON.parse(localStorage.getItem('mindBlossomPosts') || '[]');
+                posts.unshift(post);
+                localStorage.setItem('mindBlossomPosts', JSON.stringify(posts));
+                
+                createSuccessAnimation();
+                showNotification('⚠️ Saved locally. Database connection issue.', 'warning');
+                
+                // Still generate AI response
+                await generateAIResponseForFeelings(feelingText, currentMood);
+                
+            } finally {
+                // Reset button
+                document.getElementById('submitBtn').innerHTML = '<i class="fas fa-paper-plane"></i> Share Anonymously';
+                document.getElementById('submitBtn').disabled = false;
+            }
+        }
+
+        // Generate AI Response for Feelings
+        async function generateAIResponseForFeelings(text, mood) {
+            addChatMessage("Thank you for sharing that with me. Let me think about how I can support you best...", 'bot');
+            
+            setTimeout(async () => {
+                try {
+                    const response = await generateSmartAIResponse(text, 'emotional');
+                    addChatMessage(response, 'bot');
+                    
+                    // Add helpful tips based on mood
+                    addMoodSpecificTips(mood);
+                    
+                } catch (error) {
+                    console.error('AI Error:', error);
+                    addChatMessage("I'm here for you. Sometimes technical issues happen, but I want you to know that your feelings are valid and important. Would you like to talk more about what you're experiencing?", 'bot');
+                }
+            }, 1500);
+        }
+
+        // Add Mood Specific Tips
+        function addMoodSpecificTips(mood) {
+            const tips = {
+                stressed: [
+                    "🌿 **Try the 4-7-8 breathing technique**: Inhale for 4 seconds, hold for 7, exhale for 8.",
+                    "📝 **Write down what's stressing you** - getting it out of your head can help.",
+                    "🚶 **Take a 10-minute walk outside** - movement helps reduce stress hormones."
+                ],
+                anxious: [
+                    "🌸 **Practice the 5-4-3-2-1 grounding technique**: Notice 5 things you can see, 4 you can touch, 3 you can hear, 2 you can smell, 1 you can taste.",
+                    "🧘 **Try progressive muscle relaxation** - tense and release each muscle group from toes to head.",
+                    "📅 **Break overwhelming tasks into smaller, manageable steps.**"
+                ],
+                sad: [
+                    "💫 **Allow yourself to feel your emotions** without judgment - it's okay to not be okay.",
+                    "☀️ **Get some sunlight** - even 15 minutes can boost your mood.",
+                    "🎨 **Express yourself creatively** through writing, drawing, or music."
+                ],
+                angry: [
+                    "🌊 **Take deep breaths before reacting** - count to 10 slowly.",
+                    "💪 **Channel the energy into physical activity** - exercise can help release tension.",
+                    "✍️ **Write a letter expressing your anger** (you don't have to send it)."
+                ],
+                lonely: [
+                    "🤝 **Reach out to one person today** - even a simple text message.",
+                    "🎯 **Join an online community about your interests.**",
+                    "❤️ **Practice self-compassion** - talk to yourself like you would talk to a friend."
+                ]
+            };
+
+            if (tips[mood]) {
+                setTimeout(() => {
+                    addChatMessage("**Here are some tips that might help:**", 'bot');
+                    tips[mood].forEach(tip => {
+                        setTimeout(() => {
+                            addChatMessage(tip, 'bot');
+                        }, 500);
+                    });
+                }, 1000);
+            }
+        }
+
+        // Toggle Chatbot
+        function toggleChatbot() {
+            const chatbot = document.getElementById('chatbotWindow');
+            chatbot.classList.toggle('active');
+            
+            if (chatbot.classList.contains('active')) {
+                document.getElementById('chatInput').focus();
+            }
+        }
+        
+        // Open YouTube Modal with PROPER embed URL
+        function openYouTubeModal(videoId, title) {
+            const modal = document.getElementById('youtubeModal');
+            const player = document.getElementById('youtubePlayer');
+            const titleElement = document.getElementById('youtubeTitle');
+            
+            // Use proper embed URL format
+            player.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+            titleElement.textContent = `Now Playing: ${title}`;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Show notification
+            showNotification(`🎵 Now Playing: ${title}`, 'success');
+            
+            // Add to chat
+            setTimeout(() => {
+                addChatMessage(`I see you're playing "${title}". Music can be very healing! Would you like me to suggest more songs in this mood? 🎶`, 'bot');
+            }, 1000);
+        }
+        
+        // Close YouTube Modal
+        function closeYouTubeModal() {
+            const modal = document.getElementById('youtubeModal');
+            const player = document.getElementById('youtubePlayer');
+            
+            // Stop the video
+            player.src = '';
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Send Chat Message
+        async function sendChatMessage() {
+            console.log('🔍 sendChatMessage called');
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            console.log('📝 Message:', message);
+            
+            if (!message) {
+                showNotification('Please type a message first!', 'warning');
+                return;
+            }
+
+            // Check for inappropriate content
+            if (containsInappropriateContent(message)) {
+                showNotification('⚠️ Please keep the conversation respectful and appropriate.', 'warning');
+                input.value = '';
+                return;
+            }
+
+            // Add user message
+            addChatMessage(message, 'user');
+            input.value = '';
+            
+            // Show typing indicator
+            addTypingIndicator();
+            
+            console.log('🤖 Starting AI response generation...');
+            
+            try {
+                // Generate smart AI response
+                const response = await generateSmartAIResponse(message, 'general');
+                console.log('✅ AI Response received:', response);
+                removeTypingIndicator();
+                
+                // Add source attribution if available
+                let finalResponse = response;
+                if (response.source) {
+                    finalResponse = response.response;
+                    const sourceText = `\n\n<div class="source-attribution">Source: ${response.source}</div>`;
+                    addChatMessage(finalResponse + sourceText, 'bot');
+                } else {
+                    addChatMessage(finalResponse, 'bot');
+                }
+                
+                // Auto-detect mood if emotional content
+                const detectedMood = detectMoodFromText(message);
+                if (detectedMood && !currentMood) {
+                    const emotionCard = document.querySelector(`[data-mood="${detectedMood}"]`);
+                    if (emotionCard) {
+                        emotionCard.click();
+                    }
+                }
+                
+                // Check if asking for tips about feelings
+                if (message.toLowerCase().includes('tips') ||
+                    message.toLowerCase().includes('help') ||
+                    message.toLowerCase().includes('advice') ||
+                    message.toLowerCase().includes('what should') ||
+                    message.toLowerCase().includes('how to') ||
+                    message.toLowerCase().includes('suggest')) {
+
+                    // Provide tips based on current mood or detected mood
+                    const targetMood = currentMood || detectMoodFromText(message);
+                    if (targetMood) {
+                        setTimeout(() => {
+                            console.log('💡 Providing mood-specific tips for:', targetMood);
+                            provideMoodSpecificTips(targetMood);
+                        }, 1000);
+                    } else {
+                        setTimeout(() => {
+                            console.log('💡 Providing general wellness tips');
+                            provideGeneralWellnessTips();
+                        }, 1000);
+                    }
+                }
+
+                // Check if asking for stress tips
+                if (message.toLowerCase().includes('stress') ||
+                    message.toLowerCase().includes('anxiety') ||
+                    message.toLowerCase().includes('worried')) {
+                    setTimeout(() => {
+                        console.log('💡 Providing stress relief tips');
+                        provideStressReliefTips();
+                    }, 1000);
+                }
+
+                // Check if asking for songs
+                if (message.toLowerCase().includes('song') ||
+                    message.toLowerCase().includes('music') ||
+                    message.toLowerCase().includes('tamil song')) {
+                    setTimeout(() => {
+                        console.log('🎵 Suggesting songs based on mood');
+                        suggestSongsBasedOnMood();
+                    }, 1000);
+                }
+
+                // Check if asking for movies
+                if (message.toLowerCase().includes('movie') ||
+                    message.toLowerCase().includes('film') ||
+                    message.toLowerCase().includes('cinema') ||
+                    message.toLowerCase().includes('watch movie')) {
+                    setTimeout(() => {
+                        console.log('🎬 Suggesting movies based on mood');
+                        suggestMoviesBasedOnMood();
+                    }, 1000);
+                }
+
+                // Check if asking for comedy
+                if (message.toLowerCase().includes('comedy') ||
+                    message.toLowerCase().includes('funny') ||
+                    message.toLowerCase().includes('joke') ||
+                    message.toLowerCase().includes('laugh') ||
+                    message.toLowerCase().includes('make me laugh')) {
+                    setTimeout(() => {
+                        console.log('😄 Suggesting comedy content');
+                        suggestComedyBasedOnMood();
+                    }, 1000);
+                }
+
+            } catch (error) {
+                console.error('❌ Chat error:', error);
+                removeTypingIndicator();
+                addChatMessage("I'm having trouble connecting right now, but I want you to know that I'm here for you. Your feelings matter and you're not alone in this. 💕", 'bot');
+            }
+        }
+
+        // Generate Smart AI Response with multiple sources
+        async function generateSmartAIResponse(message, type = 'general') {
+            const lowerMessage = message.toLowerCase();
+            
+            // Try Gemini API first for all types of questions
+            try {
+                const geminiResponse = await generateGeminiResponse(message, type);
+                return geminiResponse.response || geminiResponse;
+            } catch (error) {
+                console.log('Gemini failed, trying other sources...');
+            }
+            
+            // Try to fetch from Wikipedia for factual questions
+            if (isFactualQuestion(message)) {
+                try {
+                    const wikiResponse = await fetchFromWikipedia(message);
+                    if (wikiResponse) {
+                        return wikiResponse;
+                    }
+                } catch (error) {
+                    console.log('Wikipedia failed...');
+                }
+            }
+            
+            // Try DuckDuckGo for general queries
+            try {
+                const duckResponse = await fetchFromDuckDuckGo(message);
+                if (duckResponse) {
+                    return duckResponse;
+                }
+            } catch (error) {
+                console.log('DuckDuckGo failed...');
+            }
+            
+            // Fallback to comprehensive response
+            return getComprehensiveResponse(message, type);
+        }
+
+        // Generate Gemini Response
+        async function generateGeminiResponse(message, type) {
+            let prompt = '';
+            
+            if (type === 'emotional') {
+                prompt = `As a compassionate emotional support AI, respond to: "${message}"
+                
+                Provide empathetic, supportive advice. Focus on validation, coping strategies, and emotional support.
+                Keep it warm, kind, and helpful.`;
+            } else {
+                prompt = `You are a helpful AI assistant. Answer this question: "${message}"
+                
+                Provide accurate, helpful information. Be clear and concise. 
+                If it's about feelings, be empathetic. If it's factual, be informative.`;
+            }
+
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    contents: [{
+                        parts: [{
+                            text: prompt
+                        }]
+                    }],
+                    safetySettings: [
+                        {
+                            category: "HARM_CATEGORY_HARASSMENT",
+                            threshold: "BLOCK_MEDIUM_AND_ABOVE"
+                        },
+                        {
+                            category: "HARM_CATEGORY_HATE_SPEECH",
+                            threshold: "BLOCK_MEDIUM_AND_ABOVE"
+                        },
+                        {
+                            category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                            threshold: "BLOCK_MEDIUM_AND_ABOVE"
+                        },
+                        {
+                            category: "HARM_CATEGORY_DANGEROUS_CONTENT",
+                            threshold: "BLOCK_MEDIUM_AND_ABOVE"
+                        }
+                    ],
+                    generationConfig: {
+                        temperature: 0.7,
+                        maxOutputTokens: 500,
+                        topP: 0.8,
+                        topK: 40
+                    }
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Gemini API request failed');
+            }
+
+            const data = await response.json();
+            return {
+                response: data.candidates[0].content.parts[0].text,
+                source: "Google AI"
+            };
+        }
+
+        // Check if question is factual
+        function isFactualQuestion(message) {
+            const factualKeywords = [
+                'what is', 'who is', 'when was', 'where is', 'how does',
+                'explain', 'define', 'meaning of', 'history of', 'facts about',
+                'capital of', 'population of', 'size of', 'length of', 'height of',
+                'invented', 'discovered', 'created', 'found', 'established'
+            ];
+            
+            const lowerMessage = message.toLowerCase();
+            return factualKeywords.some(keyword => lowerMessage.includes(keyword));
+        }
+
+        // Fetch from Wikipedia
+        async function fetchFromWikipedia(query) {
+            // Extract search term from question
+            const searchTerm = extractSearchTerm(query);
+            
+            try {
+                const response = await fetch(`${WIKIPEDIA_API}${encodeURIComponent(searchTerm)}`);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    if (data.extract) {
+                        return {
+                            response: `**${data.title}**\n\n${data.extract}\n\n${data.description ? `This is about: ${data.description}` : ''}`,
+                            source: "Wikipedia"
+                        };
+                    }
+                }
+            } catch (error) {
+                console.log('Wikipedia fetch error:', error);
+            }
+            
+            return null;
+        }
+
+        // Fetch from DuckDuckGo
+        async function fetchFromDuckDuckGo(query) {
+            try {
+                const response = await fetch(`${DUCKDUCKGO_API}${encodeURIComponent(query)}`);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    if (data.AbstractText) {
+                        return {
+                            response: `${data.AbstractText}\n\n${data.RelatedTopics && data.RelatedTopics.length > 0 ? 'Related topics available.' : ''}`,
+                            source: "DuckDuckGo Instant Answers"
+                        };
+                    } else if (data.Heading) {
+                        return {
+                            response: `**${data.Heading}**\n\n${data.Abstract ? data.Abstract : 'Information available from various sources.'}`,
+                            source: "DuckDuckGo"
+                        };
+                    }
+                }
+            } catch (error) {
+                console.log('DuckDuckGo fetch error:', error);
+            }
+            
+            return null;
+        }
+
+        // Extract search term from question
+        function extractSearchTerm(query) {
+            // Remove question words and get the main subject
+            const cleaned = query
+                .toLowerCase()
+                .replace(/(what is|who is|where is|when was|how does|explain|define|tell me about|what are|who are)\s+/i, '')
+                .replace(/\?/g, '')
+                .trim();
+            
+            // Capitalize first letter
+            return cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
+        }
+
+        // Get Comprehensive Response
+        function getComprehensiveResponse(message, type) {
+            const lowerMessage = message.toLowerCase();
+            
+            // Emotional responses
+            if (type === 'emotional' || 
+                lowerMessage.includes('feeling') || 
+                lowerMessage.includes('sad') ||
+                lowerMessage.includes('depressed') ||
+                lowerMessage.includes('anxious')) {
+                
+                const emotionalResponses = [
+                    "I understand you're going through a tough time. Remember, it's okay to not be okay. Your feelings are valid and important. 💕",
+                    "Thank you for sharing that with me. I want you to know that you're not alone in whatever you're feeling. 🌸",
+                    "I hear you, and I'm here for you. Sometimes just expressing what we feel can be the first step toward feeling better. 🌟"
+                ];
+                
+                return {
+                    response: emotionalResponses[Math.floor(Math.random() * emotionalResponses.length)],
+                    source: "Emotional Support AI"
+                };
+            }
+            
+            // General knowledge responses
+            if (lowerMessage.includes('what') || lowerMessage.includes('how') || lowerMessage.includes('why')) {
+                return {
+                    response: `That's an interesting question about "${extractSearchTerm(message)}". Based on general knowledge: ${getGeneralKnowledgeAnswer(message)}`,
+                    source: "General Knowledge Database"
+                };
+            }
+            
+            // Default helpful response
+            return {
+                response: `Thank you for your question about "${extractSearchTerm(message)}". I'm here to help you with information and support. For the most accurate and up-to-date information, I recommend checking reliable sources or consulting with experts in that field. How else can I support you today? 🌸`,
+                source: "Mind Blossom AI"
+            };
+        }
+
+        // Get General Knowledge Answer
+        function getGeneralKnowledgeAnswer(query) {
+            const lowerQuery = query.toLowerCase();
+            
+            // Common knowledge responses
+            if (lowerQuery.includes('capital of india')) {
+                return "The capital of India is New Delhi.";
+            }
+            if (lowerQuery.includes('largest planet')) {
+                return "Jupiter is the largest planet in our solar system.";
+            }
+            if (lowerQuery.includes('tallest mountain')) {
+                return "Mount Everest is the tallest mountain in the world, with a height of 8,848.86 meters (29,031.7 feet).";
+            }
+            if (lowerQuery.includes('population of earth')) {
+                return "As of 2024, the estimated world population is approximately 8.1 billion people.";
+            }
+            if (lowerQuery.includes('water boils at')) {
+                return "Water boils at 100°C (212°F) at sea level under standard atmospheric pressure.";
+            }
+            
+            return "This is a topic that requires specific information. I recommend consulting reliable educational resources or experts for detailed and accurate information.";
+        }
+
+        // Check for inappropriate content
+        function containsInappropriateContent(text) {
+            const inappropriatePatterns = [
+                /\b(sex|porn|nude|explicit|xxx|adult)\b/i,
+                /\b(drugs|alcohol|weed|marijuana|cocaine)\b/i,
+                /\b(violence|kill|hurt|attack|fight)\b/i,
+                /\b(hate|racist|discrimination)\b/i
+            ];
+            
+            return inappropriatePatterns.some(pattern => pattern.test(text));
+        }
+
+        // Provide Stress Relief Tips
+        function provideStressReliefTips() {
+            const tips = [
+                "🌿 **Quick Stress Relief Techniques:**",
+                "1. **Box Breathing**: Inhale 4s, hold 4s, exhale 4s, hold 4s. Repeat 5 times.",
+                "2. **5-4-3-2-1 Grounding**: Notice 5 things you see, 4 you feel, 3 you hear, 2 you smell, 1 you taste.",
+                "3. **Progressive Muscle Relaxation**: Tense and release muscles from toes to head.",
+                "",
+                "💡 **Daily Stress Management:**",
+                "• Take regular screen breaks every 45 minutes",
+                "• Practice gratitude - write 3 things you're thankful for",
+                "• Stay hydrated and eat regular meals",
+                "• Get 7-8 hours of quality sleep",
+                "",
+                "Would you like me to explain any of these techniques in more detail? I'm here to help you find what works best for you. 🌸"
+            ];
+            
+            tips.forEach((tip, index) => {
+                setTimeout(() => {
+                    addChatMessage(tip, 'bot');
+                }, index * 300);
+            });
+        }
+        
+        // Suggest Songs Based on Mood
+        function suggestSongsBasedOnMood() {
+            if (!currentMood) {
+                addChatMessage("I'd love to recommend some songs! First, could you tell me how you're feeling today? Or select an emotion from the cards above. 🎵", 'bot');
+                return;
+            }
+            
+            const songs = youtubeVideos[currentMood] || youtubeVideos.default;
+            const selectedSongs = songs.slice(0, 3);
+            
+            addChatMessage(`Based on your ${currentMood} mood, here are some Tamil songs that might resonate with you:`, 'bot');
+            
+            selectedSongs.forEach((song, index) => {
+                setTimeout(() => {
+                    addChatMessage(`🎵 **${song.title}** by ${song.artist}\nClick the song card to play it!`, 'bot');
+                }, index * 500);
+            });
+            
+            setTimeout(() => {
+                addChatMessage("You can also click any song card in the right panel to play it instantly! The music will open in YouTube. 🎶", 'bot');
+            }, 2000);
+        }
+
+        // Suggest Movies Based on Mood
+        function suggestMoviesBasedOnMood() {
+            const mood = currentMood || 'general';
+            
+            const movieDatabase = {
+                happy: [
+                    {
+                        title: "3 Idiots",
+                        year: "2012",
+                        director: "Nalan Kumarasamy",
+                        cast: "Karthi, Siva Karthikeyan, Santhanam",
+                        genre: "Comedy",
+                        rating: "8.4/10",
+                        description: "Three friends with different personalities who become roommates and their hilarious adventures",
+                        whyRecommended: "Perfect comedy to boost your happy mood with non-stop laughter!",
+                        streaming: "Available on Disney+ Hotstar, Netflix"
+                    },
+                    {
+                        title: "Mersal",
+                        year: "2021",
+                        director: "Ponram",
+                        cast: "Suriya, Lijo Mol Jose, Kalidas Jayaram",
+                        genre: "Action Comedy",
+                        rating: "7.3/10",
+                        description: "A man with multiple identities tries to balance his complicated life",
+                        whyRecommended: "Action-packed comedy that'll keep you entertained and smiling",
+                        streaming: "Available on Amazon Prime Video"
+                    },
+                    {
+                        title: "Thirupaachi",
+                        year: "2023",
+                        director: "M. Rajesh",
+                        cast: "Shiva, Nirosha, Ashwin",
+                        genre: "Family Comedy",
+                        rating: "7.8/10",
+                        description: "A man who becomes a local celebrity after being mistaken for a goon",
+                        whyRecommended: "Light-hearted family comedy that'll warm your heart",
+                        streaming: "Available on Netflix"
+                    }
+                ],
+                sad: [
+                    {
+                        title: "96",
+                        year: "2018",
+                        director: "C. Prem Kumar",
+                        cast: "Vijay Sethupathi, Varalaxmi Sarathkumar",
+                        genre: "Emotional Drama",
+                        rating: "8.5/10",
+                        description: "A military officer's life changes when he adopts a 96-year-old girl",
+                        whyRecommended: "Emotional story that acknowledges sadness while offering hope",
+                        streaming: "Available on Amazon Prime Video"
+                    },
+                    {
+                        title: "Thanga Meengal",
+                        year: "2013",
+                        director: "A. L. Vijay",
+                        cast: "Arya, Anjali, Santhanam",
+                        genre: "Romantic Drama",
+                        rating: "7.9/10",
+                        description: "A love story that transcends time and circumstances",
+                        whyRecommended: "Beautiful cinematography and music that soothes the soul",
+                        streaming: "Available on YouTube Movies"
+                    },
+                    {
+                        title: "Kannathil Muthamittal",
+                        year: "2019",
+                        director: "Mari Selvaraj",
+                        cast: "Madhavan, Shraddha Srinath, Vijay Sethupathi",
+                        genre: "Drama",
+                        rating: "8.2/10",
+                        description: "An ordinary man's extraordinary journey through life's challenges",
+                        whyRecommended: "Inspirational story that resonates with feelings of sadness",
+                        streaming: "Available on Disney+ Hotstar"
+                    }
+                ],
+                stressed: [
+                    {
+                        title: "Doctor",
+                        year: "2021",
+                        director: "Nelson Dilipkumar",
+                        cast: "Sivakarthikeyan, Priyanka Arul Mohan, Yogi Babu",
+                        genre: "Action Comedy",
+                        rating: "7.2/10",
+                        description: "A doctor who moonlights as a vigilante to fight corruption",
+                        whyRecommended: "Perfect stress relief - action comedy that lets you escape reality",
+                        streaming: "Available on Sun NXT, Amazon Prime"
+                    },
+                    {
+                        title: "Petta",
+                        year: "2019",
+                        director: "Karthik Subbaraj",
+                        cast: "Rajinikanth, Vijay Sethupathi, Nawab Shah",
+                        genre: "Action Drama",
+                        rating: "8.3/10",
+                        description: "An aged hostel warden takes on drug dealers",
+                        whyRecommended: "High-octane action to channel your stress into entertainment",
+                        streaming: "Available on Netflix"
+                    },
+                    {
+                        title: "Viswasam",
+                        year: "2019",
+                        director: "Ajith Kumar",
+                        cast: "Ajith Kumar, Rakul Preet Singh, Abhishek Kapoor",
+                        genre: "Comedy Drama",
+                        rating: "7.5/10",
+                        description: "A man with multiple identities tries to reform society",
+                        whyRecommended: "Light comedy with social message - perfect for stress relief",
+                        streaming: "Available on Zee5"
+                    }
+                ],
+                angry: [
+                    {
+                        title: "Vikram",
+                        year: "2022",
+                        director: "Lokesh Kanagaraj",
+                        cast: "Kamal Haasan, Vijay Sethupathi, Fahadh Faasil",
+                        genre: "Action Thriller",
+                        rating: "8.7/10",
+                        description: "A special agent investigates complex cases involving black market organ trade",
+                        whyRecommended: "Intense action to channel your angry energy positively",
+                        streaming: "Available on Disney+ Hotstar"
+                    },
+                    {
+                        title: "Kaithi",
+                        year: "2022",
+                        director: "Pa. Ranjith",
+                        cast: "Karthi, Simran, Narain",
+                        genre: "Action Drama",
+                        rating: "8.1/10",
+                        description: "A gangster who runs a smuggling operation tries to go straight",
+                        whyRecommended: "Gritty action that matches your intense mood perfectly",
+                        streaming: "Available on Netflix"
+                    },
+                    {
+                        title: "Mersal",
+                        year: "2021",
+                        director: "Ponram",
+                        cast: "Suriya, Lijo Mol Jose, Kalidas Jayaram",
+                        genre: "Action Comedy",
+                        rating: "7.3/10",
+                        description: "A man with multiple identities tries to balance his complicated life",
+                        whyRecommended: "Action-packed entertainment to redirect angry energy",
+                        streaming: "Available on Amazon Prime Video"
+                    }
+                ],
+                lonely: [
+                    {
+                        title: "Vinnaithaandi Varuvaayaa",
+                        year: "2015",
+                        director: "Atlee Kumar",
+                        cast: "Vijay, Samantha, Nithya Menon",
+                        genre: "Romantic Drama",
+                        rating: "8.2/10",
+                        description: "A man who can communicate with spirits seeks to understand his purpose",
+                        whyRecommended: "Heartwarming story about connection and finding your place",
+                        streaming: "Available on Disney+ Hotstar"
+                    },
+                    {
+                        title: "Mynaa",
+                        year: "2021",
+                        director: "Nelson Dilipkumar",
+                        cast: "Suriya, Aishwarya Rajesh, Priyanka Arul Mohan",
+                        genre: "Psychological Thriller",
+                        rating: "7.8/10",
+                        description: "A businessman's life unravels through mysterious events",
+                        whyRecommended: "Engaging mystery that'll make you feel less alone",
+                        streaming: "Available on Netflix"
+                    },
+                    {
+                        title: "Sillunu Oru Kaadhal",
+                        year: "2022",
+                        director: "Halitha Shameer",
+                        cast: "Dushara Vijayan, Siddharth, Remya Nambeesan",
+                        genre: "Romantic Drama",
+                        rating: "7.6/10",
+                        description: "A young man's quest to find his childhood friend",
+                        whyRecommended: "Beautiful story about love and friendship that comforts loneliness",
+                        streaming: "Available on Disney+ Hotstar"
+                    }
+                ],
+                anxious: [
+                    {
+                        title: "Pannaiyarum Padminiyum",
+                        year: "2022",
+                        director: "Priyadarshan",
+                        cast: "Prabhas, Pooja Hegde, Krishnam Raju",
+                        genre: "Period Drama",
+                        rating: "8.4/10",
+                        description: "A village girl's love story set in the 1980s",
+                        whyRecommended: "Calming, beautiful narrative that soothes anxious mind",
+                        streaming: "Available on Amazon Prime Video"
+                    },
+                    {
+                        title: "Thirumanam Ennum Nikkum",
+                        year: "2021",
+                        director: "Karthik Subbaraj",
+                        cast: "Dhanush, Nithya Menen, Raashi Khanna",
+                        genre: "Sci-Fi Drama",
+                        rating: "8.0/10",
+                        description: "A time traveler tries to change historical events",
+                        whyRecommended: "Gentle sci-fi that provides peaceful escape from anxiety",
+                        streaming: "Available on Netflix"
+                    },
+                    {
+                        title: "Kumbalangi Nights",
+                        year: "2021",
+                        director: "Pa. Ranjith",
+                        cast: "Prabhas, Sai Pallavi, Bhanupriya",
+                        genre: "Romantic Drama",
+                        rating: "7.9/10",
+                        description: "A photographer's love story across different time periods",
+                        whyRecommended: "Comforting romance that calms anxious thoughts",
+                        streaming: "Available on Amazon Prime Video"
+                    }
+                ],
+                general: [
+                    {
+                        title: "Baasha",
+                        year: "1995",
+                        director: "Suresh Krissna",
+                        cast: "Rajinikanth, Nagma, Raghuvaran",
+                        genre: "Action Drama",
+                        rating: "8.9/10",
+                        description: "An auto mechanic becomes a mafia don",
+                        whyRecommended: "Timeless classic that never fails to entertain",
+                        streaming: "Available on YouTube, Amazon Prime"
+                    },
+                    {
+                        title: "Anniyan",
+                        year: "2018",
+                        director: "Shankar Shanmugham",
+                        cast: "Vikram, Nayanthara, Nithya Menen",
+                        genre: "Sci-Fi Thriller",
+                        rating: "8.3/10",
+                        description: "A man with multiple identities and extraordinary abilities",
+                        whyRecommended: "Mind-bending thriller that'll keep you engaged",
+                        streaming: "Available on Disney+ Hotstar"
+                    },
+                    {
+                        title: "Indian",
+                        year: "2001",
+                        director: "Shankar",
+                        cast: "Kamal Haasan, R. Madhavan, Raveena Tandon",
+                        genre: "Patriotic Drama",
+                        rating: "8.7/10",
+                        description: "A freedom fighter's journey for India's independence",
+                        whyRecommended: "Inspiring patriotic drama with powerful performances",
+                        streaming: "Available on Disney+ Hotstar"
+                    }
+                ]
+            };
+            
+            const movies = movieDatabase[mood] || movieDatabase.general;
+            const selectedMovies = movies.slice(0, 3);
+            
+            addChatMessage(`Based on your ${mood} mood, here are some detailed movie recommendations:`, 'bot');
+            
+            selectedMovies.forEach((movie, index) => {
+                setTimeout(() => {
+                    addChatMessage(`🎬 **${movie.title} (${movie.year})**`, 'bot');
+                    addChatMessage(`📽 **Director:** ${movie.director}`, 'bot');
+                    addChatMessage(`🎭 **Cast:** ${movie.cast}`, 'bot');
+                    addChatMessage(`⭐ **Rating:** ${movie.rating}`, 'bot');
+                    addChatMessage(`📝 **Genre:** ${movie.genre}`, 'bot');
+                    addChatMessage(`📖 **About:** ${movie.description}`, 'bot');
+                    addChatMessage(`💡 **Why watch:** ${movie.whyRecommended}`, 'bot');
+                    addChatMessage(`📺 **Where to watch:** ${movie.streaming}`, 'bot');
+                    addChatMessage("", 'bot'); // Empty line for spacing
+                }, index * 1200);
+            });
+            
+            setTimeout(() => {
+                addChatMessage("🍿 These movies offer perfect entertainment for your current mood. Detailed information helps you choose what resonates most! Would you like recommendations for any specific genre or actor?", 'bot');
+            }, selectedMovies.length * 1200 + 1500);
+        }
+
+        // Suggest Comedy Content Based on Mood
+        function suggestComedyBasedOnMood() {
+            const mood = currentMood || 'general';
+            
+            const comedyDatabase = {
+                happy: [
+                    {
+                        title: "Why This Kolaveri Di?",
+                        type: "Movie",
+                        year: "2012",
+                        creator: "Aishwarya Dhanush",
+                        description: "The ultimate feel-good comedy about a college student who becomes a YouTube sensation",
+                        whyRecommended: "Perfect mood booster with non-stop laughter and catchy songs!",
+                        whereToWatch: "Netflix, YouTube Movies"
+                    },
+                    {
+                        title: "Santhanam's Comedy Shows",
+                        type: "TV Series",
+                        creator: "Santhanam",
+                        description: "Clean family comedy shows with hilarious sketches and social commentary",
+                        whyRecommended: "Light-hearted entertainment that brings families together",
+                        whereToWatch: "Vijay TV, Sun TV, YouTube"
+                    },
+                    {
+                        title: "Lollu Sabha",
+                        type: "Reality Comedy Show",
+                        creator: "Kalakka Povathu Yaaru",
+                        description: "Ultimate stress reliever with celebrity guests and comedy competitions",
+                        whyRecommended: "Pure comedy therapy - guaranteed to make you forget your worries!",
+                        whereToWatch: "Star Vijay, Disney+ Hotstar"
+                    }
+                ],
+                sad: [
+                    {
+                        title: "Santhanam's Light-Hearted Dramas",
+                        type: "Mixed Content",
+                        creator: "Santhanam",
+                        description: "Gentle comedy with emotional depth that acknowledges sadness while offering hope",
+                        whyRecommended: "Comforting entertainment that validates your feelings while lifting spirits",
+                        whereToWatch: "YouTube, Amazon Prime"
+                    },
+                    {
+                        title: "Yogi Babu",
+                        type: "Dramedy Film",
+                        creator: "R. Parthiban",
+                        description: "Comedy with emotional depth about finding purpose in life's challenges",
+                        whyRecommended: "Uplifting messages wrapped in humor - perfect for emotional healing",
+                        whereToWatch: "Netflix, YouTube Movies"
+                    },
+                    {
+                        title: "KPY's Motivational Comedy",
+                        type: "Stand-up Special",
+                        creator: "Kadhal Kumaran",
+                        description: "Inspirational comedy with life lessons and positive messages",
+                        whyRecommended: "Motivational humor that turns sadness into strength and hope",
+                        whereToWatch: "Amazon Prime, YouTube"
+                    },
+                    {
+                        title: "Cooku with Comali",
+                        type: "Comedy Film",
+                        creator: "Vignesh Shivan",
+                        description: "Feel-good comedy about friendship and simple joys of life",
+                        whyRecommended: "Heartwarming entertainment that reminds you of life's beautiful moments",
+                        whereToWatch: "Disney+ Hotstar, Netflix"
+                    }
+                ],
+                stressed: [
+                    {
+                        title: "Lollu Sabha",
+                        type: "Reality Comedy Show",
+                        creator: "Kalakka Povathu Yaaru",
+                        description: "Ultimate stress reliever with celebrity guests and comedy competitions",
+                        whyRecommended: "Pure comedy therapy - guaranteed to make you forget your worries!",
+                        whereToWatch: "Star Vijay, Disney+ Hotstar"
+                    },
+                    {
+                        title: "Kalakka Povathu Yaaru",
+                        type: "Comedy Film",
+                        creator: "Choreographer Shankar",
+                        description: "Wacky over-the-top comedy that helps you laugh at life's absurdities",
+                        whyRecommended: "Stress-busting humor that puts your problems in perspective",
+                        whereToWatch: "Sun NXT, Amazon Prime"
+                    },
+                    {
+                        title: "Asathapovadhu Alangaram",
+                        type: "Comedy Classic",
+                        creator: "K. Bhagyaraj",
+                        description: "Classic slapstick comedy with timeless humor that never gets old",
+                        whyRecommended: "Time-tested comedy that provides instant stress relief",
+                        whereToWatch: "YouTube, Raj TV"
+                    },
+                    {
+                        title: "Nagesh Thiraiyarangal",
+                        type: "Comedy Legend",
+                        creator: "Nagesh",
+                        description: "Comedy gold from the legend of Tamil cinema - perfect for relaxation",
+                        whyRecommended: "Therapeutic humor that has healed generations with laughter",
+                        whereToWatch: "YouTube, Sun TV"
+                    }
+                ],
+                angry: [
+                    {
+                        title: "Vadivelu's Slapstick Comedy",
+                        type: "Sketch Comedy",
+                        creator: "Vadivelu",
+                        description: "Physical comedy that channels angry energy into harmless laughter",
+                        whyRecommended: "Perfect way to transform anger into positive energy through humor",
+                        whereToWatch: "YouTube, Raj TV"
+                    },
+                    {
+                        title: "Santhanam's Political Satire",
+                        type: "Satirical Content",
+                        creator: "Santhanam",
+                        description: "Smart comedy that uses humor to comment on social issues",
+                        whyRecommended: "Intelligent satire that validates your anger while making you think",
+                        whereToWatch: "Vijay TV, YouTube"
+                    },
+                    {
+                        title: "Goundamani's One-Liners",
+                        type: "Punch Dialogues",
+                        creator: "Goundamani",
+                        description: "Quick, witty comebacks and humorous observations",
+                        whyRecommended: "Instant mood fixer with clever wordplay and timing",
+                        whereToWatch: "Social media, YouTube compilations"
+                    },
+                    {
+                        title: "Chinna Pasanga Naanga",
+                        type: "Relatable Comedy",
+                        creator: "M. Rajesh",
+                        description: "Everyday situations comedy that makes anger feel normal and manageable",
+                        whyRecommended: "Relatable humor that shows you're not alone in your feelings",
+                        whereToWatch: "Sun TV, Amazon Prime"
+                    }
+                ],
+                lonely: [
+                    {
+                        title: "Friendship-Themed Comedies",
+                        type: "Feel-Good Content",
+                        creator: "Various",
+                        description: "Comedy about connection, belonging, and the joy of friendship",
+                        whyRecommended: "Heartwarming entertainment that makes you feel connected and less alone",
+                        whereToWatch: "Netflix, Amazon Prime"
+                    },
+                    {
+                        title: "Family Comedy Shows",
+                        type: "Group Entertainment",
+                        creator: "Star Vijay",
+                        description: "Warm, inclusive comedy shows that bring families together",
+                        whyRecommended: "Shared laughter experience that creates sense of belonging",
+                        whereToWatch: "Disney+ Hotstar, Vijay TV"
+                    },
+                    {
+                        title: "Comedy Podcasts",
+                        type: "Audio Content",
+                        creator: "Various Creators",
+                        description: "Comforting background noise with conversations and humor",
+                        whyRecommended: "Helps feel less alone with friendly voices and companionship",
+                        whereToWatch: "Spotify, Apple Podcasts, YouTube"
+                    },
+                    {
+                        title: "Group Comedy Sketches",
+                        type: "Interactive Content",
+                        creator: "Black Sheep",
+                        description: "Shared laughter experience with friends and community",
+                        whyRecommended: "Social connection through humor - perfect for combating loneliness",
+                        whereToWatch: "YouTube, Instagram"
+                    }
+                ],
+                anxious: [
+                    {
+                        title: "Calming Comedy Series",
+                        type: "Gentle Entertainment",
+                        creator: "Thiru. Prabhu",
+                        description: "Soft, soothing comedy that doesn't trigger anxiety but provides gentle laughs",
+                        whyRecommended: "Anxiety-friendly humor that calms your nerves while entertaining",
+                        whereToWatch: "Netflix, Amazon Prime"
+                    },
+                    {
+                        title: "Situational Comedy",
+                        type: "Relatable Humor",
+                        creator: "Naveen",
+                        description: "Everyday anxiety situations turned into humorous, relatable content",
+                        whyRecommended: "Helps you laugh at your worries and feel understood",
+                        whereToWatch: "YouTube, Social Media"
+                    },
+                    {
+                        title: "Stand-up Comedy Specials",
+                        type: "Live Performance",
+                        creator: "Various Artists",
+                        description: "Professional comedy performances with clean, thoughtful humor",
+                        whyRecommended: "Light distraction that takes your mind off anxious thoughts",
+                        whereToWatch: "Netflix, Amazon Prime, Live Shows"
+                    },
+                    {
+                        title: "Comedy Talk Shows",
+                        type: "Interactive Content",
+                        creator: "Vijay TV",
+                        description: "Comforting background entertainment with guest interviews and audience interaction",
+                        whyRecommended: "Gentle noise and company that soothes anxious mind",
+                        whereToWatch: "Vijay TV, YouTube"
+                    }
+                ],
+                general: [
+                    {
+                        title: "Tamil Comedy Classics",
+                        type: "Golden Collection",
+                        creator: "Various Legends",
+                        description: "Time-tested comedy from the legends of Tamil cinema",
+                        whyRecommended: "Nostalgic entertainment that never fails to make you smile",
+                        whereToWatch: "YouTube, Raj TV, Sun TV"
+                    },
+                    {
+                        title: "Modern Tamil Web Series",
+                        type: "Digital Content",
+                        creator: "Black Sheep, Soodhu Kavvum",
+                        description: "Fresh, contemporary comedy that addresses modern life with humor",
+                        whyRecommended: "Relatable content that speaks to current generation",
+                        whereToWatch: "YouTube, Instagram, OTT Platforms"
+                    },
+                    {
+                        title: "Comedy Reality Shows",
+                        type: "Unscripted Entertainment",
+                        creator: "Vijay TV, Star Vijay",
+                        description: "Light entertainment with real people in funny situations",
+                        whyRecommended: "Easy watching that doesn't require mental energy but provides laughs",
+                        whereToWatch: "Disney+ Hotstar, Vijay TV"
+                    },
+                    {
+                        title: "Latest Comedy Movies",
+                        type: "Current Releases",
+                        creator: "Various Directors",
+                        description: "Newest comedy films with contemporary humor and current themes",
+                        whyRecommended: "Fresh entertainment that keeps you updated with trending comedy",
+                        whereToWatch: "Theaters, OTT Platforms, Netflix"
+                    }
+                ]
+            };
+            
+            const comedy = comedyDatabase[mood] || comedyDatabase.general;
+            const selectedComedy = comedy.slice(0, 3);
+            
+            addChatMessage(`Here's some detailed comedy recommendations perfect for when you're feeling ${mood}:`, 'bot');
+            
+            selectedComedy.forEach((item, index) => {
+                setTimeout(() => {
+                    addChatMessage(`🎭 **${item.title}**`, 'bot');
+                    addChatMessage(`📽 **Type:** ${item.type}`, 'bot');
+                    addChatMessage(`👤 **Creator:** ${item.creator}`, 'bot');
+                    addChatMessage(`📝 **About:** ${item.description}`, 'bot');
+                    addChatMessage(`💡 **Why watch:** ${item.whyRecommended}`, 'bot');
+                    addChatMessage(`📺 **Where to watch:** ${item.whereToWatch}`, 'bot');
+                    addChatMessage("", 'bot'); // Empty line for spacing
+                }, index * 800);
+            });
+            
+            setTimeout(() => {
+                addChatMessage("😄 Laughter is truly the best medicine! These recommendations include detailed information about creators, platforms, and why each content is perfect for your current mood. Remember, comedy is not just entertainment - it's therapy! Want more specific comedy suggestions?", 'bot');
+            }, selectedComedy.length * 800 + 1500);
+        }
+
+        // Add Chat Message
+        function addChatMessage(text, sender) {
+            const messagesDiv = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            
+            messageDiv.className = `message ${sender}`;
+            
+            // Format the message with line breaks and basic markdown
+            let formattedText = text
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\n\n/g, '</p><p>')
+                .replace(/\n/g, '<br>');
+                
+            messageDiv.innerHTML = `<div class="message-content">${formattedText}</div>`;
+            
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            
+            // Add to chat history
+            chatHistory.push({ sender, text, time: new Date() });
+            
+            // Limit history
+            if (chatHistory.length > 50) {
+                chatHistory = chatHistory.slice(-50);
+            }
+        }
+
+        // Add Typing Indicator
+        function addTypingIndicator() {
+            const messagesDiv = document.getElementById('chatMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'typing-indicator';
+            typingDiv.id = 'typingIndicator';
+            typingDiv.innerHTML = `
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            `;
+            messagesDiv.appendChild(typingDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        // Remove Typing Indicator
+        function removeTypingIndicator() {
+            const indicator = document.getElementById('typingIndicator');
+            if (indicator) indicator.remove();
+        }
+
+        // Handle Chat Keypress
+        function handleChatKeypress(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendChatMessage();
+            }
+        }
+
+        // Load Tamil Songs - ORIGINAL VERSION
+        function loadTamilSongs(mood = null) {
+            const songsGrid = document.getElementById('songsGrid');
+            const songs = youtubeVideos[mood] || youtubeVideos.default;
+            
+            songsGrid.innerHTML = songs.map(song => `
+                <div class="song-card" onclick="playSong('${song.id}', '${song.title}')">
+                    <div class="song-cover">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="song-title">${song.title}</div>
+                    <div class="song-artist">${song.artist}</div>
+                    <div style="font-size: 0.85rem; opacity: 0.7; margin-top: 0.5rem;">Click to play on YouTube</div>
+                    <button class="play-btn" onclick="event.stopPropagation(); playSong('${song.id}', '${song.title}')">
+                        <i class="fas fa-play"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // Play Song - Opens YouTube directly
+        function playSong(videoId, title) {
+            // Open YouTube directly in new tab
+            const youtubeUrl = `https://www.youtube.com/watch?v=${videoId}`;
+            window.open(youtubeUrl, '_blank');
+            
+            // Show notification
+            showNotification(`🎵 Opening "${title}" on YouTube...`, 'success');
+            
+            // Add to chat
+            setTimeout(() => {
+                addChatMessage(`I've opened "${title}" on YouTube for you. Music can be very healing! Would you like me to suggest more songs in this mood? 🎶`, 'bot');
+            }, 1000);
+        }
+
+        // Create Success Animation
+        function createSuccessAnimation() {
+            // Create floating hearts
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.style.position = 'fixed';
+                    heart.style.fontSize = '1.5rem';
+                    heart.style.zIndex = '10000';
+                    heart.style.pointerEvents = 'none';
+                    heart.style.animation = `floatUp ${Math.random() * 2 + 2}s linear forwards`;
+                    heart.style.left = `${Math.random() * 90 + 5}%`;
+                    heart.style.bottom = '0';
+                    heart.innerHTML = '💖';
+                    
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        if (heart.parentNode) heart.parentNode.removeChild(heart);
+                    }, 3000);
+                }, i * 200);
+            }
+
+            // Add CSS for animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes floatUp {
+                    0% {
+                        transform: translateY(0) rotate(0deg);
+                        opacity: 1;
+                    }
+                    100% {
+                        transform: translateY(-100vh) rotate(360deg);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Update Progress Steps
+        function updateProgressSteps() {
+            const steps = document.querySelectorAll('.step');
+            let completedCount = 0;
+            
+            // Check completion criteria
+            if (currentMood) completedCount++;
+            if (document.getElementById('feelingInput').value.trim()) completedCount++;
+            if (chatHistory.length >= 2) completedCount++;
+            if (JSON.parse(localStorage.getItem('mindBlossomPosts') || '[]').length > 0) completedCount++;
+            
+            steps.forEach((step, index) => {
+                step.classList.remove('active', 'completed');
+                if (index < completedCount) {
+                    step.classList.add('completed');
+                } else if (index === completedCount) {
+                    step.classList.add('active');
+                }
+            });
+        }
+
+        // Show Notification
+        function showNotification(message, type = 'info') {
+            // Remove existing notifications
+            document.querySelectorAll('.notification').forEach(n => n.remove());
+            
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            
+            const icons = {
+                info: '💡',
+                success: '✨',
+                warning: '⚠️',
+                error: '❌'
+            };
+            
+            notification.innerHTML = `
+                <div style="font-size: 1.5rem;">${icons[type] || icons.info}</div>
+                <div>${message}</div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto remove
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 3000);
+        }
+
+        // Provide Mood Specific Tips
+        function provideMoodSpecificTips(mood) {
+            const tips = {
+                stressed: [
+                    "🌿 **Quick Stress Relief:**",
+                    "• Try the 4-7-8 breathing: Inhale 4s, hold 7s, exhale 8s",
+                    "• Take a 10-minute walk to clear your mind",
+                    "• Write down what's stressing you - externalize it",
+                    "",
+                    "💡 **Daily Stress Management:**",
+                    "• Break tasks into smaller, manageable steps",
+                    "• Practice saying 'no' to extra commitments",
+                    "• Get 7-8 hours of quality sleep"
+                ],
+                anxious: [
+                    "🌸 **Anxiety Relief Techniques:**",
+                    "• 5-4-3-2-1 Grounding: Notice 5 things you see, 4 you touch, 3 you hear, 2 you smell, 1 you taste",
+                    "• Progressive muscle relaxation from toes to head",
+                    "• Focus on your breathing - 4 counts in, 4 counts out",
+                    "",
+                    "🧘 **Calm Your Mind:**",
+                    "• Challenge anxious thoughts - are they really true?",
+                    "• Limit caffeine and sugar intake",
+                    "• Try gentle yoga or stretching"
+                ],
+                sad: [
+                    "💫 **Gentle Mood Support:**",
+                    "• Allow yourself to feel - emotions are like weather, they pass",
+                    "• Get 15 minutes of sunlight daily",
+                    "• Listen to calming music or nature sounds",
+                    "",
+                    "🌈 **Uplifting Activities:**",
+                    "• Express yourself through journaling or art",
+                    "• Connect with a friend or loved one",
+                    "• Practice gratitude - list 3 good things"
+                ],
+                angry: [
+                    "🌊 **Anger Management:**",
+                    "• Count to 10 before speaking or acting",
+                    "• Remove yourself from the situation temporarily",
+                    "• Use 'I' statements to express feelings",
+                    "",
+                    "💪 **Healthy Release:**",
+                    "• Channel energy into exercise or physical activity",
+                    "• Write a letter expressing your anger (don't send it)",
+                    "• Practice deep, slow breathing"
+                ],
+                lonely: [
+                    "🤝 **Connection Strategies:**",
+                    "• Reach out to one person today - even a simple text",
+                    "• Join an online community or group with shared interests",
+                    "• Volunteer to help others - it creates connection",
+                    "",
+                    "❤️ **Self-Compassion:**",
+                    "• Talk to yourself like you would talk to a friend",
+                    "• Remember: loneliness is a feeling, not a fact",
+                    "• Engage in activities you genuinely enjoy"
+                ],
+                happy: [
+                    "😊 **Sustain Your Joy:**",
+                    "• Share your happiness with others - it's contagious",
+                    "• Practice savoring - fully enjoy positive moments",
+                    "• Express gratitude for what's going well",
+                    "",
+                    "🌟 **Build on Positivity:**",
+                    "• Engage in activities that use your strengths",
+                    "• Help someone else - giving increases happiness",
+                    "• Create something - art, music, writing, cooking"
+                ]
+            };
+
+            if (tips[mood]) {
+                addChatMessage(`**Here are some personalized tips for when you're feeling ${mood}:**`, 'bot');
+                tips[mood].forEach((tip, index) => {
+                    setTimeout(() => {
+                        addChatMessage(tip, 'bot');
+                    }, index * 800);
+                });
+            } else {
+                provideGeneralWellnessTips();
+            }
+        }
+
+        // Provide General Wellness Tips
+        function provideGeneralWellnessTips() {
+            addChatMessage("**Here are some general wellness tips that can help:**", 'bot');
+            
+            setTimeout(() => {
+                addChatMessage("🌿 **Mind & Body Balance:**", 'bot');
+            }, 500);
+            
+            setTimeout(() => {
+                addChatMessage("• Practice mindfulness for 5 minutes daily", 'bot');
+            }, 1000);
+            
+            setTimeout(() => {
+                addChatMessage("• Stay hydrated - drink 8 glasses of water", 'bot');
+            }, 1500);
+            
+            setTimeout(() => {
+                addChatMessage("• Move your body - even 10 minutes of walking helps", 'bot');
+            }, 2000);
+            
+            setTimeout(() => {
+                addChatMessage("🧠 **Mental Wellness:**", 'bot');
+            }, 2500);
+            
+            setTimeout(() => {
+                addChatMessage("• Practice gratitude - note 3 good things daily", 'bot');
+            }, 3000);
+            
+            setTimeout(() => {
+                addChatMessage("• Connect with others - social bonds matter", 'bot');
+            }, 3500);
+            
+            setTimeout(() => {
+                addChatMessage("• Get quality sleep - 7-8 hours per night", 'bot');
+            }, 4000);
+            
+            setTimeout(() => {
+                addChatMessage("Remember: Small steps lead to big changes! 💕", 'bot');
+            }, 4500);
+        }
+
+        // Suggest Songs Based on Mood
+        function suggestSongsBasedOnMood() {
+            const mood = currentMood || 'happy';
+            const songs = youtubeVideos[mood] || youtubeVideos.happy;
+            
+            addChatMessage(`🎵 **Here are some ${mood} Tamil songs that might help:**`, 'bot');
+            
+            songs.slice(0, 3).forEach((song, index) => {
+                setTimeout(() => {
+                    addChatMessage(`• "${song.title}" - ${song.artist}`, 'bot');
+                }, (index + 1) * 800);
+            });
+            
+            setTimeout(() => {
+                addChatMessage("Would you like me to play one of these songs? 🎶", 'bot');
+            }, 3000);
+        }
+
+        // Initialize everything
+        initializeBackground();
+        initializeEventListeners();
+        initializeVoiceRecognition();
+        loadTamilSongs();
+    </script>
+</body>
+</html>
