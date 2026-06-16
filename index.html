@@ -100,6 +100,7 @@
             display: flex;
             align-items: center;
             gap: 1rem;
+            text-decoration: none;
         }
 
         .logo-icon {
@@ -122,6 +123,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            color: transparent;
         }
 
         /* Navigation Links */
@@ -149,6 +151,11 @@
             background: var(--gradient-primary);
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+            border-color: var(--primary-light);
+        }
+
+        .nav-link.active {
+            background: var(--gradient-primary);
             border-color: var(--primary-light);
         }
 
@@ -1235,16 +1242,16 @@
 
     <!-- Header -->
     <header class="header">
-        <div class="logo">
+        <a href="index.html" class="logo">
             <div class="logo-icon">
                 <i class="fas fa-heart"></i>
             </div>
             <div class="logo-text">மனம் பூக்கும் | Mind Blossom</div>
-        </div>
+        </a>
         
         <!-- Navigation Links -->
         <nav class="nav-links">
-            <a href="home.html" class="nav-link">
+            <a href="index.html" class="nav-link active">
                 <i class="fas fa-home"></i>
                 <span>Home</span>
             </a>

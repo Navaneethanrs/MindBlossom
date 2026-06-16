@@ -22,7 +22,7 @@ npm run dev
 ```
 
 ### 4. Access the Application
-- **Homepage**: http://localhost:3000/home.html
+- **Homepage**: http://localhost:3000/index.html
 - **Counselor Page**: http://localhost:3000/counseller.html
 - **Community**: http://localhost:3000/comm.html
 - **API Health Check**: http://localhost:3000/api/health

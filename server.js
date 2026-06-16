@@ -346,7 +346,7 @@ app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
     console.log(`📁 Serving files from: ${__dirname}`);
     console.log(`🌐 Access your app at:`);
-    console.log(`   - http://localhost:${PORT}/home.html`);
+    console.log(`   - http://localhost:${PORT}/index.html`);
     console.log(`   - http://localhost:${PORT}/counseller.html`);
     console.log(`   - http://localhost:${PORT}/game.html`);
     console.log(`   - http://localhost:${PORT}/comm.html`);
