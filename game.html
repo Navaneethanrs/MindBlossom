@@ -1,0 +1,2335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mind Blossom | Therapeutic Games</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&family=Tiro+Tamil&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #667eea;
+            --primary-light: #764ba2;
+            --secondary: #f093fb;
+            --secondary-light: #f5576c;
+            --accent: #4facfe;
+            --accent-light: #00f2fe;
+            --success: #38ef7d;
+            --warning: #ff9a9e;
+            --danger: #ff0844;
+            --light: #fff;
+            --dark: #0f172a;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.07);
+            --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.25);
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --radius-xl: 25px;
+            --radius-lg: 20px;
+            --radius-md: 15px;
+            --radius-sm: 10px;
+            --transition-smooth: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-quick: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--gradient-dark);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            animation: pulse 2s infinite;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Navigation Links */
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition-quick);
+            border: 2px solid transparent;
+            font-size: 0.9rem;
+        }
+
+        .nav-link:hover {
+            background: var(--gradient-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+            border-color: var(--primary-light);
+        }
+
+        .nav-link.active {
+            background: var(--gradient-primary);
+            border-color: var(--primary-light);
+        }
+
+        .nav-link i {
+            font-size: 1rem;
+        }
+
+        .nav-link span {
+            font-size: 0.9rem;
+        }
+
+        .back-btn {
+            background: var(--gradient-secondary);
+            color: var(--light);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-quick);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(240, 147, 251, 0.4);
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 2rem 2rem;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 2rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea, #f093fb, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        /* Games Grid */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .game-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            transition: var(--transition-quick);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .game-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .game-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .game-desc {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .game-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .game-tag {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .play-btn {
+            background: var(--gradient-primary);
+            color: var(--light);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-quick);
+            display: block;
+            margin: 0 auto;
+            width: fit-content;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Game Containers */
+        .game-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-dark);
+            z-index: 2000;
+            overflow: auto;
+        }
+
+        .game-container.active {
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .game-header {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .game-content {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Game 1: Thought Cloud Catcher */
+        .thought-game {
+            text-align: center;
+        }
+
+        .thought-clouds-container {
+            width: 100%;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
+            position: relative;
+            overflow: hidden;
+            margin: 2rem 0;
+            border: 2px solid var(--glass-border);
+        }
+
+        .thought-cloud {
+            position: absolute;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition-quick);
+            user-select: none;
+            font-size: 0.9rem;
+            max-width: 200px;
+            text-align: center;
+            animation: float 10s infinite ease-in-out;
+        }
+
+        .thought-cloud.negative {
+            background: rgba(255, 0, 0, 0.2);
+            border: 2px solid rgba(255, 100, 100, 0.5);
+        }
+
+        .thought-cloud.positive {
+            background: rgba(0, 255, 100, 0.2);
+            border: 2px solid rgba(100, 255, 100, 0.5);
+        }
+
+        .thought-cloud:hover {
+            transform: scale(1.1);
+        }
+
+        .thought-cloud.caught {
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.3s ease;
+        }
+
+        .catcher {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: move;
+            z-index: 10;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+        }
+
+        .score-display {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .score-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .score-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .score-value {
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .game-instructions {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            margin: 2rem 0;
+            border-left: 4px solid var(--primary);
+        }
+
+        /* Game 2: Anxiety Maze Escape */
+        .maze-game {
+            text-align: center;
+        }
+
+        .maze-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 2rem auto;
+            position: relative;
+        }
+
+        .maze-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: var(--radius-lg);
+            border: 2px solid var(--glass-border);
+        }
+
+        .maze-cell {
+            aspect-ratio: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-quick);
+        }
+
+        .maze-cell.wall {
+            background: rgba(255, 100, 100, 0.3);
+        }
+
+        .maze-cell.path {
+            background: rgba(100, 255, 100, 0.1);
+        }
+
+        .maze-cell.start {
+            background: rgba(100, 200, 255, 0.3);
+            border: 2px solid var(--accent);
+        }
+
+        .maze-cell.end {
+            background: rgba(255, 200, 100, 0.3);
+            border: 2px solid var(--warning);
+        }
+
+        .maze-cell.current {
+            background: var(--gradient-primary);
+            animation: pulse 2s infinite;
+        }
+
+        .maze-player {
+            width: 70%;
+            height: 70%;
+            background: var(--gradient-accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
+        }
+
+        .breathing-guide {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .breath-stage {
+            text-align: center;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            background: rgba(255, 255, 255, 0.1);
+            min-width: 120px;
+            transition: var(--transition-quick);
+        }
+
+        .breath-stage.active {
+            background: var(--gradient-accent);
+            transform: scale(1.05);
+        }
+
+        .breath-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Game 3: Gratitude Garden */
+        .garden-game {
+            text-align: center;
+        }
+
+        .garden-container {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #1a3a1a 0%, #2d5a2d 100%);
+            border-radius: var(--radius-lg);
+            position: relative;
+            overflow: hidden;
+            margin: 2rem 0;
+            border: 2px solid rgba(100, 255, 100, 0.3);
+        }
+
+        .garden-plot {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .seed {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle at 30% 30%, #8B4513, #654321);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition-quick);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .seed:hover {
+            transform: scale(1.3);
+        }
+
+        .plant {
+            position: absolute;
+            transition: all 1s ease-out;
+        }
+
+        .plant.stage-1 {
+            width: 20px;
+            height: 40px;
+            background: linear-gradient(to bottom, #228B22, #32CD32);
+            border-radius: 10px;
+        }
+
+        .plant.stage-2 {
+            width: 40px;
+            height: 80px;
+            background: linear-gradient(to bottom, #228B22, #32CD32);
+            border-radius: 20px;
+        }
+
+        .plant.stage-3 {
+            width: 60px;
+            height: 120px;
+            background: linear-gradient(to bottom, #228B22, #90EE90);
+            border-radius: 30px;
+        }
+
+        .plant.stage-4 {
+            width: 80px;
+            height: 160px;
+            background: linear-gradient(to bottom, #228B22, #98FB98);
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .gratitude-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            color: var(--light);
+            font-size: 1rem;
+            margin: 1rem auto;
+            display: block;
+        }
+
+        .gratitude-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .plant-seeds {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .seed-type {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition-quick);
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .seed-type:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .seed-type.active {
+            background: var(--gradient-primary);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Game 4: Emotion Match */
+        .match-game {
+            text-align: center;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+
+        .card {
+            aspect-ratio: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition-quick);
+            font-size: 2rem;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateY(0deg);
+            transition: transform 0.6s;
+        }
+
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card .front,
+        .card .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+        }
+
+        .card .front {
+            background: var(--gradient-primary);
+            transform: rotateY(180deg);
+        }
+
+        .card .back {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--glass-border);
+        }
+
+        .card.matched {
+            background: rgba(100, 255, 100, 0.2);
+            border: 2px solid rgba(100, 255, 100, 0.5);
+        }
+
+        .emotion-emoji {
+            font-size: 2.5rem;
+        }
+
+        .strategy-text {
+            font-size: 0.9rem;
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+        /* Game Controls */
+        .game-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--light);
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-quick);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .control-btn.primary {
+            background: var(--gradient-primary);
+        }
+
+        .control-btn.primary:hover {
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .control-btn.secondary {
+            background: var(--gradient-secondary);
+        }
+
+        .control-btn.secondary:hover {
+            box-shadow: 0 10px 25px rgba(240, 147, 251, 0.4);
+        }
+
+        /* Timer */
+        .game-timer {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 1rem 0;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-md);
+            display: inline-block;
+        }
+
+        /* Game Complete Modal */
+        .game-complete-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .game-complete-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .complete-content {
+            background: var(--dark);
+            padding: 3rem;
+            border-radius: var(--radius-xl);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid var(--glass-border);
+            position: relative;
+        }
+
+        .complete-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .complete-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .complete-message {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes blossom {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cards-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .game-content {
+                padding: 0 1rem;
+            }
+            
+            .breathing-guide {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .score-display {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-primary);
+            border-radius: 4px;
+        }
+
+        /* Content Filter Badge */
+        .content-filter {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="home.html" class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+            <div class="logo-text">மனம் பூக்கும் | Mind Blossom</div>
+        </a>
+        
+        <!-- Navigation Links -->
+        <nav class="nav-links">
+            <a href="home.html" class="nav-link">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="counseller.html" class="nav-link">
+                <i class="fas fa-user-md"></i>
+                <span>Counselor</span>
+            </a>
+            <a href="game.html" class="nav-link active">
+                <i class="fas fa-gamepad"></i>
+                <span>Games</span>
+            </a>
+            <a href="comm.html" class="nav-link">
+                <i class="fas fa-users"></i>
+                <span>Community</span>
+            </a>
+        </nav>
+        
+        <div class="content-filter">
+            <i class="fas fa-shield-alt"></i>
+            Therapeutic Games
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <h1 class="hero-title">Therapeutic Mind Games</h1>
+            <p class="hero-subtitle">
+                Engage with interactive games designed to teach coping skills, manage emotions, 
+                and build mental resilience. Each game combines fun with therapeutic benefits.
+            </p>
+        </div>
+
+        <!-- Games Grid -->
+        <div class="games-grid">
+            <!-- Game 1: Thought Cloud Catcher -->
+            <div class="game-card" data-game="thought-cloud">
+                <div class="game-icon">
+                    <i class="fas fa-cloud"></i>
+                </div>
+                <h3 class="game-title">Thought Cloud Catcher</h3>
+                <p class="game-desc">
+                    Catch negative thoughts and release positive ones. Learn cognitive restructuring 
+                    by transforming unhelpful thoughts into constructive ones.
+                </p>
+                <div class="game-tags">
+                    <span class="game-tag">Cognitive Therapy</span>
+                    <span class="game-tag">Thought Restructuring</span>
+                    <span class="game-tag">Anxiety Relief</span>
+                </div>
+                <button class="play-btn" onclick="startGame('thought-cloud')">
+                    <i class="fas fa-play"></i> Play Game
+                </button>
+            </div>
+
+            <!-- Game 2: Anxiety Maze Escape -->
+            <div class="game-card" data-game="anxiety-maze">
+                <div class="game-icon">
+                    <i class="fas fa-map"></i>
+                </div>
+                <h3 class="game-title">Anxiety Maze Escape</h3>
+                <p class="game-desc">
+                    Navigate through challenging mazes using breathing techniques. Learn to 
+                    stay calm under pressure and find your way to peace.
+                </p>
+                <div class="game-tags">
+                    <span class="game-tag">Breathing Exercise</span>
+                    <span class="game-tag">Mindfulness</span>
+                    <span class="game-tag">Stress Management</span>
+                </div>
+                <button class="play-btn" onclick="startGame('anxiety-maze')">
+                    <i class="fas fa-play"></i> Play Game
+                </button>
+            </div>
+
+            <!-- Game 3: Gratitude Garden -->
+            <div class="game-card" data-game="gratitude-garden">
+                <div class="game-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <h3 class="game-title">Gratitude Garden</h3>
+                <p class="game-desc">
+                    Plant seeds of positive thoughts and watch them grow into a beautiful garden. 
+                    Cultivate gratitude and positive thinking patterns.
+                </p>
+                <div class="game-tags">
+                    <span class="game-tag">Gratitude Practice</span>
+                    <span class="game-tag">Positive Psychology</span>
+                    <span class="game-tag">Mindfulness</span>
+                </div>
+                <button class="play-btn" onclick="startGame('gratitude-garden')">
+                    <i class="fas fa-play"></i> Play Game
+                </button>
+            </div>
+
+            <!-- Game 4: Emotion Match -->
+            <div class="game-card" data-game="emotion-match">
+                <div class="game-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3 class="game-title">Emotion Match</h3>
+                <p class="game-desc">
+                    Match emotions with appropriate coping strategies. Learn effective ways 
+                    to manage different emotional states through memory and association.
+                </p>
+                <div class="game-tags">
+                    <span class="game-tag">Emotional Intelligence</span>
+                    <span class="game-tag">Coping Skills</span>
+                    <span class="game-tag">Memory Training</span>
+                </div>
+                <button class="play-btn" onclick="startGame('emotion-match')">
+                    <i class="fas fa-play"></i> Play Game
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game 1: Thought Cloud Catcher -->
+    <div class="game-container" id="thought-cloud-game">
+        <div class="game-header">
+            <h2 style="font-size: 1.5rem; font-weight: 700;">Thought Cloud Catcher</h2>
+            <button class="control-btn" onclick="exitGame()">
+                <i class="fas fa-times"></i> Exit Game
+            </button>
+        </div>
+        
+        <div class="game-content thought-game">
+            <div class="game-instructions">
+                <h3><i class="fas fa-info-circle"></i> How to Play</h3>
+                <p>Move the catcher with your mouse/touch. Catch negative thoughts (red clouds) and release positive ones (green clouds). 
+                Each negative thought caught reduces anxiety, each positive thought released increases happiness.</p>
+            </div>
+            
+            <div class="score-display">
+                <div class="score-box">
+                    <div class="score-label">Negative Thoughts Caught</div>
+                    <div class="score-value" id="negative-score">0</div>
+                </div>
+                <div class="score-box">
+                    <div class="score-label">Positive Thoughts Released</div>
+                    <div class="score-value" id="positive-score">0</div>
+                </div>
+                <div class="score-box">
+                    <div class="score-label">Time Remaining</div>
+                    <div class="score-value" id="thought-timer">60</div>
+                </div>
+            </div>
+            
+            <div class="thought-clouds-container" id="thought-clouds-container">
+                <div class="catcher" id="catcher">
+                    <i class="fas fa-heart"></i>
+                </div>
+            </div>
+            
+            <div class="game-controls">
+                <button class="control-btn primary" onclick="restartThoughtGame()">
+                    <i class="fas fa-redo"></i> Restart Game
+                </button>
+                <button class="control-btn" onclick="pauseThoughtGame()">
+                    <i class="fas fa-pause"></i> Pause
+                </button>
+                <button class="control-btn secondary" onclick="completeGame('thought-cloud')">
+                    <i class="fas fa-flag-checkered"></i> Complete Game
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game 2: Anxiety Maze Escape -->
+    <div class="game-container" id="anxiety-maze-game">
+        <div class="game-header">
+            <h2 style="font-size: 1.5rem; font-weight: 700;">Anxiety Maze Escape</h2>
+            <button class="control-btn" onclick="exitGame()">
+                <i class="fas fa-times"></i> Exit Game
+            </button>
+        </div>
+        
+        <div class="game-content maze-game">
+            <div class="game-instructions">
+                <h3><i class="fas fa-info-circle"></i> How to Play</h3>
+                <p>Use arrow keys or buttons to navigate through the maze. Follow the breathing guide to stay calm. 
+                Reach the exit while maintaining steady breathing to succeed!</p>
+            </div>
+            
+            <div class="score-display">
+                <div class="score-box">
+                    <div class="score-label">Moves</div>
+                    <div class="score-value" id="maze-moves">0</div>
+                </div>
+                <div class="score-box">
+                    <div class="score-label">Breathing Score</div>
+                    <div class="score-value" id="breathing-score">100</div>
+                </div>
+                <div class="score-box">
+                    <div class="score-label">Time</div>
+                    <div class="score-value" id="maze-timer">180</div>
+                </div>
+            </div>
+            
+            <div class="breathing-guide">
+                <div class="breath-stage" id="inhale-stage">
+                    <div class="breath-icon">🌬️</div>
+                    <div>Inhale (4s)</div>
+                    <div class="game-timer" id="inhale-timer">4</div>
+                </div>
+                <div class="breath-stage" id="hold1-stage">
+                    <div class="breath-icon">⏱️</div>
+                    <div>Hold (4s)</div>
+                    <div class="game-timer" id="hold1-timer">4</div>
+                </div>
+                <div class="breath-stage" id="exhale-stage">
+                    <div class="breath-icon">💨</div>
+                    <div>Exhale (6s)</div>
+                    <div class="game-timer" id="exhale-timer">6</div>
+                </div>
+                <div class="breath-stage" id="hold2-stage">
+                    <div class="breath-icon">⏱️</div>
+                    <div>Hold (2s)</div>
+                    <div class="game-timer" id="hold2-timer">2</div>
+                </div>
+            </div>
+            
+            <div class="maze-container">
+                <div class="maze-grid" id="maze-grid">
+                    <!-- Maze will be generated here -->
+                </div>
+            </div>
+            
+            <div class="game-controls">
+                <button class="control-btn" onclick="movePlayer('up')">
+                    <i class="fas fa-arrow-up"></i> Up
+                </button>
+                <button class="control-btn" onclick="movePlayer('left')">
+                    <i class="fas fa-arrow-left"></i> Left
+                </button>
+                <button class="control-btn" onclick="movePlayer('down')">
+                    <i class="fas fa-arrow-down"></i> Down
+                </button>
+                <button class="control-btn" onclick="movePlayer('right')">
+                    <i class="fas fa-arrow-right"></i> Right
+                </button>
+                <button class="control-btn primary" onclick="restartMazeGame()">
+                    <i class="fas fa-redo"></i> Restart
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game 3: Gratitude Garden -->
+    <div class="game-container" id="gratitude-garden-game">
+        <div class="game-header">
+            <h2 style="font-size: 1.5rem; font-weight: 700;">Gratitude Garden</h2>
+            <button class="control-btn" onclick="exitGame()">
+                <i class="fas fa-times"></i> Exit Game
+            </button>
+        </div>
+        
+        <div class="game-content garden-game">
+            <div class="game-instructions">
+                <h3><i class="fas fa-info-circle"></i> How to Play</h3>
+                <p>Write something you're grateful for, choose a seed type, and plant it in the garden. 
+                Watch your gratitude grow into beautiful plants over time!</p>
+            </div>
+            
+            <div class="score-display">
+                <div class="score-box">
+                    <div class="score-label">Plants Grown</div>
+                    <div class="score-value" id="plants-grown">0</div>
+                </div>
+                <div class="score-box">
+                    <div class="score-label">Garden Size</div>
+                    <div class="score-value" id="garden-size">0/10</div>
+                </div>
+                <div class="score-box">
+                    <div class="score-label">Gratitude Score</div>
+                    <div class="score-value" id="gratitude-score">0</div>
+                </div>
+            </div>
+            
+            <input type="text" class="gratitude-input" id="gratitude-input" 
+                   placeholder="What are you grateful for today?">
+            
+            <div class="plant-seeds">
+                <div class="seed-type active" data-type="flower" onclick="selectSeedType('flower')">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🌸</div>
+                    <div>Flower Seed</div>
+                    <div style="font-size: 0.8rem; opacity: 0.8;">Grows with love</div>
+                </div>
+                <div class="seed-type" data-type="tree" onclick="selectSeedType('tree')">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🌳</div>
+                    <div>Tree Seed</div>
+                    <div style="font-size: 0.8rem; opacity: 0.8;">Grows with patience</div>
+                </div>
+                <div class="seed-type" data-type="herb" onclick="selectSeedType('herb')">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🌿</div>
+                    <div>Herb Seed</div>
+                    <div style="font-size: 0.8rem; opacity: 0.8;">Grows with care</div>
+                </div>
+            </div>
+            
+            <div class="garden-container" id="garden-container">
+                <div class="garden-plot" id="garden-plot"></div>
+            </div>
+            
+            <div class="game-controls">
+                <button class="control-btn primary" onclick="plantSeed()">
+                    <i class="fas fa-seedling"></i> Plant Seed
+                </button>
+                <button class="control-btn" onclick="waterGarden()">
+                    <i class="fas fa-tint"></i> Water Garden
+                </button>
+                <button class="control-btn secondary" onclick="completeGame('gratitude-garden')">
+                    <i class="fas fa-flag-checkered"></i> Complete Garden
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game 4: Emotion Match -->
+    <div class="game-container" id="emotion-match-game">
+        <div class="game-header">
+            <h2 style="font-size: 1.5rem; font-weight: 700;">Emotion Match</h2>
+            <button class="control-btn" onclick="exitGame()">
+                <i class="fas fa-times"></i> Exit Game
+            </button>
+        </div>
+        
+        <div class="game-content match-game">
+            <div class="game-instructions">
+                <h3><i class="fas fa-info-circle"></i> How to Play</h3>
+                <p>Flip cards to match emotions with their coping strategies. Remember the positions 
+                and make matches to clear the board. Each match teaches you a new coping skill!</p>
+            </div>
+            
+            <div class="score-display">
+                <div class="score-box">
+                    <div class="score-label">Matches Found</div>
+                    <div class="score-value" id="matches-found">0/8</div>
+                </div>
+                <div class="score-box">
+                    <div class="score-label">Moves Used</div>
+                    <div class="score-value" id="match-moves">0</div>
+                </div>
+                <div class="score-box">
+                    <div class="score-label">Time</div>
+                    <div class="score-value" id="match-timer">120</div>
+                </div>
+            </div>
+            
+            <div class="cards-grid" id="cards-grid">
+                <!-- Cards will be generated here -->
+            </div>
+            
+            <div class="game-controls">
+                <button class="control-btn primary" onclick="restartMatchGame()">
+                    <i class="fas fa-redo"></i> Restart Game
+                </button>
+                <button class="control-btn" onclick="showHint()">
+                    <i class="fas fa-lightbulb"></i> Show Hint
+                </button>
+                <button class="control-btn secondary" onclick="completeGame('emotion-match')">
+                    <i class="fas fa-flag-checkered"></i> Complete Game
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Complete Modal -->
+    <div class="game-complete-modal" id="game-complete-modal">
+        <div class="complete-content">
+            <div class="complete-icon">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <h2 class="complete-title">Game Complete! 🎉</h2>
+            <p class="complete-message" id="complete-message">
+                Congratulations! You've successfully completed the game and learned valuable coping skills.
+            </p>
+            <div class="score-display">
+                <div class="score-box">
+                    <div class="score-label">Your Score</div>
+                    <div class="score-value" id="final-score">0</div>
+                </div>
+            </div>
+            <div class="game-controls" style="margin-top: 2rem;">
+                <button class="control-btn primary" onclick="playAgain()">
+                    <i class="fas fa-redo"></i> Play Again
+                </button>
+                <button class="control-btn" onclick="exitToMenu()">
+                    <i class="fas fa-home"></i> Back to Games
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game State Variables
+        let currentGame = null;
+        let thoughtGameInterval;
+        let mazeGameInterval;
+        let matchGameInterval;
+        let gratitudeGameInterval;
+        let selectedSeedType = 'flower';
+
+        // Game 1: Thought Cloud Catcher Variables
+        let negativeScore = 0;
+        let positiveScore = 0;
+        let thoughtTimeLeft = 60;
+        let catcherPosition = { x: 0, y: 0 };
+        let clouds = [];
+
+        // Game 2: Anxiety Maze Variables
+        let maze = [];
+        let playerPosition = { x: 0, y: 0 };
+        let endPosition = { x: 0, y: 0 };
+        let mazeMoves = 0;
+        let breathingScore = 100;
+        let mazeTimeLeft = 180;
+        let breathingStage = 'inhale';
+        let breathingTimer = 4;
+        let breathingInterval;
+
+        // Game 3: Gratitude Garden Variables
+        let plants = [];
+        let plantsGrown = 0;
+        let gardenSize = 0;
+        let gratitudeScore = 0;
+        let selectedGratitude = '';
+
+        // Game 4: Emotion Match Variables
+        let cards = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let matchMoves = 0;
+        let matchTimeLeft = 120;
+
+        // Emotion-Coping Strategy Pairs
+        const emotionPairs = [
+            { emotion: '😢 Sad', strategy: 'Talk to a friend or write in a journal' },
+            { emotion: '😠 Angry', strategy: 'Take deep breaths and count to 10' },
+            { emotion: '😰 Anxious', strategy: 'Practice 4-7-8 breathing technique' },
+            { emotion: '😫 Stressed', strategy: 'Take a short walk or stretch break' },
+            { emotion: '😔 Lonely', strategy: 'Reach out to someone you trust' },
+            { emotion: '😊 Happy', strategy: 'Share your joy with others' },
+            { emotion: '😴 Tired', strategy: 'Rest and practice self-care' },
+            { emotion: '😖 Overwhelmed', strategy: 'Break tasks into smaller steps' }
+        ];
+
+        // Start Game Function
+        function startGame(gameType) {
+            currentGame = gameType;
+            document.getElementById(`${gameType}-game`).classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            switch(gameType) {
+                case 'thought-cloud':
+                    initializeThoughtGame();
+                    break;
+                case 'anxiety-maze':
+                    initializeMazeGame();
+                    break;
+                case 'gratitude-garden':
+                    initializeGardenGame();
+                    break;
+                case 'emotion-match':
+                    initializeMatchGame();
+                    break;
+            }
+        }
+
+        // Exit Game Function
+        function exitGame() {
+            if (currentGame) {
+                document.getElementById(`${currentGame}-game`).classList.remove('active');
+                
+                // Clear intervals
+                clearInterval(thoughtGameInterval);
+                clearInterval(mazeGameInterval);
+                clearInterval(matchGameInterval);
+                clearInterval(gratitudeGameInterval);
+                clearInterval(breathingInterval);
+                
+                currentGame = null;
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Game 1: Thought Cloud Catcher Functions
+        function initializeThoughtGame() {
+            // Reset scores
+            negativeScore = 0;
+            positiveScore = 0;
+            thoughtTimeLeft = 60;
+            
+            // Update display
+            document.getElementById('negative-score').textContent = negativeScore;
+            document.getElementById('positive-score').textContent = positiveScore;
+            document.getElementById('thought-timer').textContent = thoughtTimeLeft;
+            
+            // Clear existing clouds
+            const container = document.getElementById('thought-clouds-container');
+            container.innerHTML = '<div class="catcher" id="catcher"><i class="fas fa-heart"></i></div>';
+            
+            // Initialize catcher
+            catcherPosition = {
+                x: container.clientWidth / 2 - 40,
+                y: container.clientHeight - 100
+            };
+            const catcher = document.getElementById('catcher');
+            catcher.style.left = catcherPosition.x + 'px';
+            catcher.style.top = catcherPosition.y + 'px';
+            
+            // Make catcher draggable
+            makeCatcherDraggable(catcher);
+            
+            // Start cloud generation
+            clouds = [];
+            generateClouds();
+            
+            // Start timer
+            clearInterval(thoughtGameInterval);
+            thoughtGameInterval = setInterval(updateThoughtGame, 1000);
+        }
+
+        function makeCatcherDraggable(catcher) {
+            let isDragging = false;
+            let offsetX, offsetY;
+            
+            catcher.addEventListener('mousedown', startDrag);
+            catcher.addEventListener('touchstart', startDrag);
+            
+            function startDrag(e) {
+                isDragging = true;
+                e.preventDefault();
+                
+                if (e.type === 'mousedown') {
+                    offsetX = e.clientX - catcher.getBoundingClientRect().left;
+                    offsetY = e.clientY - catcher.getBoundingClientRect().top;
+                    document.addEventListener('mousemove', drag);
+                    document.addEventListener('mouseup', stopDrag);
+                } else {
+                    const touch = e.touches[0];
+                    offsetX = touch.clientX - catcher.getBoundingClientRect().left;
+                    offsetY = touch.clientY - catcher.getBoundingClientRect().top;
+                    document.addEventListener('touchmove', drag);
+                    document.addEventListener('touchend', stopDrag);
+                }
+            }
+            
+            function drag(e) {
+                if (!isDragging) return;
+                e.preventDefault();
+                
+                const container = document.getElementById('thought-clouds-container');
+                const containerRect = container.getBoundingClientRect();
+                
+                let clientX, clientY;
+                if (e.type === 'mousemove') {
+                    clientX = e.clientX;
+                    clientY = e.clientY;
+                } else {
+                    const touch = e.touches[0];
+                    clientX = touch.clientX;
+                    clientY = touch.clientY;
+                }
+                
+                // Calculate new position
+                let newX = clientX - containerRect.left - offsetX;
+                let newY = clientY - containerRect.top - offsetY;
+                
+                // Keep within bounds
+                newX = Math.max(0, Math.min(newX, containerRect.width - 80));
+                newY = Math.max(0, Math.min(newY, containerRect.height - 80));
+                
+                // Update position
+                catcher.style.left = newX + 'px';
+                catcher.style.top = newY + 'px';
+                
+                catcherPosition.x = newX;
+                catcherPosition.y = newY;
+                
+                // Check for collisions
+                checkCloudCollisions();
+            }
+            
+            function stopDrag() {
+                isDragging = false;
+                document.removeEventListener('mousemove', drag);
+                document.removeEventListener('mouseup', stopDrag);
+                document.removeEventListener('touchmove', drag);
+                document.removeEventListener('touchend', stopDrag);
+            }
+        }
+
+        function generateClouds() {
+            const container = document.getElementById('thought-clouds-container');
+            const negativeThoughts = [
+                "I can't do this",
+                "I'm not good enough",
+                "Everyone hates me",
+                "I always fail",
+                "Things will never get better",
+                "I'm a burden",
+                "Nothing matters",
+                "I'm worthless"
+            ];
+            
+            const positiveThoughts = [
+                "I can try my best",
+                "I'm learning and growing",
+                "Some people care about me",
+                "I've succeeded before",
+                "Things can improve",
+                "I have value to offer",
+                "Small things matter",
+                "I'm worthy of love"
+            ];
+            
+            // Create negative clouds
+            for (let i = 0; i < 5; i++) {
+                const thought = negativeThoughts[Math.floor(Math.random() * negativeThoughts.length)];
+                createCloud(thought, 'negative');
+            }
+            
+            // Create positive clouds
+            for (let i = 0; i < 5; i++) {
+                const thought = positiveThoughts[Math.floor(Math.random() * positiveThoughts.length)];
+                createCloud(thought, 'positive');
+            }
+        }
+
+        function createCloud(text, type) {
+            const container = document.getElementById('thought-clouds-container');
+            
+            const cloud = document.createElement('div');
+            cloud.className = `thought-cloud ${type}`;
+            cloud.textContent = text;
+            
+            // Random position
+            const x = Math.random() * (container.clientWidth - 200);
+            const y = Math.random() * (container.clientHeight - 100);
+            
+            cloud.style.left = x + 'px';
+            cloud.style.top = y + 'px';
+            
+            // Random animation delay
+            cloud.style.animationDelay = Math.random() * 5 + 's';
+            
+            container.appendChild(cloud);
+            
+            clouds.push({
+                element: cloud,
+                x: x,
+                y: y,
+                type: type,
+                caught: false
+            });
+        }
+
+        function checkCloudCollisions() {
+            const catcherRadius = 40;
+            
+            clouds.forEach((cloud, index) => {
+                if (cloud.caught) return;
+                
+                const cloudRect = cloud.element.getBoundingClientRect();
+                const catcherRect = document.getElementById('catcher').getBoundingClientRect();
+                
+                // Simple circle collision detection
+                const dx = (catcherRect.left + catcherRadius) - (cloudRect.left + cloudRect.width / 2);
+                const dy = (catcherRect.top + catcherRadius) - (cloudRect.top + cloudRect.height / 2);
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < catcherRadius + cloudRect.width / 2) {
+                    cloud.caught = true;
+                    cloud.element.classList.add('caught');
+                    
+                    // Update score
+                    if (cloud.type === 'negative') {
+                        negativeScore++;
+                        document.getElementById('negative-score').textContent = negativeScore;
+                    } else {
+                        positiveScore++;
+                        document.getElementById('positive-score').textContent = positiveScore;
+                    }
+                    
+                    // Remove cloud after animation
+                    setTimeout(() => {
+                        if (cloud.element.parentNode) {
+                            cloud.element.parentNode.removeChild(cloud.element);
+                        }
+                    }, 300);
+                    
+                    // Generate new cloud
+                    setTimeout(() => {
+                        createCloud(cloud.type === 'negative' ? 
+                            getNegativeThought() : getPositiveThought(), cloud.type);
+                    }, 1000);
+                }
+            });
+        }
+
+        function getNegativeThought() {
+            const thoughts = [
+                "I'm a failure",
+                "Nobody likes me",
+                "I can't handle this",
+                "It's too hard",
+                "I'll never succeed",
+                "I'm not smart enough",
+                "I'm all alone",
+                "Everything is wrong"
+            ];
+            return thoughts[Math.floor(Math.random() * thoughts.length)];
+        }
+
+        function getPositiveThought() {
+            const thoughts = [
+                "I can learn from this",
+                "Some people appreciate me",
+                "I can ask for help",
+                "I can take it step by step",
+                "I can try again",
+                "I have my own strengths",
+                "I can reach out to others",
+                "Some things are going right"
+            ];
+            return thoughts[Math.floor(Math.random() * thoughts.length)];
+        }
+
+        function updateThoughtGame() {
+            thoughtTimeLeft--;
+            document.getElementById('thought-timer').textContent = thoughtTimeLeft;
+            
+            if (thoughtTimeLeft <= 0) {
+                clearInterval(thoughtGameInterval);
+                completeGame('thought-cloud');
+            }
+        }
+
+        function restartThoughtGame() {
+            clearInterval(thoughtGameInterval);
+            initializeThoughtGame();
+        }
+
+        function pauseThoughtGame() {
+            clearInterval(thoughtGameInterval);
+        }
+
+        // Game 2: Anxiety Maze Functions
+        function initializeMazeGame() {
+            // Reset variables
+            mazeMoves = 0;
+            breathingScore = 100;
+            mazeTimeLeft = 180;
+            
+            // Update display
+            document.getElementById('maze-moves').textContent = mazeMoves;
+            document.getElementById('breathing-score').textContent = breathingScore;
+            document.getElementById('maze-timer').textContent = mazeTimeLeft;
+            
+            // Generate maze
+            generateMaze();
+            
+            // Start breathing guide
+            startBreathingGuide();
+            
+            // Start timer
+            clearInterval(mazeGameInterval);
+            mazeGameInterval = setInterval(updateMazeGame, 1000);
+            
+            // Add keyboard controls
+            document.addEventListener('keydown', handleKeyPress);
+        }
+
+        function generateMaze() {
+            const grid = document.getElementById('maze-grid');
+            grid.innerHTML = '';
+            
+            maze = [];
+            const size = 10;
+            
+            // Initialize maze with walls
+            for (let i = 0; i < size; i++) {
+                maze[i] = [];
+                for (let j = 0; j < size; j++) {
+                    maze[i][j] = Math.random() > 0.7 ? 'wall' : 'path';
+                }
+            }
+            
+            // Ensure start and end are paths
+            playerPosition = { x: 0, y: 0 };
+            endPosition = { x: size - 1, y: size - 1 };
+            maze[0][0] = 'start';
+            maze[size - 1][size - 1] = 'end';
+            
+            // Create a path from start to end
+            createPath(0, 0, size - 1, size - 1);
+            
+            // Render maze
+            for (let i = 0; i < size; i++) {
+                for (let j = 0; j < size; j++) {
+                    const cell = document.createElement('div');
+                    cell.className = `maze-cell ${maze[i][j]}`;
+                    cell.dataset.x = i;
+                    cell.dataset.y = j;
+                    
+                    if (i === playerPosition.x && j === playerPosition.y) {
+                        cell.classList.add('current');
+                        const player = document.createElement('div');
+                        player.className = 'maze-player';
+                        cell.appendChild(player);
+                    }
+                    
+                    grid.appendChild(cell);
+                }
+            }
+        }
+
+        function createPath(startX, startY, endX, endY) {
+            let x = startX;
+            let y = startY;
+            
+            while (x !== endX || y !== endY) {
+                maze[x][y] = 'path';
+                
+                if (x < endX && Math.random() > 0.5) {
+                    x++;
+                } else if (y < endY) {
+                    y++;
+                } else if (x > endX) {
+                    x--;
+                } else if (y > endY) {
+                    y--;
+                }
+            }
+            maze[endX][endY] = 'end';
+        }
+
+        function startBreathingGuide() {
+            breathingStage = 'inhale';
+            breathingTimer = 4;
+            
+            // Reset all stages
+            ['inhale', 'hold1', 'exhale', 'hold2'].forEach(stage => {
+                document.getElementById(`${stage}-stage`).classList.remove('active');
+                document.getElementById(`${stage}-timer`).textContent = 
+                    stage === 'inhale' ? 4 : stage === 'exhale' ? 6 : stage === 'hold2' ? 2 : 4;
+            });
+            
+            // Activate inhale stage
+            document.getElementById('inhale-stage').classList.add('active');
+            
+            // Start breathing timer
+            clearInterval(breathingInterval);
+            breathingInterval = setInterval(updateBreathing, 1000);
+        }
+
+        function updateBreathing() {
+            breathingTimer--;
+            document.getElementById(`${breathingStage}-timer`).textContent = breathingTimer;
+            
+            if (breathingTimer <= 0) {
+                // Move to next stage
+                switch (breathingStage) {
+                    case 'inhale':
+                        breathingStage = 'hold1';
+                        breathingTimer = 4;
+                        break;
+                    case 'hold1':
+                        breathingStage = 'exhale';
+                        breathingTimer = 6;
+                        break;
+                    case 'exhale':
+                        breathingStage = 'hold2';
+                        breathingTimer = 2;
+                        break;
+                    case 'hold2':
+                        breathingStage = 'inhale';
+                        breathingTimer = 4;
+                        break;
+                }
+                
+                // Update active stage
+                ['inhale', 'hold1', 'exhale', 'hold2'].forEach(stage => {
+                    document.getElementById(`${stage}-stage`).classList.remove('active');
+                });
+                document.getElementById(`${breathingStage}-stage`).classList.add('active');
+                
+                // Update breathing score based on stage
+                if (breathingStage === 'exhale') {
+                    breathingScore = Math.min(100, breathingScore + 5);
+                    document.getElementById('breathing-score').textContent = breathingScore;
+                }
+            }
+        }
+
+        function handleKeyPress(e) {
+            if (!currentGame === 'anxiety-maze') return;
+            
+            switch(e.key) {
+                case 'ArrowUp':
+                    movePlayer('up');
+                    break;
+                case 'ArrowDown':
+                    movePlayer('down');
+                    break;
+                case 'ArrowLeft':
+                    movePlayer('left');
+                    break;
+                case 'ArrowRight':
+                    movePlayer('right');
+                    break;
+            }
+        }
+
+        function movePlayer(direction) {
+            let newX = playerPosition.x;
+            let newY = playerPosition.y;
+            
+            switch(direction) {
+                case 'up':
+                    newX--;
+                    break;
+                case 'down':
+                    newX++;
+                    break;
+                case 'left':
+                    newY--;
+                    break;
+                case 'right':
+                    newY++;
+                    break;
+            }
+            
+            // Check boundaries and walls
+            if (newX >= 0 && newX < 10 && newY >= 0 && newY < 10 && 
+                maze[newX][newY] !== 'wall') {
+                
+                // Update player position
+                playerPosition.x = newX;
+                playerPosition.y = newY;
+                mazeMoves++;
+                
+                // Update display
+                document.getElementById('maze-moves').textContent = mazeMoves;
+                
+                // Deduct from breathing score for moving
+                breathingScore = Math.max(0, breathingScore - 1);
+                document.getElementById('breathing-score').textContent = breathingScore;
+                
+                // Render updated maze
+                renderMaze();
+                
+                // Check if reached end
+                if (newX === endPosition.x && newY === endPosition.y) {
+                    clearInterval(mazeGameInterval);
+                    completeGame('anxiety-maze');
+                }
+            }
+        }
+
+        function renderMaze() {
+            const cells = document.querySelectorAll('.maze-cell');
+            cells.forEach(cell => {
+                const x = parseInt(cell.dataset.x);
+                const y = parseInt(cell.dataset.y);
+                
+                cell.classList.remove('current');
+                cell.innerHTML = '';
+                
+                if (x === playerPosition.x && y === playerPosition.y) {
+                    cell.classList.add('current');
+                    const player = document.createElement('div');
+                    player.className = 'maze-player';
+                    cell.appendChild(player);
+                }
+            });
+        }
+
+        function updateMazeGame() {
+            mazeTimeLeft--;
+            document.getElementById('maze-timer').textContent = mazeTimeLeft;
+            
+            if (mazeTimeLeft <= 0) {
+                clearInterval(mazeGameInterval);
+                completeGame('anxiety-maze');
+            }
+        }
+
+        function restartMazeGame() {
+            clearInterval(mazeGameInterval);
+            clearInterval(breathingInterval);
+            document.removeEventListener('keydown', handleKeyPress);
+            initializeMazeGame();
+        }
+
+        // Game 3: Gratitude Garden Functions
+        function initializeGardenGame() {
+            // Reset variables
+            plants = [];
+            plantsGrown = 0;
+            gardenSize = 0;
+            gratitudeScore = 0;
+            
+            // Update display
+            document.getElementById('plants-grown').textContent = plantsGrown;
+            document.getElementById('garden-size').textContent = `${gardenSize}/10`;
+            document.getElementById('gratitude-score').textContent = gratitudeScore;
+            
+            // Clear garden
+            document.getElementById('garden-plot').innerHTML = '';
+            
+            // Set up seed selection
+            selectedSeedType = 'flower';
+            document.querySelectorAll('.seed-type').forEach(seed => {
+                seed.classList.remove('active');
+                if (seed.dataset.type === selectedSeedType) {
+                    seed.classList.add('active');
+                }
+            });
+            
+            // Start growth check interval
+            clearInterval(gratitudeGameInterval);
+            gratitudeGameInterval = setInterval(checkPlantGrowth, 2000);
+        }
+
+        function selectSeedType(type) {
+            selectedSeedType = type;
+            document.querySelectorAll('.seed-type').forEach(seed => {
+                seed.classList.remove('active');
+                if (seed.dataset.type === type) {
+                    seed.classList.add('active');
+                }
+            });
+        }
+
+        function plantSeed() {
+            const gratitude = document.getElementById('gratitude-input').value.trim();
+            if (!gratitude || gardenSize >= 10) return;
+            
+            // Create seed
+            const gardenPlot = document.getElementById('garden-plot');
+            const seed = document.createElement('div');
+            seed.className = 'seed';
+            
+            // Random position
+            const x = Math.random() * (gardenPlot.clientWidth - 40);
+            const y = Math.random() * (gardenPlot.clientHeight - 40);
+            
+            seed.style.left = x + 'px';
+            seed.style.top = y + 'px';
+            
+            gardenPlot.appendChild(seed);
+            
+            // Add plant data
+            plants.push({
+                element: seed,
+                x: x,
+                y: y,
+                type: selectedSeedType,
+                gratitude: gratitude,
+                stage: 0,
+                growth: 0,
+                plantedAt: Date.now()
+            });
+            
+            gardenSize++;
+            document.getElementById('garden-size').textContent = `${gardenSize}/10`;
+            
+            // Clear input
+            document.getElementById('gratitude-input').value = '';
+            
+            // Animate seed planting
+            seed.style.animation = 'blossom 0.5s ease-out';
+            
+            // Update gratitude score
+            gratitudeScore += 10;
+            document.getElementById('gratitude-score').textContent = gratitudeScore;
+        }
+
+        function waterGarden() {
+            if (plants.length === 0) return;
+            
+            plants.forEach(plant => {
+                if (plant.stage < 4) {
+                    plant.growth += 20;
+                    
+                    // Animate watering
+                    plant.element.style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                        plant.element.style.transform = 'scale(1)';
+                    }, 300);
+                }
+            });
+            
+            // Update gratitude score
+            gratitudeScore += 5;
+            document.getElementById('gratitude-score').textContent = gratitudeScore;
+        }
+
+        function checkPlantGrowth() {
+            plants.forEach((plant, index) => {
+                if (plant.stage < 4) {
+                    // Natural growth over time
+                    const timeSincePlanted = Date.now() - plant.plantedAt;
+                    plant.growth += timeSincePlanted / 10000; // Slower natural growth
+                    
+                    // Check for stage advancement
+                    if (plant.growth >= 100 && plant.stage < 4) {
+                        plant.stage++;
+                        plant.growth = 0;
+                        growPlant(plant, index);
+                    }
+                }
+            });
+        }
+
+        function growPlant(plant, index) {
+            const gardenPlot = document.getElementById('garden-plot');
+            
+            // Remove seed
+            if (plant.element.parentNode) {
+                plant.element.parentNode.removeChild(plant.element);
+            }
+            
+            // Create plant
+            const newPlant = document.createElement('div');
+            newPlant.className = `plant stage-${plant.stage}`;
+            
+            newPlant.style.left = plant.x + 'px';
+            newPlant.style.top = plant.y + 'px';
+            
+            // Add gratitude text for fully grown plants
+            if (plant.stage === 4) {
+                newPlant.innerHTML = getPlantEmoji(plant.type);
+                newPlant.title = plant.gratitude;
+            }
+            
+            gardenPlot.appendChild(newPlant);
+            
+            // Update plant data
+            plant.element = newPlant;
+            
+            // Update counts for fully grown plants
+            if (plant.stage === 4) {
+                plantsGrown++;
+                document.getElementById('plants-grown').textContent = plantsGrown;
+                
+                // Update gratitude score
+                gratitudeScore += 50;
+                document.getElementById('gratitude-score').textContent = gratitudeScore;
+            }
+            
+            // Animate growth
+            newPlant.style.animation = 'blossom 0.5s ease-out';
+        }
+
+        function getPlantEmoji(type) {
+            switch(type) {
+                case 'flower': return '🌸';
+                case 'tree': return '🌳';
+                case 'herb': return '🌿';
+                default: return '🌱';
+            }
+        }
+
+        // Game 4: Emotion Match Functions
+        function initializeMatchGame() {
+            // Reset variables
+            flippedCards = [];
+            matchedPairs = 0;
+            matchMoves = 0;
+            matchTimeLeft = 120;
+            
+            // Update display
+            document.getElementById('matches-found').textContent = `${matchedPairs}/8`;
+            document.getElementById('match-moves').textContent = matchMoves;
+            document.getElementById('match-timer').textContent = matchTimeLeft;
+            
+            // Create cards
+            createCards();
+            
+            // Start timer
+            clearInterval(matchGameInterval);
+            matchGameInterval = setInterval(updateMatchGame, 1000);
+        }
+
+        function createCards() {
+            const grid = document.getElementById('cards-grid');
+            grid.innerHTML = '';
+            
+            cards = [];
+            
+            // Create pairs
+            let pairs = [...emotionPairs, ...emotionPairs];
+            
+            // Shuffle pairs
+            for (let i = pairs.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [pairs[i], pairs[j]] = [pairs[j], pairs[i]];
+            }
+            
+            // Create cards
+            pairs.forEach((pair, index) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.dataset.index = index;
+                
+                const front = document.createElement('div');
+                front.className = 'front';
+                
+                const back = document.createElement('div');
+                back.className = 'back';
+                
+                if (index % 2 === 0) {
+                    // Emotion card
+                    front.innerHTML = `<div class="emotion-emoji">${pair.emotion.split(' ')[0]}</div>`;
+                    back.textContent = 'Emotion';
+                } else {
+                    // Strategy card
+                    front.innerHTML = `<div class="strategy-text">${pair.strategy}</div>`;
+                    back.textContent = 'Coping Strategy';
+                }
+                
+                card.appendChild(front);
+                card.appendChild(back);
+                
+                card.addEventListener('click', () => flipCard(card, pair));
+                
+                grid.appendChild(card);
+                
+                cards.push({
+                    element: card,
+                    pair: pair,
+                    isEmotion: index % 2 === 0,
+                    matched: false
+                });
+            });
+        }
+
+        function flipCard(card, pair) {
+            if (flippedCards.length >= 2 || card.classList.contains('flipped') || 
+                card.classList.contains('matched')) return;
+            
+            card.classList.add('flipped');
+            flippedCards.push({ card: card, pair: pair });
+            
+            if (flippedCards.length === 2) {
+                matchMoves++;
+                document.getElementById('match-moves').textContent = matchMoves;
+                
+                // Check for match
+                setTimeout(checkForMatch, 500);
+            }
+        }
+
+        function checkForMatch() {
+            const [card1, card2] = flippedCards;
+            
+            if (card1.pair === card2.pair) {
+                // Match found
+                card1.card.classList.add('matched');
+                card2.card.classList.add('matched');
+                matchedPairs++;
+                
+                document.getElementById('matches-found').textContent = `${matchedPairs}/8`;
+                
+                // Check if game is complete
+                if (matchedPairs === 8) {
+                    clearInterval(matchGameInterval);
+                    setTimeout(() => completeGame('emotion-match'), 500);
+                }
+            } else {
+                // No match, flip back
+                card1.card.classList.remove('flipped');
+                card2.card.classList.remove('flipped');
+            }
+            
+            flippedCards = [];
+        }
+
+        function showHint() {
+            if (flippedCards.length === 1) {
+                // Show matching card for the flipped card
+                const flippedPair = flippedCards[0].pair;
+                const matchingCard = cards.find(card => 
+                    card.pair === flippedPair && 
+                    !card.matched && 
+                    !card.element.classList.contains('flipped')
+                );
+                
+                if (matchingCard) {
+                    matchingCard.element.classList.add('flipped');
+                    setTimeout(() => {
+                        matchingCard.element.classList.remove('flipped');
+                    }, 1000);
+                }
+            }
+        }
+
+        function updateMatchGame() {
+            matchTimeLeft--;
+            document.getElementById('match-timer').textContent = matchTimeLeft;
+            
+            if (matchTimeLeft <= 0) {
+                clearInterval(matchGameInterval);
+                completeGame('emotion-match');
+            }
+        }
+
+        function restartMatchGame() {
+            clearInterval(matchGameInterval);
+            initializeMatchGame();
+        }
+
+        // Common Game Functions
+        function completeGame(gameType) {
+            // Calculate final score based on game type
+            let finalScore = 0;
+            let message = '';
+            
+            switch(gameType) {
+                case 'thought-cloud':
+                    finalScore = negativeScore * 10 + positiveScore * 15;
+                    message = `Great job! You caught ${negativeScore} negative thoughts and released ${positiveScore} positive ones. 
+                    Remember, recognizing negative thoughts is the first step to changing them!`;
+                    break;
+                case 'anxiety-maze':
+                    finalScore = breathingScore * 2 + (180 - mazeTimeLeft);
+                    message = `Excellent! You maintained a breathing score of ${breathingScore} while navigating the maze in ${mazeMoves} moves. 
+                    Keep practicing these breathing techniques when you feel anxious!`;
+                    break;
+                case 'gratitude-garden':
+                    finalScore = gratitudeScore;
+                    message = `Beautiful! You grew ${plantsGrown} plants in your gratitude garden. 
+                    Remember to cultivate gratitude every day for better mental health!`;
+                    break;
+                case 'emotion-match':
+                    finalScore = matchedPairs * 25 + (120 - matchTimeLeft);
+                    message = `Well done! You found ${matchedPairs} emotion-strategy pairs in ${matchMoves} moves. 
+                    These coping strategies will help you manage your emotions effectively!`;
+                    break;
+            }
+            
+            // Show completion modal
+            document.getElementById('final-score').textContent = finalScore;
+            document.getElementById('complete-message').innerHTML = message;
+            document.getElementById('game-complete-modal').classList.add('active');
+        }
+
+        function playAgain() {
+            document.getElementById('game-complete-modal').classList.remove('active');
+            exitGame();
+            setTimeout(() => startGame(currentGame), 300);
+        }
+
+        function exitToMenu() {
+            document.getElementById('game-complete-modal').classList.remove('active');
+            exitGame();
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                exitGame();
+            }
+        });
+
+        // Initialize tooltips
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add any initialization code here
+        });
+    </script>
+</body>
+</html>
