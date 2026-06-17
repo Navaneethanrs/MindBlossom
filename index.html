@@ -673,6 +673,36 @@
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
+        /* Show More Songs Button */
+        .show-more-songs-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--light);
+            padding: 0.8rem 1.8rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-quick);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin: 1.5rem auto 0;
+            font-size: 0.95rem;
+            width: fit-content;
+        }
+
+        .show-more-songs-btn:hover {
+            background: var(--gradient-primary);
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .show-more-songs-btn i {
+            transition: transform 0.3s ease;
+        }
+
         /* YouTube Player Modal */
         .youtube-modal {
             position: fixed;
@@ -1358,11 +1388,19 @@
                         Refresh
                     </button>
                 </div>
-                <p style="opacity: 0.9; margin-bottom: 1.5rem;">Songs selected based on your emotional state</p>
+                <p style="opacity: 0.9; margin-bottom: 1.5rem;" id="songsMoodSubtitle">Songs selected based on your emotional state</p>
                 
                 <!-- Songs Grid -->
                 <div class="songs-grid" id="songsGrid">
                     <!-- Songs will be populated here -->
+                </div>
+
+                <!-- Show More Button -->
+                <div id="songsToggleContainer" style="margin-top: 1.5rem; text-align: center; display: none;">
+                    <button id="showMoreSongsBtn" class="show-more-songs-btn">
+                        <span>Show More Songs</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -1441,6 +1479,7 @@
         let voiceRecognition = null;
         let isListening = false;
         let selectedEmotionCard = null;
+        let isSongsExpanded = false;
         
         // YouTube Video IDs database - ORIGINAL STRUCTURE
         const youtubeVideos = {
@@ -1448,43 +1487,71 @@
                 { id: "YR12Z8f1Dh8", title: "Why This Kolaveri Di – Dhanush", artist: "Dhanush" },
                 { id: "k5dC5FQTn3I", title: "Naa Ready – Anirudh Ravichander", artist: "Anirudh Ravichander" },
                 { id: "7B6eMjp_X2E", title: "Enjoy Enjaami – Dhee", artist: "Dhee" },
-                { id: "k-BR0YzYVrA", title: "Vaathi Coming – Anirudh Ravichander", artist: "Anirudh Ravichander" }
+                { id: "k-BR0YzYVrA", title: "Vaathi Coming – Anirudh Ravichander", artist: "Anirudh Ravichander" },
+                { id: "D56_iU_kXgM", title: "Tum Tum – Enemy", artist: "Thaman S" },
+                { id: "x6Q7c9RyMzk", title: "Rowdy Baby – Maari 2", artist: "Yuvan Shankar Raja" },
+                { id: "KUN5Uf9mObQ", title: "Arabic Kuthu – Beast", artist: "Anirudh Ravichander" },
+                { id: "v4ZlePkVd4s", title: "Aaluma Doluma – Vedalam", artist: "Anirudh Ravichander" }
             ],
             sad: [
                 { id: "ryD8BqVexJI", title: "Kanave Kanave – Anirudh Ravichander", artist: "Anirudh Ravichander" },
                 { id: "uDtN8pAe-68", title: "Munbe Vaa – A.R. Rahman", artist: "A.R. Rahman" },
                 { id: "MZ8YDP5mHwE", title: "Nenjame Nenjame – A.R. Rahman", artist: "A.R. Rahman" },
-                { id: "SqSx-NpPjIQ", title: "Mannipaaya – A.R. Rahman", artist: "A.R. Rahman" }
+                { id: "SqSx-NpPjIQ", title: "Mannipaaya – A.R. Rahman", artist: "A.R. Rahman" },
+                { id: "9a5H3y_o9Jc", title: "Po Nee Po – 3", artist: "Anirudh Ravichander" },
+                { id: "fR8E2yGjYtU", title: "Amma Amma – Velaiilla Pattadhari", artist: "Anirudh Ravichander" },
+                { id: "cZkZ5fKxVw0", title: "Unna Nenachu – Psycho", artist: "Ilaiyaraaja" },
+                { id: "4iN188S3Bq0", title: "Kannaana Kanney – Viswasam", artist: "D. Imman" }
             ],
             stressed: [
                 { id: "Wp05ZCG3yMk", title: "Mella Sirithal – HipHop Tamizha", artist: "HipHop Tamizha" },
                 { id: "QNSDR4Fu1WU", title: "Malare – Vijay Yesudas", artist: "Vijay Yesudas" },
                 { id: "p6SjmRwa5jU", title: "Ennodu Nee Irundhal – A.R. Rahman", artist: "A.R. Rahman" },
-                { id: "E7_3TOqNvF4", title: "Aalaporan Tamizhan – A.R. Rahman", artist: "A.R. Rahman" }
+                { id: "E7_3TOqNvF4", title: "Aalaporan Tamizhan – A.R. Rahman", artist: "A.R. Rahman" },
+                { id: "q-bN_qJp2_E", title: "Singappenney – Bigil", artist: "A.R. Rahman" },
+                { id: "rD4Kz0Jp-i0", title: "Kadhal Sadugudu – Alaipayuthey", artist: "A.R. Rahman" },
+                { id: "zF_Kz0S9hLw", title: "Kannala Kannala – Thani Oruvan", artist: "Hiphop Tamizha" },
+                { id: "gR4Kz3p-i44", title: "Sirikkadhey – Remo", artist: "Anirudh Ravichander" }
             ],
             angry: [
                 { id: "xM4lQN7Sgrg", title: "Thee Illai – Anirudh Ravichander", artist: "Anirudh Ravichander" },
                 { id: "f-3mDZYsk4Y", title: "Porkalam – Anirudh Ravichander", artist: "Anirudh Ravichander" },
                 { id: "NcET8QRs5Nc", title: "Badass – Anirudh Ravichander", artist: "Anirudh Ravichander" },
-                { id: "BmR_wjR7i3Y", title: "Vikram Title Track – Anirudh Ravichander", artist: "Anirudh Ravichander" }
+                { id: "BmR_wjR7i3Y", title: "Vikram Title Track – Anirudh Ravichander", artist: "Anirudh Ravichander" },
+                { id: "1F32H1k3-Lw", title: "Hukum – Jailer", artist: "Anirudh Ravichander" },
+                { id: "L1R_z09p-k0", title: "Neruppu Da – Kabali", artist: "Santhosh Narayanan" },
+                { id: "Wk_F2aK3m-E", title: "Marana Mass – Petta", artist: "Anirudh Ravichander" },
+                { id: "9a0K3o1K_Q", title: "Kaththi Theme – Kaththi", artist: "Anirudh Ravichander" }
             ],
             lonely: [
                 { id: "Q8c1rDrsL4M", title: "Vaseegara – Bombay Jayashri", artist: "Bombay Jayashri" },
                 { id: "d7mWDRrrHlI", title: "En Kadhal Solla – Yuvan Shankar Raja", artist: "Yuvan Shankar Raja" },
                 { id: "7D8Fd0y4gy8", title: "Mazhai Kuruvi – Harris Jayaraj", artist: "Harris Jayaraj" },
-                { id: "gQx0efP5o70", title: "Enna Solla – Harris Jayaraj", artist: "Harris Jayaraj" }
+                { id: "gQx0efP5o70", title: "Enna Solla – Harris Jayaraj", artist: "Harris Jayaraj" },
+                { id: "1m0_faK2oQw", title: "Thalli Pogathey – AYM", artist: "A.R. Rahman" },
+                { id: "Wk2fP0a2-Lw", title: "Pookkale Sattru Oyivedungal – I", artist: "A.R. Rahman" },
+                { id: "y-Kz1K8S_eE", title: "Po Indru Neeyaga – 3", artist: "Anirudh Ravichander" },
+                { id: "r8Kz2jO_pE0", title: "Visiri – ENPT", artist: "A.R. Rahman" }
             ],
             anxious: [
                 { id: "kRqK6T6_p-k", title: "Kadhal Cricket – Yuvan Shankar Raja", artist: "Yuvan Shankar Raja" },
                 { id: "cQhaSreizWg", title: "Oru Naalil – Yuvan Shankar Raja", artist: "Yuvan Shankar Raja" },
                 { id: "8gSOBw9nOmQ", title: "Kangal Irandal – A.R. Rahman", artist: "A.R. Rahman" },
-                { id: "Wk3nYH5_tms", title: "New York Nagaram – A.R. Rahman", artist: "A.R. Rahman" }
+                { id: "Wk3nYH5_tms", title: "New York Nagaram – A.R. Rahman", artist: "A.R. Rahman" },
+                { id: "FzG4u9-k3Ew", title: "Nenjukkul Peidhidum – V1000", artist: "Harris Jayaraj" },
+                { id: "8-z2p0w3ELw", title: "Moongil Thottam – Kadal", artist: "A.R. Rahman" },
+                { id: "Wk0p3Kz8e_Q", title: "Pachai Nirame – Alaipayuthey", artist: "A.R. Rahman" },
+                { id: "z-Kz9p0_fLw", title: "Thuli Thuli – Paiyaa", artist: "Yuvan Shankar Raja" }
             ],
             default: [
                 { id: "DV7nV9W7y-0", title: "Chellamma – Doctor (Anirudh)", artist: "Anirudh Ravichander" },
                 { id: "QNSDR4Fu1WU", title: "Jigarthanda Theme – Santhosh Narayanan", artist: "Santhosh Narayanan" },
                 { id: "Wp05ZCG3yMk", title: "Mental Manadhil – A.R. Rahman", artist: "A.R. Rahman" },
-                { id: "YR12Z8f1Dh8", title: "Why This Kolaveri Di – Dhanush", artist: "Dhanush" }
+                { id: "YR12Z8f1Dh8", title: "Why This Kolaveri Di – Dhanush", artist: "Dhanush" },
+                { id: "KUN5Uf9mObQ", title: "Arabic Kuthu – Beast", artist: "Anirudh Ravichander" },
+                { id: "x6Q7c9RyMzk", title: "Rowdy Baby – Maari 2", artist: "Yuvan Shankar Raja" },
+                { id: "7B6eMjp_X2E", title: "Enjoy Enjaami – Dhee", artist: "Dhee" },
+                { id: "k5dC5FQTn3I", title: "Naa Ready – Leo", artist: "Anirudh Ravichander" }
             ]
         };
 
@@ -1600,7 +1667,8 @@
                     // Show notification
                     showNotification(`Selected: ${this.querySelector('.emotion-name').textContent} ${this.querySelector('.emotion-emoji').textContent}`);
                     
-                    // Update songs based on mood
+                    // Update songs based on mood (reset expand state first)
+                    isSongsExpanded = false;
                     loadTamilSongs(currentMood);
                     
                     // Update progress steps
@@ -1633,9 +1701,25 @@
 
             // Refresh Songs Button
             document.getElementById('refreshSongs').addEventListener('click', () => {
+                isSongsExpanded = false;
                 loadTamilSongs(currentMood);
                 showNotification('🎵 Songs refreshed!');
             });
+
+            // Show More Songs Button
+            const showMoreSongsBtn = document.getElementById('showMoreSongsBtn');
+            if (showMoreSongsBtn) {
+                showMoreSongsBtn.addEventListener('click', () => {
+                    isSongsExpanded = !isSongsExpanded;
+                    loadTamilSongs(currentMood);
+                    if (isSongsExpanded) {
+                        const target = document.getElementById('songsGrid').children[4];
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        }
+                    }
+                });
+            }
 
             // Community Button
             document.getElementById('communityBtn').addEventListener('click', () => {
@@ -3106,12 +3190,28 @@
             }
         }
 
-        // Load Tamil Songs - ORIGINAL VERSION
+        // Load Tamil Songs - UPDATED VERSION WITH SHOW MORE TOGGLE
         function loadTamilSongs(mood = null) {
             const songsGrid = document.getElementById('songsGrid');
+            const toggleContainer = document.getElementById('songsToggleContainer');
+            const subtitle = document.getElementById('songsMoodSubtitle');
+            
             const songs = youtubeVideos[mood] || youtubeVideos.default;
             
-            songsGrid.innerHTML = songs.map(song => `
+            // Update subtitle dynamically based on mood
+            if (subtitle) {
+                if (mood) {
+                    const moodLabel = mood.charAt(0).toUpperCase() + mood.slice(1);
+                    subtitle.innerHTML = `Songs selected to match your <strong style="color: var(--primary-light);">${moodLabel}</strong> feeling`;
+                } else {
+                    subtitle.textContent = "Songs selected based on your emotional state";
+                }
+            }
+            
+            // Limit songs to 4 if not expanded
+            const songsToDisplay = isSongsExpanded ? songs : songs.slice(0, 4);
+            
+            songsGrid.innerHTML = songsToDisplay.map(song => `
                 <div class="song-card" onclick="playSong('${song.id}', '${song.title}')">
                     <div class="song-cover">
                         <i class="fas fa-music"></i>
@@ -3124,6 +3224,21 @@
                     </button>
                 </div>
             `).join('');
+            
+            // Handle toggle button visibility and text state
+            if (songs.length > 4) {
+                toggleContainer.style.display = 'block';
+                const toggleBtn = document.getElementById('showMoreSongsBtn');
+                if (toggleBtn) {
+                    if (isSongsExpanded) {
+                        toggleBtn.innerHTML = `<span>Show Less Songs</span><i class="fas fa-chevron-up"></i>`;
+                    } else {
+                        toggleBtn.innerHTML = `<span>Show More Songs</span><i class="fas fa-chevron-down"></i>`;
+                    }
+                }
+            } else {
+                toggleContainer.style.display = 'none';
+            }
         }
 
         // Play Song - Opens YouTube directly
