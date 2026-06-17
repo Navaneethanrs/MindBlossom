@@ -164,19 +164,87 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 8rem 2rem 2rem;
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 3rem;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .comm-feed-col {
+            flex: 1.3;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            min-width: 0;
+        }
+
+        .comm-side-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            min-width: 0;
+        }
+
+        .comm-header-box {
+            background: var(--gradient-primary);
+            padding: 1.5rem;
+            border-radius: var(--radius-xl);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .comm-header-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .comm-header-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .comm-header-text h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--light);
+            margin-bottom: 0.2rem;
+        }
+
+        .comm-header-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .comm-content-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            border: 1px solid var(--glass-border);
+            max-height: 70vh;
+            overflow-y: auto;
         }
 
         /* Glass Cards */
         .glass-card {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-md);
-            padding: 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            transition: var(--transition-quick);
         }
 
         /* Post Card */
@@ -715,8 +783,12 @@
         /* Responsive Design */
         @media (max-width: 1200px) {
             .main-container {
-                grid-template-columns: 1fr;
+                flex-direction: column;
                 gap: 2rem;
+            }
+
+            .comm-content-box {
+                max-height: none;
             }
         }
 
@@ -737,6 +809,10 @@
             
             .filter-buttons {
                 justify-content: center;
+            }
+
+            .comm-content-box, .comm-header-box {
+                padding: 1.2rem;
             }
         }
 
@@ -959,124 +1035,156 @@
 
     <!-- Main Container -->
     <div class="main-container">
-        <!-- Left Side - Community Feed -->
-        <div>
-            <!-- Stats Panel -->
-            <div class="stats-panel">
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-heart"></i>
+        <!-- Left Side - Community Feed Column -->
+        <div class="comm-feed-col">
+            <!-- Header Banner Box -->
+            <div class="comm-header-box">
+                <div class="comm-header-info">
+                    <div class="comm-header-icon">
+                        <i class="fas fa-users"></i>
                     </div>
-                    <div class="stat-value" id="totalSupport">1,245</div>
-                    <div>Hearts Given</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-comments"></i>
+                    <div class="comm-header-text">
+                        <h3>Community Feed</h3>
+                        <p>Share your feelings anonymously and support others</p>
                     </div>
-                    <div class="stat-value" id="totalComments">893</div>
-                    <div>Supportive Comments</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-hands"></i>
-                    </div>
-                    <div class="stat-value" id="totalHugs">567</div>
-                    <div>Virtual Hugs</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-seedling"></i>
-                    </div>
-                    <div class="stat-value" id="totalPosts">328</div>
-                    <div>Blossoms Shared</div>
                 </div>
             </div>
 
-            <!-- Filter Section -->
-            <div class="filter-section">
-                <h2 style="margin-bottom: 1.5rem; font-size: 1.8rem;">Community Feed</h2>
-                <div class="filter-buttons">
-                    <button class="filter-btn active" data-filter="all">
-                        <i class="fas fa-globe"></i> All
-                    </button>
-                    <button class="filter-btn" data-filter="happy">
-                        <i class="fas fa-smile"></i> Happy
-                    </button>
-                    <button class="filter-btn" data-filter="sad">
-                        <i class="fas fa-frown"></i> Sad
-                    </button>
-                    <button class="filter-btn" data-filter="angry">
-                        <i class="fas fa-angry"></i> Angry
-                    </button>
-                    <button class="filter-btn" data-filter="anxious">
-                        <i class="fas fa-wind"></i> Anxious
-                    </button>
+            <!-- Content Box -->
+            <div class="comm-content-box">
+                <!-- Stats Panel -->
+                <div class="stats-panel">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="stat-value" id="totalSupport">1,245</div>
+                        <div>Hearts Given</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="stat-value" id="totalComments">893</div>
+                        <div>Supportive Comments</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-hands"></i>
+                        </div>
+                        <div class="stat-value" id="totalHugs">567</div>
+                        <div>Virtual Hugs</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <div class="stat-value" id="totalPosts">328</div>
+                        <div>Blossoms Shared</div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Posts Container -->
-            <div id="postsContainer">
-                <!-- Posts will be loaded here -->
+                <!-- Filter Section -->
+                <div class="filter-section">
+                    <h4 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">Filter Feed</h4>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">
+                            <i class="fas fa-globe"></i> All
+                        </button>
+                        <button class="filter-btn" data-filter="happy">
+                            <i class="fas fa-smile"></i> Happy
+                        </button>
+                        <button class="filter-btn" data-filter="sad">
+                            <i class="fas fa-frown"></i> Sad
+                        </button>
+                        <button class="filter-btn" data-filter="angry">
+                            <i class="fas fa-angry"></i> Angry
+                        </button>
+                        <button class="filter-btn" data-filter="anxious">
+                            <i class="fas fa-wind"></i> Anxious
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Posts Container -->
+                <div id="postsContainer">
+                    <!-- Posts will be loaded here -->
+                </div>
             </div>
         </div>
 
-        <!-- Right Side - Community Info -->
-        <div>
-            <!-- Quotes Panel -->
-            <div class="glass-card quotes-panel">
-                <h2 style="margin-bottom: 1.5rem; font-size: 1.8rem;">
-                    <i class="fas fa-quote-left"></i> Daily Inspiration
-                </h2>
-                <div class="quote-board" id="quoteBoard">
-                    <!-- Quotes will be populated by JavaScript -->
+        <!-- Right Side - Info Column -->
+        <div class="comm-side-col">
+            <!-- Header Banner Box -->
+            <div class="comm-header-box">
+                <div class="comm-header-info">
+                    <div class="comm-header-icon">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <div class="comm-header-text">
+                        <h3>Inspiration & Help</h3>
+                        <p>Daily positive quotes and safe space controls</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Quick Support -->
-            <div class="glass-card" style="margin-top: 2rem;">
-                <h2 style="margin-bottom: 1.5rem; font-size: 1.8rem;">
-                    <i class="fas fa-hand-holding-heart"></i> Quick Support
-                </h2>
-                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
-                    <button class="support-btn" data-support="hug">
-                        <i class="fas fa-hands"></i> Send Hug
-                    </button>
-                    <button class="support-btn" data-support="heart">
-                        <i class="fas fa-heart"></i> Send Love
-                    </button>
-                    <button class="support-btn" data-support="flower">
-                        <i class="fas fa-seedling"></i> Send Flower
-                    </button>
-                    <button class="support-btn" data-support="star">
-                        <i class="fas fa-star"></i> Send Star
-                    </button>
+            <!-- Content Box -->
+            <div class="comm-content-box">
+                <!-- Quotes Panel -->
+                <div class="glass-card quotes-panel">
+                    <h4 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">
+                        <i class="fas fa-quote-left"></i> Daily Inspiration
+                    </h4>
+                    <div class="quote-board" id="quoteBoard">
+                        <!-- Quotes will be populated by JavaScript -->
+                    </div>
                 </div>
-            </div>
 
-            <!-- Community Guidelines -->
-            <div class="glass-card" style="margin-top: 2rem;">
-                <h2 style="margin-bottom: 1.5rem; font-size: 1.8rem;">
-                    <i class="fas fa-shield-alt"></i> Safe Space Rules
-                </h2>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative;">
-                        <i class="fas fa-check" style="position: absolute; left: 0; color: #38ef7d;"></i>
-                        Be kind and supportive
-                    </li>
-                    <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative;">
-                        <i class="fas fa-check" style="position: absolute; left: 0; color: #38ef7d;"></i>
-                        Respect anonymity
-                    </li>
-                    <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative;">
-                        <i class="fas fa-check" style="position: absolute; left: 0; color: #38ef7d;"></i>
-                        No judgment allowed
-                    </li>
-                    <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative;">
-                        <i class="fas fa-check" style="position: absolute; left: 0; color: #38ef7d;"></i>
-                        Listen with empathy
-                    </li>
-                </ul>
+                <!-- Quick Support -->
+                <div class="glass-card">
+                    <h4 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">
+                        <i class="fas fa-hands"></i> Quick Support
+                    </h4>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+                        <button class="support-btn" data-support="hug">
+                            <i class="fas fa-hands"></i> Send Hug
+                        </button>
+                        <button class="support-btn" data-support="heart">
+                            <i class="fas fa-heart"></i> Send Love
+                        </button>
+                        <button class="support-btn" data-support="flower">
+                            <i class="fas fa-seedling"></i> Send Flower
+                        </button>
+                        <button class="support-btn" data-support="star">
+                            <i class="fas fa-star"></i> Send Star
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Community Guidelines -->
+                <div class="glass-card">
+                    <h4 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">
+                        <i class="fas fa-shield-alt"></i> Safe Space Rules
+                    </h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 0.8rem; padding-left: 2rem; position: relative; font-size: 0.95rem;">
+                            <i class="fas fa-check" style="position: absolute; left: 0; color: #38ef7d; top: 0.2rem;"></i>
+                            Be kind and supportive
+                        </li>
+                        <li style="margin-bottom: 0.8rem; padding-left: 2rem; position: relative; font-size: 0.95rem;">
+                            <i class="fas fa-check" style="position: absolute; left: 0; color: #38ef7d; top: 0.2rem;"></i>
+                            Respect anonymity
+                        </li>
+                        <li style="margin-bottom: 0.8rem; padding-left: 2rem; position: relative; font-size: 0.95rem;">
+                            <i class="fas fa-check" style="position: absolute; left: 0; color: #38ef7d; top: 0.2rem;"></i>
+                            No judgment allowed
+                        </li>
+                        <li style="margin-bottom: 0px; padding-left: 2rem; position: relative; font-size: 0.95rem;">
+                            <i class="fas fa-check" style="position: absolute; left: 0; color: #38ef7d; top: 0.2rem;"></i>
+                            Listen with empathy
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

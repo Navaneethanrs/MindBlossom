@@ -175,20 +175,28 @@
             gap: 2rem;
         }
 
-        .glass-card {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
+        .counselor-header-box {
+            background: var(--gradient-primary);
+            padding: 1.5rem;
             border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-md);
-            padding: 2rem;
-            transition: var(--transition-quick);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .glass-card:hover {
-                transform: translateY(-5px);
-                box-shadow: var(--shadow-lg);
-            }
+        .counselor-content-box {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            border: 1px solid var(--glass-border);
+            max-height: 60vh;
+            overflow-y: auto;
+        }
 
         .section-title {
             font-family: 'Montserrat', sans-serif;
@@ -1059,6 +1067,10 @@
                 display: grid;
                 grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             }
+
+            .counselor-content-box {
+                max-height: none;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1070,8 +1082,8 @@
                 padding: 5rem 1rem 2rem;
             }
             
-            .glass-card {
-                padding: 1.5rem;
+            .counselor-content-box, .counselor-header-box {
+                padding: 1.2rem;
             }
             
             .section-title {
@@ -1312,16 +1324,21 @@
     <div class="main-container">
         <!-- Left Panel - Counselor Selection -->
         <div class="left-panel">
-            <div class="glass-card">
-                <h2 class="section-title">
-                    <i class="fas fa-user-md"></i>
-                    Available Counselors
-                </h2>
-                <p style="opacity: 0.9; margin-bottom: 1.5rem;">
-                    Chat anonymously with certified mental health professionals.
-                    Your privacy is protected.
-                </p>
-                
+            <!-- Counselor Header Banner Box -->
+            <div class="counselor-header-box">
+                <div class="current-counselor">
+                    <div class="current-counselor-avatar">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <div class="chat-info">
+                        <h3>Available Counselors</h3>
+                        <p>Chat anonymously with certified professionals</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Counselor Content Box -->
+            <div class="counselor-content-box">
                 <!-- Search and Filter -->
                 <div class="counselor-search">
                     <input type="text" 
