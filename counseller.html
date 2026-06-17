@@ -209,8 +209,8 @@
 
         /* Counselor Cards - UPDATED FOR BETTER ALIGNMENT */
         .counselor-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            display: flex;
+            flex-direction: column;
             gap: 1rem;
             margin-bottom: 1.5rem;
         }
@@ -702,47 +702,259 @@
             transform: translateY(-2px);
         }
 
-        /* Safety Notice */
-        .safety-notice {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: var(--radius-lg);
-            padding: 1rem 1.5rem;
-            border-left: 4px solid var(--accent);
-            margin-top: 1rem;
+        /* Sidebar Info Buttons */
+        .sidebar-info-buttons {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
         }
 
-        .safety-notice h4 {
+        .info-btn {
+            flex: 1;
+            padding: 0.8rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--glass-border);
+            color: var(--light);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-quick);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .safety-btn {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .safety-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .emergency-btn {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: rgba(239, 68, 68, 0.3);
+            color: #ff8a8a;
+        }
+
+        .emergency-btn:hover {
+            background: rgba(239, 68, 68, 0.25);
+            border-color: #ff3333;
+            color: #ffb3b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+        }
+
+        /* Custom Modal Styles */
+        .custom-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-quick);
+        }
+
+        .custom-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .custom-modal-content {
+            background: #1e293b;
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            max-width: 550px;
+            width: 90%;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            transform: scale(0.9);
+            transition: var(--transition-quick);
+        }
+
+        .custom-modal.active .custom-modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1rem;
+        }
+
+        .modal-header h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--light);
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--accent-light);
         }
 
-        .safety-notice p {
-            font-size: 0.9rem;
-            opacity: 0.9;
-            line-height: 1.5;
+        .close-modal-btn {
+            background: transparent;
+            border: none;
+            color: var(--light);
+            font-size: 2rem;
+            cursor: pointer;
+            line-height: 1;
+            opacity: 0.7;
+            transition: var(--transition-quick);
         }
 
-        /* Privacy Features */
-        .privacy-features {
+        .close-modal-btn:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .modal-body {
+            color: var(--light);
+            line-height: 1.6;
+        }
+
+        /* Privacy Features Grid */
+        .privacy-features-grid {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 1rem;
             margin-top: 1.5rem;
         }
 
-        .privacy-feature {
+        .privacy-feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-md);
+            padding: 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
             display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.85rem;
-            opacity: 0.9;
+            flex-direction: column;
+            gap: 0.3rem;
         }
 
-        .privacy-feature i {
-            color: var(--accent);
+        .privacy-feature-card i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .privacy-feature-card h5 {
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+
+        .privacy-feature-card p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Emergency Contacts List */
+        .emergency-contacts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .emergency-contact-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            gap: 1.2rem;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-icon.danger-icon {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ff6b6b;
+        }
+
+        .contact-icon.warning-icon {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+        }
+
+        .contact-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .contact-details h5 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .contact-desc {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-call-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition-quick);
+            align-self: flex-start;
+        }
+
+        .contact-call-btn.danger-btn {
+            background: #ef4444;
+            color: white;
+        }
+
+        .contact-call-btn.danger-btn:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        }
+
+        .contact-call-btn.warning-btn {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .contact-call-btn.warning-btn:hover {
+            background: #d97706;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
         }
 
         /* Animations */
@@ -844,6 +1056,7 @@
             }
             
             .counselor-grid {
+                display: grid;
                 grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             }
         }
@@ -866,6 +1079,7 @@
             }
             
             .counselor-grid {
+                display: grid;
                 grid-template-columns: 1fr;
             }
             
@@ -894,38 +1108,7 @@
             }
         }
 
-        /* Emergency resources */
-        .emergency-resources {
-            background: rgba(255, 8, 68, 0.1);
-            border: 1px solid rgba(255, 8, 68, 0.3);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            margin-top: 2rem;
-        }
 
-        .emergency-resources h4 {
-            color: var(--danger);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .emergency-contact {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.8rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: var(--radius-md);
-            margin-bottom: 0.5rem;
-            transition: var(--transition-quick);
-        }
-
-        .emergency-contact:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateX(5px);
-        }
 
         /* Search and Filter */
         .counselor-search {
@@ -980,6 +1163,31 @@
 
         .filter-btn.active {
             background: var(--gradient-primary);
+        }
+
+        /* Show More Button */
+        .show-more-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            color: var(--light);
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition-quick);
+            font-size: 0.9rem;
+            font-weight: 500;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .show-more-btn:hover {
+            background: var(--gradient-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            border-color: var(--primary-light);
         }
 
         /* Message formatting */
@@ -1136,46 +1344,21 @@
                 <div class="counselor-grid" id="counselorGrid">
                     <!-- Counselors will be loaded here -->
                 </div>
-            </div>
-
-            <!-- Safety Notice -->
-            <div class="safety-notice">
-                <h4><i class="fas fa-shield-alt"></i> Your Safety & Privacy</h4>
-                <p>All conversations are encrypted and completely anonymous. No personal information is stored or shared.</p>
-            </div>
-
-            <!-- Privacy Features -->
-            <div class="privacy-features">
-                <div class="privacy-feature">
-                    <i class="fas fa-lock"></i>
-                    End-to-end encrypted
-                </div>
-                <div class="privacy-feature">
-                    <i class="fas fa-user-secret"></i>
-                    Anonymous user ID
-                </div>
-                <div class="privacy-feature">
-                    <i class="fas fa-clock"></i>
-                    Auto-delete after 30 days
-                </div>
-            </div>
-
-            <!-- Emergency Resources -->
-            <div class="emergency-resources">
-                <h4><i class="fas fa-phone-alt"></i> Emergency Resources</h4>
-                <div class="emergency-contact">
-                    <i class="fas fa-phone" style="color: var(--danger);"></i>
-                    <div>
-                        <div style="font-weight: 600;">Suicide Prevention Helpline</div>
-                        <div style="font-size: 0.9rem; opacity: 0.8;">044-24640050 (24/7)</div>
-                    </div>
-                </div>
-                <div class="emergency-contact">
-                    <i class="fas fa-first-aid" style="color: var(--warning);"></i>
-                    <div>
-                        <div style="font-weight: 600;">iCall Psychological Helpline</div>
-                        <div style="font-size: 0.9rem; opacity: 0.8;">9152987821 (Mon-Sat, 10AM-8PM)</div>
-                    </div>
+                
+                <!-- Show More / Show Less Button Container -->
+                <div id="showMoreContainer" style="margin-top: 1.5rem; display: none;"></div>
+                
+                <!-- Divider -->
+                <div style="height: 1px; background: rgba(255, 255, 255, 0.1); margin: 1.5rem 0;"></div>
+                
+                <!-- Safety & Emergency Info Buttons -->
+                <div class="sidebar-info-buttons">
+                    <button class="info-btn safety-btn" onclick="openSafetyModal()">
+                        <i class="fas fa-shield-alt"></i> Privacy & Safety
+                    </button>
+                    <button class="info-btn emergency-btn" onclick="openEmergencyModal()">
+                        <i class="fas fa-phone-alt"></i> Emergency Help
+                    </button>
                 </div>
             </div>
         </div>
@@ -1194,6 +1377,9 @@
                     </div>
                 </div>
                 <div class="chat-actions">
+                    <button class="chat-action-btn" id="voiceToggleBtn" onclick="toggleVoiceOutput()" title="Mute/Unmute Voice Response">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
                     <button class="chat-action-btn" onclick="clearChat()" title="Clear Chat">
                         <i class="fas fa-trash"></i>
                     </button>
@@ -1256,6 +1442,77 @@
         </div>
     </div>
 
+    <!-- Safety & Privacy Modal -->
+    <div class="custom-modal" id="safetyModal">
+        <div class="custom-modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-shield-alt"></i> Your Safety & Privacy</h3>
+                <button class="close-modal-btn" onclick="closeSafetyModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>All conversations are fully encrypted and completely anonymous. No personal information is ever stored or shared.</p>
+                <div class="privacy-features-grid">
+                    <div class="privacy-feature-card">
+                        <i class="fas fa-lock"></i>
+                        <h5>End-to-end encrypted</h5>
+                        <p>Messages are encrypted in transit and at rest.</p>
+                    </div>
+                    <div class="privacy-feature-card">
+                        <i class="fas fa-user-secret"></i>
+                        <h5>Anonymous user ID</h5>
+                        <p>Randomly generated session identifier.</p>
+                    </div>
+                    <div class="privacy-feature-card">
+                        <i class="fas fa-clock"></i>
+                        <h5>Auto-delete after 30 days</h5>
+                        <p>All chats are automatically purged from database.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Emergency Resources Modal -->
+    <div class="custom-modal" id="emergencyModal">
+        <div class="custom-modal-content">
+            <div class="modal-header">
+                <h3 style="color: #ff8a8a;"><i class="fas fa-exclamation-triangle"></i> Emergency Resources</h3>
+                <button class="close-modal-btn" onclick="closeEmergencyModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p style="margin-bottom: 1.5rem;">If you are in immediate danger or experiencing a severe mental health crisis, please reach out to these free, confidential helplines:</p>
+                
+                <div class="emergency-contacts-list">
+                    <div class="emergency-contact-card">
+                        <div class="contact-icon danger-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h5>Suicide Prevention Helpline</h5>
+                            <p class="contact-desc">Available 24/7 for support and crisis intervention.</p>
+                            <a href="tel:04424640050" class="contact-call-btn danger-btn">
+                                <i class="fas fa-phone"></i> Call 044-24640050
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="emergency-contact-card">
+                        <div class="contact-icon warning-icon">
+                            <i class="fas fa-first-aid"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h5>iCall Psychological Helpline</h5>
+                            <p class="contact-desc">Mon-Sat, 10 AM - 8 PM. Run by TISS professionals.</p>
+                            <a href="tel:9152987821" class="contact-call-btn warning-btn">
+                                <i class="fas fa-phone"></i> Call 9152987821
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // API Configuration - Using multiple reliable APIs
         const OPENAI_API_KEY = 'sk-proj-your-openai-key-here'; // Replace with your OpenAI key
@@ -1275,6 +1532,8 @@
         let voiceRecognition = null;
         let isListening = false;
         let speechSynthesis = null;
+        let showAll = false;
+        let isVoiceEnabled = localStorage.getItem('isVoiceEnabled') !== 'false';
 
         // Generate random session ID for anonymity
         function generateSessionId() {
@@ -1404,6 +1663,7 @@
             initializeCounselors();
             initializeEventListeners();
             initializeVoiceRecognition();
+            initializeVoiceToggleUI();
             loadPreviousChat();
             
             // Show welcome notification
@@ -1516,12 +1776,54 @@
             }
         }
 
+        // Initialize voice toggle UI
+        function initializeVoiceToggleUI() {
+            const voiceToggleBtn = document.getElementById('voiceToggleBtn');
+            if (voiceToggleBtn) {
+                if (isVoiceEnabled) {
+                    voiceToggleBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                    voiceToggleBtn.style.background = 'rgba(255, 255, 255, 0.2)';
+                    voiceToggleBtn.title = 'Mute Voice Responses';
+                } else {
+                    voiceToggleBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                    voiceToggleBtn.style.background = 'rgba(239, 68, 68, 0.3)';
+                    voiceToggleBtn.title = 'Unmute Voice Responses';
+                }
+            }
+        }
+
+        // Toggle voice output setting
+        function toggleVoiceOutput() {
+            isVoiceEnabled = !isVoiceEnabled;
+            localStorage.setItem('isVoiceEnabled', isVoiceEnabled);
+            const voiceToggleBtn = document.getElementById('voiceToggleBtn');
+            if (voiceToggleBtn) {
+                if (isVoiceEnabled) {
+                    voiceToggleBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                    voiceToggleBtn.style.background = 'rgba(255, 255, 255, 0.2)';
+                    voiceToggleBtn.title = 'Mute Voice Responses';
+                    showNotification('🔊 Voice responses enabled', 'info');
+                } else {
+                    voiceToggleBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                    voiceToggleBtn.style.background = 'rgba(239, 68, 68, 0.3)';
+                    voiceToggleBtn.title = 'Unmute Voice Responses';
+                    if (speechSynthesis) {
+                        speechSynthesis.cancel();
+                    }
+                    showNotification('🔇 Voice responses muted', 'info');
+                }
+            }
+        }
+
         // Speak text using speech synthesis
         function speakText(text) {
             if (!speechSynthesis || !text) return;
             
             // Stop any ongoing speech
             speechSynthesis.cancel();
+            
+            // Return if voice responses are disabled
+            if (!isVoiceEnabled) return;
             
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.rate = 1.0;
@@ -1541,8 +1843,17 @@
         // Render counselors in grid
         function renderCounselors() {
             const counselorGrid = document.getElementById('counselorGrid');
+            const showMoreContainer = document.getElementById('showMoreContainer');
             
-            counselorGrid.innerHTML = allCounselors.map(counselor => {
+            // Counselors to display
+            let displayList = allCounselors;
+            const INITIAL_LIMIT = 3;
+            
+            if (!showAll && allCounselors.length > INITIAL_LIMIT) {
+                displayList = allCounselors.slice(0, INITIAL_LIMIT);
+            }
+            
+            counselorGrid.innerHTML = displayList.map(counselor => {
                 let statusBadge = '';
                 if (counselor.status === 'online') {
                     statusBadge = `<span class="availability-badge available"><i class="fas fa-circle"></i> Online</span>`;
@@ -1580,10 +1891,31 @@
                     </div>
                 `;
             }).join('');
+
+            // Render show more button
+            if (allCounselors.length > INITIAL_LIMIT) {
+                showMoreContainer.innerHTML = `
+                    <button class="show-more-btn" onclick="toggleShowAll()">
+                        <span>${showAll ? 'Show Less' : 'Show More'}</span>
+                        <i class="fas ${showAll ? 'fa-chevron-up' : 'fa-chevron-down'}"></i>
+                    </button>
+                `;
+                showMoreContainer.style.display = 'block';
+            } else {
+                showMoreContainer.innerHTML = '';
+                showMoreContainer.style.display = 'none';
+            }
+        }
+
+        // Toggle Show All state
+        function toggleShowAll() {
+            showAll = !showAll;
+            renderCounselors();
         }
 
         // Filter counselors
         function filterCounselors() {
+            showAll = false;
             const searchTerm = document.getElementById('counselorSearch').value.toLowerCase();
             
             allCounselors = counselors.filter(counselor => {
@@ -2258,6 +2590,35 @@
             div.textContent = text;
             return div.innerHTML;
         }
+
+        // Modal Control Functions
+        function openSafetyModal() {
+            document.getElementById('safetyModal').classList.add('active');
+        }
+
+        function closeSafetyModal() {
+            document.getElementById('safetyModal').classList.remove('active');
+        }
+
+        function openEmergencyModal() {
+            document.getElementById('emergencyModal').classList.add('active');
+        }
+
+        function closeEmergencyModal() {
+            document.getElementById('emergencyModal').classList.remove('active');
+        }
+
+        // Close modals on clicking outside the content
+        window.addEventListener('click', (event) => {
+            const safetyModal = document.getElementById('safetyModal');
+            const emergencyModal = document.getElementById('emergencyModal');
+            if (event.target === safetyModal) {
+                closeSafetyModal();
+            }
+            if (event.target === emergencyModal) {
+                closeEmergencyModal();
+            }
+        });
 
         // Show notification
         function showNotification(message, type = 'info') {
