@@ -2055,7 +2055,6 @@
                 localStorage.setItem('mindBlossomPosts', JSON.stringify(posts));
                 
                 createSuccessAnimation();
-                showNotification('⚠️ Saved locally. Database connection issue.', 'warning');
                 
                 // Still generate AI response
                 await generateAIResponseForFeelings(feelingText, currentMood);
