@@ -795,20 +795,71 @@
         @media (max-width: 768px) {
             .header {
                 padding: 1rem;
-                flex-direction: column;
+                flex-wrap: wrap;
                 gap: 1rem;
             }
             
+            .logo-text {
+                font-size: 1.3rem;
+            }
+            
+            .logo-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+            
+            .nav-links {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                gap: 0.8rem;
+            }
+            
+            .nav-link {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .nav-link span {
+                display: none;
+            }
+            
+            .nav-link i {
+                font-size: 1.2rem;
+            }
+            
             .main-container {
-                padding: 10rem 1rem 2rem;
+                padding: 8rem 1rem 2rem;
             }
             
             .stats-panel {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            
+            .stat-card {
+                padding: 1rem;
+            }
+            
+            .stat-value {
+                font-size: 2rem;
+            }
+            
+            .reactions-container {
+                gap: 0.5rem;
+                flex-wrap: wrap;
+            }
+            
+            .reaction-btn {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.85rem;
             }
             
             .filter-buttons {
                 justify-content: center;
+                flex-wrap: wrap;
+                gap: 0.5rem;
             }
 
             .comm-content-box, .comm-header-box {

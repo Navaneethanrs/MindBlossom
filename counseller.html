@@ -1076,10 +1076,42 @@
         @media (max-width: 768px) {
             .header {
                 padding: 1rem;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            
+            .logo-text {
+                font-size: 1.3rem;
+            }
+            
+            .logo-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+            
+            .nav-links {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                gap: 0.8rem;
+            }
+            
+            .nav-link {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .nav-link span {
+                display: none;
+            }
+            
+            .nav-link i {
+                font-size: 1.2rem;
             }
             
             .main-container {
-                padding: 5rem 1rem 2rem;
+                padding: 8rem 1rem 2rem;
             }
             
             .counselor-content-box, .counselor-header-box {
@@ -1093,6 +1125,16 @@
             .counselor-grid {
                 display: grid;
                 grid-template-columns: 1fr;
+            }
+            
+            .counselor-name {
+                white-space: normal;
+            }
+            
+            .counselor-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.8rem;
             }
             
             .message {

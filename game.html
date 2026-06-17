@@ -876,6 +876,46 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            
+            .logo-text {
+                font-size: 1.3rem;
+            }
+            
+            .logo-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+            
+            .nav-links {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                gap: 0.8rem;
+            }
+            
+            .nav-link {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .nav-link span {
+                display: none;
+            }
+            
+            .nav-link i {
+                font-size: 1.2rem;
+            }
+            
+            .main-container {
+                padding: 8rem 1rem 2rem;
+            }
+            
             .hero-title {
                 font-size: 2.5rem;
             }
@@ -886,15 +926,46 @@
             
             .cards-grid {
                 grid-template-columns: repeat(3, 1fr);
+                gap: 0.5rem;
+            }
+            
+            .card {
+                font-size: 1.5rem;
             }
             
             .game-content {
-                padding: 0 1rem;
+                padding: 0 0.8rem;
             }
             
             .breathing-guide {
-                flex-direction: column;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+            
+            .breath-stage {
+                min-width: unset;
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .score-display {
                 gap: 1rem;
+                flex-wrap: wrap;
+                margin: 1.5rem 0;
+            }
+            
+            .score-box {
+                min-width: 100px;
+                padding: 0.8rem 1.2rem;
+            }
+            
+            .game-header {
+                padding: 1rem;
+            }
+            
+            .game-header h2 {
+                font-size: 1.2rem;
             }
         }
 
