@@ -1902,10 +1902,16 @@
         // Update Community Stats
         function updateCommunityStats() {
             try {
-                const totalHeart = posts.reduce((sum, post) => sum + ((post.reactions || {}).heart || 0), 0);
-                const totalHug = posts.reduce((sum, post) => sum + ((post.reactions || {}).hug || 0), 0);
+                // Load quick support clicks from localStorage
+                const qsHeart = parseInt(localStorage.getItem('qs_heart') || '0', 10);
+                const qsHug = parseInt(localStorage.getItem('qs_hug') || '0', 10);
+                const qsFlower = parseInt(localStorage.getItem('qs_flower') || '0', 10);
+                const qsStar = parseInt(localStorage.getItem('qs_star') || '0', 10);
+
+                const totalHeart = qsHeart + posts.reduce((sum, post) => sum + ((post.reactions || {}).heart || 0), 0);
+                const totalHug = qsHug + posts.reduce((sum, post) => sum + ((post.reactions || {}).hug || 0), 0);
                 const totalComments = posts.reduce((sum, post) => sum + ((post.comments || []).length), 0);
-                const totalPostsCount = posts.length;
+                const totalPostsCount = qsFlower + qsStar + posts.length;
                 
                 const totalSupportEl = document.getElementById('totalSupport');
                 const totalCommentsEl = document.getElementById('totalComments');
@@ -1934,14 +1940,32 @@
         // Send Support
         function sendSupport(type) {
             try {
-                // Select a random post to support
-                if (posts.length === 0) return;
-                
-                const randomPost = posts[Math.floor(Math.random() * posts.length)];
-                addReaction(randomPost.id, type);
+                // Increment quick support counters in localStorage
+                if (type === 'heart') {
+                    const count = parseInt(localStorage.getItem('qs_heart') || '0', 10);
+                    localStorage.setItem('qs_heart', count + 1);
+                } else if (type === 'hug') {
+                    const count = parseInt(localStorage.getItem('qs_hug') || '0', 10);
+                    localStorage.setItem('qs_hug', count + 1);
+                } else if (type === 'flower') {
+                    const count = parseInt(localStorage.getItem('qs_flower') || '0', 10);
+                    localStorage.setItem('qs_flower', count + 1);
+                } else if (type === 'star') {
+                    const count = parseInt(localStorage.getItem('qs_star') || '0', 10);
+                    localStorage.setItem('qs_star', count + 1);
+                }
+
+                // If there are posts, add reaction to a random post as well
+                if (posts.length > 0) {
+                    const randomPost = posts[Math.floor(Math.random() * posts.length)];
+                    addReaction(randomPost.id, type);
+                }
                 
                 // Create floating support animation
                 createFloatingSupport(type);
+
+                // Update community stats immediately
+                updateCommunityStats();
             } catch (error) {
                 console.error('Error sending support:', error);
             }
